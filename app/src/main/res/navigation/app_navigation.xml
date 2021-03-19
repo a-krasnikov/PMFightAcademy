@@ -16,7 +16,9 @@
     <navigation
         android:id="@+id/bottom_navigation"
         app:startDestination="@id/info_fragment">
-        <fragment android:id="@+id/info_fragment" />
+        <fragment
+            android:id="@+id/info_fragment"
+            android:name="krasnikov.project.pmfightacademy.info.ui.InfoFragment" />
         <fragment android:id="@+id/coaches_fragment" />
         <fragment android:id="@+id/current_activities_fragment">
             <action
