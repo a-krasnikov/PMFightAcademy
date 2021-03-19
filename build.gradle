@@ -14,7 +14,9 @@ buildscript {
         hilt_version = '2.33-beta'
         retrofit_version = '2.9.0'
         glide_version = '4.12.0'
+        navigation_version = "2.3.4"
         detekt_version = '1.16.0'
+        google_services_version = '4.3.5'
     }
 
     repositories {
@@ -27,6 +29,7 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
+        classpath "com.google.gms:google-services:$google_services_version"
     }
 }
 
