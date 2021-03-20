@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">PMFightAcademy</string>
+    <string name="info_bottom_label">Info</string>
+    <string name="coaches_bottom_label">Coaches</string>
+    <string name="activities_bottom_label">Activities</string>
+    <string name="history_bottom_label">History</string>
+    <string name="settings_bottom_label">Settings</string>
 </resources>

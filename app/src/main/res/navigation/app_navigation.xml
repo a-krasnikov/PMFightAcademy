@@ -6,66 +6,53 @@
 
     <fragment android:id="@+id/launch_fragment">
         <action
-            android:id="@+id/action_launch_fragment_to_content_container_fragment"
-            app:destination="@id/bottom_navigation"
+            android:id="@+id/action_launch_to_main_content"
+            app:destination="@id/main_content"
             app:popUpTo="@id/launch_fragment"
             app:popUpToInclusive="true" />
     </fragment>
 
 
     <navigation
-        android:id="@+id/bottom_navigation"
+        android:id="@+id/main_content"
         app:startDestination="@id/info_fragment">
         <fragment android:id="@+id/info_fragment" />
         <fragment android:id="@+id/coaches_fragment" />
         <fragment android:id="@+id/current_activities_fragment">
             <action
-                android:id="@+id/action_current_activities_fragment_to_booking_navigation"
-                app:destination="@id/booking_navigation" />
+                android:id="@+id/action_activities_to_booking"
+                app:destination="@id/booking_fragment" />
         </fragment>
         <fragment android:id="@+id/history_fragment" />
         <fragment android:id="@+id/settings_fragment" />
+
+        <fragment android:id="@+id/booking_fragment"/>
     </navigation>
 
     <navigation
-        android:id="@+id/booking_navigation"
-        app:startDestination="@id/booking_fragment">
-        <fragment android:id="@+id/booking_fragment">
-            <action
-                android:id="@+id/action_booking_fragment_to_select_activity_fragment"
-                app:destination="@id/select_activity_fragment" />
-            <action
-                android:id="@+id/action_booking_fragment_to_select_coach_fragment"
-                app:destination="@id/select_coach_fragment" />
-        </fragment>
-        <fragment android:id="@+id/select_activity_fragment" />
-        <fragment android:id="@+id/select_coach_fragment" />
-    </navigation>
-
-    <navigation
-        android:id="@+id/login_navigation"
+        android:id="@+id/login_flow"
         app:startDestination="@id/login_fragment">
         <fragment android:id="@+id/register_fragment">
             <action
-                android:id="@+id/action_register_fragment_to_login_fragment2"
+                android:id="@+id/action_register_to_login"
                 app:destination="@id/login_fragment" />
             <action
-                android:id="@+id/action_register_fragment_to_bottom_navigation"
-                app:destination="@id/bottom_navigation" />
+                android:id="@+id/action_register_to_main_content"
+                app:destination="@id/main_content" />
         </fragment>
         <fragment android:id="@+id/login_fragment">
             <action
-                android:id="@+id/action_login_fragment_to_register_fragment2"
+                android:id="@+id/action_login_to_register"
                 app:destination="@id/register_fragment" />
             <action
-                android:id="@+id/action_register_fragment_to_bottom_navigation"
-                app:destination="@id/bottom_navigation" />
+                android:id="@+id/action_login_to_main_content"
+                app:destination="@id/main_content" />
         </fragment>
     </navigation>
 
     <action
-        android:id="@+id/action_global_login_navigation"
-        app:destination="@id/login_navigation"
+        android:id="@+id/action_global_to_login"
+        app:destination="@id/login_flow"
         app:popUpTo="@id/login_fragment"
         app:popUpToInclusive="true" />
 
