@@ -5,13 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import krasnikov.project.pmfightacademy.app.ui.base.BaseFragment
 import krasnikov.project.pmfightacademy.databinding.FragmentInfoBinding
 import krasnikov.project.pmfightacademy.utils.State
 
-class InfoFragment: Fragment() {
-    private val infoViewModel: InfoViewModel by viewModels()
+class InfoFragment: BaseFragment<InfoViewModel>() {
+    override val viewModel: InfoViewModel by viewModels()
     private lateinit var binding: FragmentInfoBinding
 
     override fun onCreateView(
@@ -27,11 +27,11 @@ class InfoFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         subscribeToInfoContent()
-        infoViewModel.getInfo()
+        viewModel.getInfo()
     }
 
     private fun subscribeToInfoContent() {
-        infoViewModel.infoScreenContent.observe(viewLifecycleOwner, { state ->
+        viewModel.infoScreenContent.observe(viewLifecycleOwner, { state ->
             when(state) {
                 is State.Content -> {
                     setIsLoading(false)
