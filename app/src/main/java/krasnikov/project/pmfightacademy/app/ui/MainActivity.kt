@@ -39,6 +39,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        bottomNav?.setupWithNavController(controller)
+        bottomNav.setupWithNavController(controller)
     }
 }
