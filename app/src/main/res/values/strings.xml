@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PMFightAcademy</string>
+    <string name="preference_login_key">login_pref</string>
 </resources>

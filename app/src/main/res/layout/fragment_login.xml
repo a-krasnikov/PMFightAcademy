@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <ImageView
+        android:id="@+id/ivLoginPageImage"
+        android:layout_width="@dimen/LoginPageImageWidth"
+        android:layout_height="@dimen/LoginPageImageHeight"
+        android:layout_marginTop="@dimen/ivLoginPageImageMargineTop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+    <EditText
+        android:id="@+id/etPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/etPhoneNumberMargineStartEnd"
+        android:layout_marginTop="@dimen/etPhoneNumberMargineTop"
+        android:layout_marginEnd="@dimen/etPhoneNumberMargineStartEnd"
+        android:background="@color/white"
+        android:hint="@string/etPhoneNumber"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivLoginPageImage" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/etPasswordMargineStartEnd"
+        android:layout_marginTop="@dimen/etPasswordMargineTop"
+        android:layout_marginEnd="@dimen/etPasswordMargineStartEnd"
+        android:background="@color/white"
+        android:hint="@string/etPassword"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etPhoneNumber" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_login"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etPassword" />
+
+    <TextView
+        android:id="@+id/tvForgotPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/etPasswordMargineStartEnd"
+        android:layout_marginTop="@dimen/etPasswordMargineTop"
+        android:layout_marginEnd="@dimen/etPasswordMargineStartEnd"
+        android:gravity="center"
+        android:text="@string/tvForgotPassword"
+        android:textColor="@color/yellow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnLogin" />
+
+    <TextView
+        android:id="@+id/tvDontHaveAccaut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/etPasswordMargineStartEnd"
+        android:layout_marginTop="@dimen/etPasswordMargineTop"
+        android:layout_marginEnd="@dimen/etPasswordMargineStartEnd"
+        android:gravity="center"
+        android:text="@string/tvDontHaveAccaut"
+        android:textColor="@color/grey"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvForgotPassword" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCreateAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnCreateAccount"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDontHaveAccaut" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
