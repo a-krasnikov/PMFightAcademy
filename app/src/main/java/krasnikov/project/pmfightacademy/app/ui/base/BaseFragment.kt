@@ -8,6 +8,7 @@ abstract class BaseFragment<V : BaseViewModel> : Fragment() {
 
     protected abstract val viewModel: V
 
+    @Suppress("UnusedPrivateMember")
     private suspend fun collectNavigationEvent() {
         viewModel.navigationEvent.collect {
             it.navigate(findNavController())
