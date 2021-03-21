@@ -1,4 +1,4 @@
-package krasnikov.project.pmfightacademy.login.registration
+package krasnikov.project.pmfightacademy.login.registation
 
 import android.os.Bundle
 import android.view.View

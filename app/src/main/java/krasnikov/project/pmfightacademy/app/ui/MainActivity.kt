@@ -2,9 +2,7 @@ package krasnikov.project.pmfightacademy.app.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.Navigator
 import krasnikov.project.pmfightacademy.R
-import krasnikov.project.pmfightacademy.login.SharedPref
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

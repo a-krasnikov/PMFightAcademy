@@ -11,8 +11,7 @@ interface LoginService {
     @POST("/Clients/Login")
     @FormUrlEncoded
     suspend fun getAccessToken(
-        @Field("client_id") clientId: String,
-        @Field("client_secret") clientSecret: String,
-        @Field("code") code: String,
+        @Field("login") login: String,
+        @Field("pass") pass: String
     ): AccessToken
 }

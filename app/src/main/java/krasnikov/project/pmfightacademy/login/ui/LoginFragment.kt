@@ -1,13 +1,17 @@
-package krasnikov.project.pmfightacademy.login
+package krasnikov.project.pmfightacademy.login.ui
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import krasnikov.project.pmfightacademy.R
+import krasnikov.project.pmfightacademy.app.ui.BaseFragment
+import krasnikov.project.pmfightacademy.databinding.FragmentLoginBinding
+import krasnikov.project.pmfightacademy.login.LoginViewModel
+import krasnikov.project.pmfightacademy.utils.State
 
-class LoginFragment : Fragment(R.layout.fragment_login) {
+class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
 
     override val viewModel: LoginViewModel by viewModels()
 
@@ -29,7 +33,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private fun setupBtnListener() {
         binding.btnLogin.setOnClickListener {
-            startGitHubLogin()
+            startLogin()
         }
     }
 
@@ -59,7 +63,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         binding.pbLoading.isVisible = false
     }
 
-    private fun startGitHubLogin() {
+    private fun startLogin() {
         val authIntent = Intent(Intent.ACTION_VIEW, viewModel.authGitHubUrl)
         startActivity(authIntent)
     }

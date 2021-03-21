@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">PMFightAcademy</string>
     <string name="preference_login_key">login_pref</string>
+
+    <!-- Errors -->
+    <string name="error_user_not_identified">User Not Identified Error</string>
+    <string name="error_unknown">Unknown Error</string>
+    <string name="error_network">Network Error</string>
+
+    <!-- Toasts -->
+    <string name="toast_login_successful">Login successful</string>
+    <string name="etPhoneNumber">Phone Number</string>
+    <string name="etPassword">Paswword</string>
+    <string name="btn_login">Log in</string>
+    <string name="tvDontHaveAccaut">"Don't have account?"</string>
 </resources>
