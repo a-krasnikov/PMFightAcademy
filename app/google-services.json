@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "717032538725",
+    "project_id": "pm-fight-academy-91de4",
+    "storage_bucket": "pm-fight-academy-91de4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:717032538725:android:8e28ab554e4605d4ee3c8c",
+        "android_client_info": {
+          "package_name": "krasnikov.project.pmfightacademy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "717032538725-nntvjh3dfmsua36kf6b20aqkcg4k5nkl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtriNknbqt0D_3qZrCeqICUzY7Tk9R9_E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "717032538725-nntvjh3dfmsua36kf6b20aqkcg4k5nkl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "717032538725-lng0bm84kuvu2gu46j6fj33nrlse36h9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.PMTech.FightAcademy"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
