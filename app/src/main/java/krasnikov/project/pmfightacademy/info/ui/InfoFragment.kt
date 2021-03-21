@@ -10,17 +10,11 @@ import krasnikov.project.pmfightacademy.app.ui.base.BaseFragment
 import krasnikov.project.pmfightacademy.databinding.FragmentInfoBinding
 import krasnikov.project.pmfightacademy.utils.State
 
-class InfoFragment: BaseFragment<InfoViewModel>() {
+class InfoFragment: BaseFragment<InfoViewModel, FragmentInfoBinding>() {
     override val viewModel: InfoViewModel by viewModels()
-    private lateinit var binding: FragmentInfoBinding
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentInfoBinding.inflate(inflater, container, false)
-        return binding.root
+    override fun createViewBinding() {
+        mBinding = FragmentInfoBinding.inflate(layoutInflater)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,4 +45,6 @@ class InfoFragment: BaseFragment<InfoViewModel>() {
     private fun setIsLoading(isVisible: Boolean) {
         binding.pbInfoLoading.isVisible = isVisible
     }
+
+
 }
