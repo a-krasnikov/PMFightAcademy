@@ -4,4 +4,10 @@
     <dimen name="spacing_small">8dp</dimen>
     <dimen name="spacing_medium">16dp</dimen>
     <dimen name="spacing_large">24dp</dimen>
+
+    <dimen name="button_corner_radius">24dp</dimen>
+    <dimen name="input_text_corner_radius">24dp</dimen>
+    <dimen name="card_corner_radius">24dp</dimen>
+    <dimen name="card_padding">12dp</dimen>
+
 </resources>
