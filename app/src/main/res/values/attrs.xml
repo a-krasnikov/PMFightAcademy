@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ExpandableTextView">
+        <attr name="backgroundShowMore" format="reference" />
+        <attr name="textColorShowMore" format="color" />
+        <attr name="textSizeShowMore" format="dimension" />
+    </declare-styleable>
+</resources>
