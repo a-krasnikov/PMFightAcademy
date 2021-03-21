@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">PMFightAcademy</string>
+
+    <string name="btn_retry">Retry</string>
+  
     <string name="info_bottom_label">Info</string>
     <string name="coaches_bottom_label">Coaches</string>
     <string name="activities_bottom_label">Activities</string>
