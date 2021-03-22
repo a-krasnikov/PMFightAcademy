@@ -17,6 +17,8 @@ class ExpandableTextView @JvmOverloads constructor(
 ) : AppCompatTextView(context, attrs, defStyleAttr) {
 
     private val rectGradient: Drawable?
+    private val rectGradientHeight: Int
+        get() = lineHeight * 2
     private val paintTextShowMore: Paint
 
     var maxLinesCollapsed: Int = DEFAULT_MAX_LINES
@@ -63,31 +65,38 @@ class ExpandableTextView @JvmOverloads constructor(
         super.onDraw(canvas)
 
         if (!isExpanded && lineCount > maxLinesCollapsed) {
-            rectGradient?.setBounds(0, height - lineHeight * 2, width, height)
+            rectGradient?.setBounds(0, height - rectGradientHeight - paddingBottom, width, height)
             rectGradient?.draw(canvas)
 
             canvas.drawText(
                 resources.getString(R.string.title_show_more),
                 width / 2f,
-                height - textSize,
+                height - rectGradientHeight / 2f - paddingBottom,
                 paintTextShowMore
             )
         }
     }
 
+    override fun performClick(): Boolean {
+        super.performClick()
+        return true
+    }
+
     override fun onTouchEvent(event: MotionEvent): Boolean {
         val y = event.y
         when (event.action) {
-            MotionEvent.ACTION_DOWN -> {
+            MotionEvent.ACTION_UP -> {
                 if (isExpanded) {
                     isExpanded = false
                 } else {
-                    if (y > height - lineHeight * 2f && y < height) {
+                    if (y > height - rectGradientHeight - paddingBottom && y < height) {
                         isExpanded = true
                     }
                 }
             }
         }
+
+        performClick()
         return true
     }
 

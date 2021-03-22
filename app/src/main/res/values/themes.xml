@@ -61,7 +61,6 @@
     <!--  CardView Style -->
 
     <style name="Widget.App.CardView" parent="Widget.MaterialComponents.CardView">
-        <item name="contentPadding">@dimen/card_padding</item>
         <item name="cardCornerRadius">@dimen/card_corner_radius</item>
         <item name="android:backgroundTint">@color/dark_grey</item>
     </style>
@@ -82,5 +81,10 @@
         <item name="cornerFamilyTopRight">rounded</item>
         <item name="cornerSizeTopLeft">@dimen/card_corner_radius</item>
         <item name="cornerSizeTopRight">@dimen/card_corner_radius</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.App.Circle" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
     </style>
 </resources>

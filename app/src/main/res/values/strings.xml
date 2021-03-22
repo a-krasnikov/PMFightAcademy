@@ -3,4 +3,8 @@
     <string name="title_coaches">Coaches</string>
     <string name="btn_retry">Retry</string>
     <string name="title_show_more">Show more</string>
+
+    <!-- Coach -->
+    <string name="text_coach_name">%1s %2s</string>
+    <string name="text_coach_age">%d years old</string>
 </resources>
