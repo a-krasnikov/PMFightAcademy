@@ -10,6 +10,7 @@ import krasnikov.project.pmfightacademy.LoginFragmentDirections
 import krasnikov.project.pmfightacademy.MainContentDirections
 import krasnikov.project.pmfightacademy.utils.Event
 
+@Suppress("UnusedPrivateMember")
 abstract class BaseViewModel : ViewModel() {
 
     protected val exceptionHandler = CoroutineExceptionHandler { _, throwable ->

@@ -1,3 +1,4 @@
+@file:Suppress("WildcardImport")
 package krasnikov.project.pmfightacademy.info.ui
 
 import androidx.lifecycle.viewModelScope

@@ -25,6 +25,7 @@ object NetworkModule {
     }
 
     //TODO Change to retrofit service
+    @Suppress("MagicNumber", "MaxLineLength", "TooGenericExceptionThrown")
     @OptIn(ExperimentalStdlibApi::class)
     @Provides
     fun provideCoachesService(): CoachesService {
