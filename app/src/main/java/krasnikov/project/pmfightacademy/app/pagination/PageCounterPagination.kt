@@ -3,6 +3,7 @@ package krasnikov.project.pmfightacademy.app.pagination
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import java.util.concurrent.atomic.AtomicInteger
+import javax.inject.Inject
 
 class PageCounterPagination<T>(private val getRequest: suspend (Int) -> List<T>) {
 
@@ -22,7 +23,7 @@ class PageCounterPagination<T>(private val getRequest: suspend (Int) -> List<T>)
     }
 }
 
-class Pagination {
+class Pagination @Inject constructor() {
 
     fun <T> pagePagination(getRequest: suspend (Int) -> List<T>): PageCounterPagination<T> {
         return PageCounterPagination(getRequest)
