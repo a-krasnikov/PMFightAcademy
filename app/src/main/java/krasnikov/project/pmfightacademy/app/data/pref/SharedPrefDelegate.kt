@@ -1,4 +1,4 @@
-package krasnikov.project.pmfightacademy.app.data.exception.pref
+package krasnikov.project.pmfightacademy.app.data.pref
 
 import android.content.SharedPreferences
 import java.lang.IllegalArgumentException
@@ -12,7 +12,7 @@ class SharedPrefDelegate<T>(
 ) : ReadWriteProperty<Any?, T> {
 
     @Suppress("UNCHECKED_CAST")
-    override fun setaVlue(thisRef: Any?, property: KProperty<*>, value: T) = with(prefs.edit()) {
+    override fun setValue(thisRef: Any?, property: KProperty<*>, value: T) = with(prefs.edit()) {
         when (value) {
             is Boolean -> putBoolean(key, value)
             is Int -> putInt(key, value)

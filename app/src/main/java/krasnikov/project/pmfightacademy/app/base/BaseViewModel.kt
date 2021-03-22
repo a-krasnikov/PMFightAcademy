@@ -1,9 +1,12 @@
-package krasnikov.project.pmfightacademy.app
+package krasnikov.project.pmfightacademy.app.base
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.*
 import krasnikov.project.pmfightacademy.app.data.exception.RequestNotAuthorizedException
+import krasnikov.project.pmfightacademy.app.navigation.NavigationEvent
+import krasnikov.project.pmfightacademy.app.navigation.Navigator.navigateToLogin
+import krasnikov.project.pmfightacademy.utils.SingleLiveEvent
 
 abstract class BaseViewModel : ViewModel() {
 
@@ -14,7 +17,7 @@ abstract class BaseViewModel : ViewModel() {
 
     open fun handleError(throwable: Throwable, coroutineName: CoroutineName?) {
         if(throwable is RequestNotAuthorizedException) {
-            _navigationEvent.postValue( NavigationEvent { Navigator.navigateToLogin(it) })
+            _navigationEvent.postValue( NavigationEvent { krasnikov.project.pmfightacademy.app.navigation.Navigator.navigateToLogin(it) })
         }
     }
 

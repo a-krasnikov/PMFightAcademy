@@ -1,4 +1,4 @@
-package krasnikov.project.pmfightacademy.app.data.exception.pref
+package krasnikov.project.pmfightacademy.app.data.pref
 
 import android.content.Context
 import android.content.SharedPreferences

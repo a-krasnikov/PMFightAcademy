@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_navigation"
+    app:startDestination="@id/launch_fragment">
+
+    <fragment
+        android:id="@+id/launch_fragment"
+        android:name="krasnikov.project.pmfightacademy.login.ui.LoginFragment"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_launch_to_main_content"
+            app:destination="@id/main_content"
+            app:popUpTo="@id/launch_fragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+
+    <navigation
+        android:id="@+id/main_content"
+        app:startDestination="@id/info_fragment">
+        <fragment android:id="@+id/info_fragment" />
+        <fragment android:id="@+id/coaches_fragment" />
+        <fragment android:id="@+id/current_activities_fragment">
+            <action
+                android:id="@+id/action_activities_to_booking"
+                app:destination="@id/booking_fragment" />
+        </fragment>
+        <fragment android:id="@+id/history_fragment" />
+        <fragment android:id="@+id/settings_fragment" />
+
+        <fragment android:id="@+id/booking_fragment" />
+    </navigation>
+
+    <navigation
+        android:id="@+id/login_flow"
+        app:startDestination="@id/login_fragment">
+        <fragment android:id="@+id/register_fragment">
+            <action
+                android:id="@+id/action_register_to_login"
+                app:destination="@id/login_fragment" />
+            <action
+                android:id="@+id/action_register_to_main_content"
+                app:destination="@id/main_content" />
+        </fragment>
+        <fragment android:id="@+id/login_fragment">
+            <action
+                android:id="@+id/action_login_to_register"
+                app:destination="@id/register_fragment" />
+            <action
+                android:id="@+id/action_login_to_main_content"
+                app:destination="@id/main_content" />
+        </fragment>
+    </navigation>
+
+    <action
+        android:id="@+id/action_global_to_login"
+        app:destination="@id/login_flow"
+        app:popUpTo="@id/login_fragment"
+        app:popUpToInclusive="true" />
+
+</navigation>

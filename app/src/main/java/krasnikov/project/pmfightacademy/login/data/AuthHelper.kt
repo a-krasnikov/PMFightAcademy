@@ -15,9 +15,6 @@ class AuthHelper @Inject constructor(private val loginService: LoginService) {
         /** Заменить "github.com" на нужную точку входа*/
         const val HOST = "github.com"
 
-        /** Уточнить нежун ли REDIRECT_URL*/
-        const val REDIRECT_URL = "pmgithubclient://callback"
-
         const val LOGIN_PATH = "/Clients/Login"
     }
 
@@ -31,17 +28,16 @@ class AuthHelper @Inject constructor(private val loginService: LoginService) {
 //            .appendQueryParameter("redirect_url", REDIRECT_URL)
             .build()
 
-    fun getCodeFromUri(uri: Uri?): String? {
-        uri ?: return null
-        if (!uri.toString().startsWith(REDIRECT_URL)) {
-            return null
+
+    suspend fun getAccessToken(login: String, password:String): AccessToken {
+        return withContext(Dispatchers.IO) {
+            loginService.getAccessToken(login, password)
         }
-        return uri.getQueryParameter("code")
     }
 
-    suspend fun getAccessToken(login: String, pass:String): AccessToken {
+    suspend fun getNewRegistration(login: String, password:String, name:String): AccessToken {
         return withContext(Dispatchers.IO) {
-            loginService.getAccessToken(login, pass)
+            loginService.getNewRegistration(login, password, name)
         }
     }
 }

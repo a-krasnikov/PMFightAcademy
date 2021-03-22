@@ -1,4 +1,4 @@
-package krasnikov.project.pmfightacademy.app.ui
+package krasnikov.project.pmfightacademy.app.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import krasnikov.project.pmfightacademy.app.BaseViewModel
 
 abstract class BaseFragment<T : ViewBinding, V : BaseViewModel> : Fragment() {
 

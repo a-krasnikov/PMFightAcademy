@@ -4,11 +4,20 @@
     <dimen name="spacing_small">8dp</dimen>
     <dimen name="spacing_medium">16dp</dimen>
     <dimen name="spacing_large">24dp</dimen>
-    <dimen name="LoginPageImageWidth">200dp</dimen>
-    <dimen name="LoginPageImageHeight">200dp</dimen>
-    <dimen name="ivLoginPageImageMargineTop">40dp</dimen>
-    <dimen name="etPhoneNumberMargineStartEnd">20dp</dimen>
-    <dimen name="etPhoneNumberMargineTop">20dp</dimen>
+
+    <dimen name="button_corner_radius">24dp</dimen>
+    <dimen name="input_text_corner_radius">24dp</dimen>
+    <dimen name="card_corner_radius">24dp</dimen>
+    <dimen name="card_padding">12dp</dimen>
+    <dimen name="btnCreateAccounMarginBottom">20dp</dimen>
+    <dimen name="tvDontHaveAccautMarginBottom">20dp</dimen>
+    <dimen name="btnLoginMarginTop">20dp</dimen>
     <dimen name="etPasswordMargineStartEnd">20dp</dimen>
     <dimen name="etPasswordMargineTop">20dp</dimen>
+    <dimen name="etPhoneNumberMargineStartEnd">20dp</dimen>
+    <dimen name="etPhoneNumberMargineTop">20dp</dimen>
+    <dimen name="ivLoginPageImageMargineTop">20dp</dimen>
+    <dimen name="LoginPageImageHeight">200dp</dimen>
+    <dimen name="LoginPageImageWidth">200dp</dimen>
+
 </resources>

@@ -12,8 +12,8 @@
         android:layout_marginTop="@dimen/ivLoginPageImageMargineTop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
+        android:src="@drawable/abc_vector_test"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/etPhoneNumber"
@@ -40,51 +40,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etPhoneNumber" />
 
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/etPasswordMargineStartEnd"
+        android:layout_marginTop="@dimen/etPasswordMargineTop"
+        android:layout_marginEnd="@dimen/etPasswordMargineStartEnd"
+        android:background="@color/white"
+        android:hint="@string/etName"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etPassword" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/btnLoginMarginTop"
         android:text="@string/btn_login"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etPassword" />
-
-    <TextView
-        android:id="@+id/tvForgotPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/etPasswordMargineStartEnd"
-        android:layout_marginTop="@dimen/etPasswordMargineTop"
-        android:layout_marginEnd="@dimen/etPasswordMargineStartEnd"
-        android:gravity="center"
-        android:text="@string/tvForgotPassword"
-        android:textColor="@color/yellow"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnLogin" />
-
-    <TextView
-        android:id="@+id/tvDontHaveAccaut"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/etPasswordMargineStartEnd"
-        android:layout_marginTop="@dimen/etPasswordMargineTop"
-        android:layout_marginEnd="@dimen/etPasswordMargineStartEnd"
-        android:gravity="center"
-        android:text="@string/tvDontHaveAccaut"
-        android:textColor="@color/grey"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvForgotPassword" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnCreateAccount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btnCreateAccount"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvDontHaveAccaut" />
-
+        app:layout_constraintTop_toBottomOf="@id/etName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

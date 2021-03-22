@@ -12,6 +12,12 @@ interface LoginService {
     @FormUrlEncoded
     suspend fun getAccessToken(
         @Field("login") login: String,
-        @Field("pass") pass: String
+        @Field("password") password: String
+    ): AccessToken
+
+    suspend fun getNewRegistration(
+        @Field("login") login: String,
+        @Field("password") password: String,
+        @Field("name") name:String
     ): AccessToken
 }

@@ -1,4 +1,4 @@
-package krasnikov.project.pmfightacademy.login.ui
+package krasnikov.project.pmfightacademy.login.registation.ui
 
 import android.os.Bundle
 import android.util.Log
@@ -6,14 +6,17 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import krasnikov.project.pmfightacademy.R
 import krasnikov.project.pmfightacademy.app.base.BaseFragment
+import krasnikov.project.pmfightacademy.app.navigation.NavigationEvent
 import krasnikov.project.pmfightacademy.databinding.FragmentLoginBinding
+import krasnikov.project.pmfightacademy.databinding.FragmentRegistrationBinding
 import krasnikov.project.pmfightacademy.login.LoginViewModel
+import krasnikov.project.pmfightacademy.login.registation.RegistrationViewModel
 import krasnikov.project.pmfightacademy.utils.State
 import krasnikov.project.pmfightacademy.utils.setSafeOnClickListener
 
-class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
+class RegistrationFragment : BaseFragment<FragmentRegistrationBinding, RegistrationViewModel>() {
 
-    override val viewModel: LoginViewModel by viewModels()
+    override val viewModel: RegistrationViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -22,23 +25,25 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
     }
 
     override fun setupBinding() {
-        binding = FragmentLoginBinding.inflate(layoutInflater)
+        binding = FragmentRegistrationBinding.inflate(layoutInflater)
     }
 
     private fun setupBtnListener() {
         binding.btnLogin.setSafeOnClickListener {
             val login: String? = binding.etPhoneNumber.text.toString()
             val password: String? = binding.etPassword.text.toString()
-            if (login.isNullOrEmpty() || password.isNullOrEmpty()) {
-                Log.d("TestLog", "(pass.isNullOrEmpty() || phone.isNullOrEmpty())")
+            val name: String? = binding.etName.text.toString()
+            if (login.isNullOrEmpty() || password.isNullOrEmpty() || name.isNullOrEmpty()) {
+                Log.d("TestLog",
+                    "(pass.isNullOrEmpty() || phone.isNullOrEmpty()) || name.isNullOrEmpty()")
             } else {
-                startLogin(login, password)
+                startRegistration(login, password, name)
             }
         }
     }
 
-    private fun startLogin(login: String, password: String) {
-        viewModel.getAccessToken(context, login, password)
+    private fun startRegistration(login: String, password: String, name: String) {
+        viewModel.startRegistration(context, login, password, name)
     }
 
     private fun observeContent() {
@@ -55,6 +60,4 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
             }
         }
     }
-
-
 }
