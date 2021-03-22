@@ -71,7 +71,7 @@ class ExpandableTextView @JvmOverloads constructor(
             canvas.drawText(
                 resources.getString(R.string.title_show_more),
                 width / 2f,
-                height - rectGradientHeight / 2f - paddingBottom,
+                height - paddingBottom.toFloat(),
                 paintTextShowMore
             )
         }
