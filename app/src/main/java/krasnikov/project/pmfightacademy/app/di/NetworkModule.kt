@@ -22,7 +22,7 @@ import javax.inject.Singleton
 class NetworkModule {
     companion object {
         const val API_BASE_URL = "https://api.github.com"
-        const val OAUTH_BASE_URL = "https://github.com"
+        const val OAUTH_BASE_URL = "https://jsonplaceholder.typicode.com/"
     }
 
     @Provides

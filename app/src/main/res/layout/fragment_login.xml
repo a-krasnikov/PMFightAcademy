@@ -23,6 +23,7 @@
         android:layout_marginTop="@dimen/etPhoneNumberMargineTop"
         android:layout_marginEnd="@dimen/etPhoneNumberMargineStartEnd"
         android:background="@color/white"
+        android:maxLines="1"
         android:hint="@string/etPhoneNumber"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivLoginPageImage" />

@@ -7,8 +7,8 @@
 
     <fragment
         android:id="@+id/launch_fragment"
-        android:name="krasnikov.project.pmfightacademy.login.ui.LoginFragment"
-        tools:layout="@layout/fragment_login">
+        android:name="krasnikov.project.pmfightacademy.launch.LaunchFragment"
+        tools:layout="@layout/fragment_launch">
         <action
             android:id="@+id/action_launch_to_main_content"
             app:destination="@id/main_content"

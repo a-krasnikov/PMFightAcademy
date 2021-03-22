@@ -13,7 +13,7 @@ import krasnikov.project.pmfightacademy.login.LoginViewModel
 import krasnikov.project.pmfightacademy.utils.State
 import krasnikov.project.pmfightacademy.utils.setSafeOnClickListener
 
-@AndroidEntryPoint
+//@AndroidEntryPoint
 class LoginFragment: BaseFragment<FragmentLoginBinding, LoginViewModel>() {
 
   override val viewModel: LoginViewModel by viewModels()
@@ -30,13 +30,15 @@ class LoginFragment: BaseFragment<FragmentLoginBinding, LoginViewModel>() {
 
     private fun setupBtnListener() {
         binding.btnLogin.setSafeOnClickListener {
-            val login: String? = binding.etPhoneNumber.text.toString()
+            viewModel.navigateRegistration()
+
+            /*val login: String? = binding.etPhoneNumber.text.toString()
             val password: String? = binding.etPassword.text.toString()
             if (login.isNullOrEmpty() || password.isNullOrEmpty()) {
                 Log.d("TestLog", "(pass.isNullOrEmpty() || phone.isNullOrEmpty())")
             } else {
                 startLogin(login, password)
-            }
+            }*/
         }
     }
 

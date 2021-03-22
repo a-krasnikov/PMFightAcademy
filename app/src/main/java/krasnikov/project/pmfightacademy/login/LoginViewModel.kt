@@ -35,7 +35,7 @@ class LoginViewModel @Inject constructor(
         baseViewModelScope.launch() {
             _content.postValue(State.Loading)
             val result = authHelper.getAccessToken(login = login, password = password)
-            pref.token = "${result.accessToken}"
+            pref.token = "${result.body()?.accessToken}"
             _content.postValue(State.Content(Unit))
             navigateAcademyInfo()
         }}
@@ -47,9 +47,13 @@ class LoginViewModel @Inject constructor(
 
     private fun navigateAcademyInfo() {
         _navigationEvent.postValue(NavigationEvent {
-            Navigator.navigateToAcademyInfo(
-                it
-            )
+            Navigator.navigateToAcademyInfo(it)
+        })
+    }
+
+    fun navigateRegistration() {
+        _navigationEvent.postValue(NavigationEvent {
+            Navigator.navigateToRegistration(it)
         })
     }
 

@@ -16,6 +16,13 @@ object Navigator {
         }
     }
 
+    fun navigateToRegistration(fragmentManager: FragmentManager) {
+        fragmentManager.commit {
+            replace<RegistrationFragment>(R.id.register_fragment)
+            setReorderingAllowed(true)
+        }
+    }
+
     fun navigateToAcademyInfo(fragmentManager: FragmentManager) {
         fragmentManager.commit {
             replace<RegistrationFragment>(R.id.register_fragment)

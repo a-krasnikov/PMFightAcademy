@@ -33,7 +33,7 @@ class RegistrationViewModel @Inject constructor(
             baseViewModelScope.launch() {
                 _content.postValue(State.Loading)
                 val result = authHelper.getNewRegistration(login = login, password = password, name=name)
-                pref.token = "${result.accessToken}"
+                pref.token = "${result.body()?.accessToken}"
                 _content.postValue(State.Content(Unit))
                 navigateAcademyInfo()
             }
