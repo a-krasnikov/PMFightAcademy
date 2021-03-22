@@ -7,37 +7,61 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import krasnikov.project.pmfightacademy.utils.Event
 
-abstract class BaseFragment<T : ViewBinding, V : BaseViewModel> : Fragment() {
+abstract class BaseFragment<V : BaseViewModel, T : ViewBinding> : Fragment() {
 
-    protected lateinit var binding: T
+    private var eventJob: Job? = null
 
     protected abstract val viewModel: V
+    protected var mBinding: T? = null
+    protected val binding get() = mBinding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        setupBinding()
+        createViewBinding()
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        observeNavEvent()
+    override fun onStart() {
+        super.onStart()
+
+        eventJob = viewModel.eventFlow
+            .onEach {
+                when (it) {
+                    is Event.Navigation -> {
+                        findNavController().navigate(it.directions)
+                    }
+                    is Event.Message -> {
+                        showToast(it.idRes)
+                    }
+                }
+            }
+            .launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
-    abstract fun setupBinding()
-
-    private fun observeNavEvent() {
-        viewModel.navigationEvent.observe(viewLifecycleOwner) {
-            it.navigate(requireActivity().supportFragmentManager)
-        }
+    override fun onStop() {
+        super.onStop()
+        eventJob?.cancel()
     }
 
-    protected fun showToast(@StringRes stringRes: Int, duration: Int = Toast.LENGTH_SHORT) {
-        Toast.makeText(requireContext(), stringRes, duration).show()
+    private fun showToast(@StringRes stringRes: Int) {
+        Toast.makeText(requireContext(), stringRes, Toast.LENGTH_SHORT).show()
+    }
+
+    abstract fun createViewBinding()
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mBinding = null
     }
 }

@@ -10,26 +10,6 @@ import javax.inject.Inject
 
 class AuthHelper @Inject constructor(private val loginService: LoginService) {
 
-//    private companion object {
-//        const val SCHEMA = "https"
-//
-//        /** Заменить "github.com" на нужную точку входа*/
-//        const val HOST = "github.com"
-//
-////        const val LOGIN_PATH = "/Clients/Login"
-//    }
-
-//    val fightAcademyUrl: Uri
-//        get() = Uri.Builder()
-//            .scheme(SCHEMA)
-//            .authority(HOST)
-////            .appendEncodedPath(LOGIN_PATH)
-////            .appendQueryParameter("client_id", CLIENT_ID)
-////            .appendQueryParameter("scope", OAUTH2_SCOPE)
-////            .appendQueryParameter("redirect_url", REDIRECT_URL)
-//            .build()
-
-
     suspend fun getAccessToken(login: String, password:String): Response<AccessToken> {
         return withContext(Dispatchers.IO) {
             loginService.getAccessToken(login, password)

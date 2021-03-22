@@ -71,4 +71,8 @@ class LoginViewModel @Inject constructor(
             }
         }
     }
+
+    override fun handleError(throwable: Throwable) {
+        TODO("Not yet implemented")
+    }
 }
