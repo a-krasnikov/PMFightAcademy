@@ -3,7 +3,6 @@ package krasnikov.project.pmfightacademy.app.navigation
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
-import androidx.lifecycle.ReportFragment
 import krasnikov.project.pmfightacademy.R
 import krasnikov.project.pmfightacademy.login.registation.ui.RegistrationFragment
 import krasnikov.project.pmfightacademy.login.ui.LoginFragment

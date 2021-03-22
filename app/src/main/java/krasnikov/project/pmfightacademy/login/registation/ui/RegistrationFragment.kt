@@ -6,10 +6,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import krasnikov.project.pmfightacademy.R
 import krasnikov.project.pmfightacademy.app.base.BaseFragment
-import krasnikov.project.pmfightacademy.app.navigation.NavigationEvent
-import krasnikov.project.pmfightacademy.databinding.FragmentLoginBinding
 import krasnikov.project.pmfightacademy.databinding.FragmentRegistrationBinding
-import krasnikov.project.pmfightacademy.login.LoginViewModel
 import krasnikov.project.pmfightacademy.login.registation.RegistrationViewModel
 import krasnikov.project.pmfightacademy.utils.State
 import krasnikov.project.pmfightacademy.utils.setSafeOnClickListener

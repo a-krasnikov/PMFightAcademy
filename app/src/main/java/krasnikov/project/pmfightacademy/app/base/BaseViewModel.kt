@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.*
 import krasnikov.project.pmfightacademy.app.data.exception.RequestNotAuthorizedException
 import krasnikov.project.pmfightacademy.app.navigation.NavigationEvent
-import krasnikov.project.pmfightacademy.app.navigation.Navigator.navigateToLogin
 import krasnikov.project.pmfightacademy.utils.SingleLiveEvent
 
 abstract class BaseViewModel : ViewModel() {
