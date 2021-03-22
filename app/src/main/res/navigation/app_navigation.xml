@@ -20,13 +20,17 @@
     <navigation
         android:id="@+id/main_content"
         app:startDestination="@id/info_fragment">
-        <fragment android:id="@+id/info_fragment" />
+
+        <fragment
+            android:id="@+id/info_fragment"
+            android:name="krasnikov.project.pmfightacademy.info.ui.InfoFragment"
+            tools:layout="@layout/fragment_info" />
+
         <fragment
             android:id="@+id/coaches_fragment"
             android:name="krasnikov.project.pmfightacademy.coaches.ui.CoachesFragment"
-            tools:layout="@layout/fragment_coaches">
+            tools:layout="@layout/fragment_coaches" />
 
-        </fragment>
         <fragment android:id="@+id/current_activities_fragment">
             <action
                 android:id="@+id/action_activities_to_booking"
