@@ -3,7 +3,9 @@ package krasnikov.project.pmfightacademy.login.ui
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import krasnikov.project.pmfightacademy.R
 import krasnikov.project.pmfightacademy.app.base.BaseFragment
 import krasnikov.project.pmfightacademy.databinding.FragmentLoginBinding
@@ -11,9 +13,10 @@ import krasnikov.project.pmfightacademy.login.LoginViewModel
 import krasnikov.project.pmfightacademy.utils.State
 import krasnikov.project.pmfightacademy.utils.setSafeOnClickListener
 
-class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
+@AndroidEntryPoint
+class LoginFragment: BaseFragment<FragmentLoginBinding, LoginViewModel>() {
 
-    override val viewModel: LoginViewModel by viewModels()
+  override val viewModel: LoginViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -55,6 +58,4 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
             }
         }
     }
-
-
 }
