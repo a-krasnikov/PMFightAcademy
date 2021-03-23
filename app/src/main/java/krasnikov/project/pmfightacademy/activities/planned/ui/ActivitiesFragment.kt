@@ -30,10 +30,24 @@ class ActivitiesFragment: BaseFragment<PlannedActivitiesViewModel, FragmentPlann
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setHasOptionsMenu(true)
+        setupMenu()
 
         setupRecyclerView()
         subscribeToPlannedActivitiesFlow()
+    }
+
+    private fun setupMenu() {
+        binding.mtToolbar.inflateMenu(R.menu.planned_activities)
+
+        binding.mtToolbar.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.book -> {
+                    //navigate to booking
+                    true
+                }
+                else -> super.onOptionsItemSelected(item)
+            }
+        }
     }
 
     private fun setupRecyclerView() {
@@ -44,20 +58,6 @@ class ActivitiesFragment: BaseFragment<PlannedActivitiesViewModel, FragmentPlann
         viewModel.plannedActivitiesContent.onEach {
             adapter.submitData(it)
         }.launchWhenStarted(lifecycleScope)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.planned_activities, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.book -> {
-                //navigate to booking
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 
 }

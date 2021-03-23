@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_navigation"
-    app:startDestination="@id/info_fragment">
+    app:startDestination="@id/launch_fragment">
 
     <fragment
         android:id="@+id/launch_fragment"
@@ -16,31 +16,28 @@
             app:popUpToInclusive="true" />
     </fragment>
 
-    <fragment
-        android:id="@+id/info_fragment"
-        android:name="krasnikov.project.pmfightacademy.info.ui.InfoFragment"
-        tools:layout="@layout/fragment_info" />
-
-    <fragment
-        android:id="@+id/coaches_fragment"
-        android:name="krasnikov.project.pmfightacademy.coaches.ui.CoachesFragment"
-        tools:layout="@layout/fragment_coaches" />
-
-    <fragment
-        android:id="@+id/current_activities_fragment"
-        android:name="krasnikov.project.pmfightacademy.activities.planned.ui.ActivitiesFragment">
-        <action
-            android:id="@+id/action_activities_to_booking"
-            app:destination="@id/booking_fragment" />
-    </fragment>
 
     <navigation
         android:id="@+id/main_content"
         app:startDestination="@id/info_fragment">
 
+        <fragment
+            android:id="@+id/info_fragment"
+            android:name="krasnikov.project.pmfightacademy.info.ui.InfoFragment"
+            tools:layout="@layout/fragment_info" />
 
+        <fragment
+            android:id="@+id/coaches_fragment"
+            android:name="krasnikov.project.pmfightacademy.coaches.ui.CoachesFragment"
+            tools:layout="@layout/fragment_coaches" />
 
-
+        <fragment
+            android:id="@+id/current_activities_fragment"
+            android:name="krasnikov.project.pmfightacademy.activities.planned.ui.ActivitiesFragment">
+            <action
+                android:id="@+id/action_activities_to_booking"
+                app:destination="@id/booking_fragment" />
+        </fragment>
         <fragment android:id="@+id/history_fragment" />
         <fragment android:id="@+id/settings_fragment" />
 
