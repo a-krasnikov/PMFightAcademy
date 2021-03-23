@@ -41,7 +41,7 @@ class CoachesViewModel @Inject constructor(
     }
 
     override fun handleError(throwable: Throwable) {
-        _contentCoaches.value.stateToError(throwable as Exception)
+        _contentCoaches.value = _contentCoaches.value.stateToError(throwable as Exception)
     }
 
     fun loadNextData() {

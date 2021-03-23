@@ -14,9 +14,9 @@ data class Coach(
     @SerialName("age")
     val age: Int,
     @SerialName("description")
-    val description: String,
+    val description: String = "",
     @SerialName("phoneNumber")
-    val phoneNumber: String,
+    val phoneNumber: String = "",
     @SerialName("services")
     val services: List<String>,
 )
