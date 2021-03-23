@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -11,52 +12,59 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ivAvatar"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="@dimen/spacing_medium"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="@dimen/coach_avatar_size"
+            android:layout_height="@dimen/coach_avatar_size"
+            app:layout_constraintStart_toStartOf="@id/marginStart"
             app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circle" />
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circle"
+            tools:src="@drawable/coach_avatar" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_small"
-            android:layout_marginEnd="@dimen/spacing_medium"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivAvatar"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@id/marginEnd"
+            app:layout_constraintStart_toEndOf="@id/ivAvatar"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Aleksandr Tarasov" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvAge"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_small"
-            app:layout_constraintEnd_toStartOf="@id/tvService"
+            android:layout_marginTop="@dimen/spacing_micro"
             app:layout_constraintStart_toEndOf="@id/ivAvatar"
-            app:layout_constraintTop_toBottomOf="@id/tvName" />
+            app:layout_constraintTop_toBottomOf="@id/tvName"
+            tools:text="29 years old" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvService"
-            android:layout_width="0dp"
+            android:id="@+id/tvServices"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_small"
-            android:layout_marginEnd="@dimen/spacing_medium"
-            android:gravity="center"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/spacing_micro"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBaseline_toBaselineOf="@id/tvAge"
+            app:layout_constraintEnd_toEndOf="@id/marginEnd"
+            app:layout_constraintHorizontal_bias="1"
             app:layout_constraintStart_toEndOf="@id/tvAge"
-            app:layout_constraintTop_toBottomOf="@id/tvName" />
+            app:layout_constraintTop_toBottomOf="@id/tvName"
+            tools:text="Boxing" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvPhoneNumber"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_small"
+            android:layout_marginTop="@dimen/spacing_micro"
             android:layout_marginEnd="@dimen/spacing_medium"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:autoLink="phone"
             app:layout_constraintStart_toEndOf="@id/ivAvatar"
-            app:layout_constraintTop_toBottomOf="@id/tvAge" />
+            app:layout_constraintTop_toBottomOf="@id/barrierAgeServices"
+            tools:text="+380679999999" />
 
         <krasnikov.project.pmfightacademy.view.ExpandableTextView
             android:id="@+id/tvDescription"
@@ -69,8 +77,37 @@
             app:backgroundShowMore="@drawable/expandable_tv_gradient"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvPhoneNumber"
-            app:textColorShowMore="@color/white" />
+            app:layout_constraintTop_toBottomOf="@id/barrierAvatarPhone"
+            app:textColorShowMore="@color/white"
+            tools:text="@tools:sample/lorem/random" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrierAgeServices"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="tvAge,tvServices" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrierAvatarPhone"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="ivAvatar,tvPhoneNumber" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/marginStart"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/spacing_medium" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/marginEnd"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/spacing_medium" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>
