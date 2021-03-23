@@ -41,6 +41,4 @@ class PlannedActivitiesAdapter(loadMore: () -> Unit) :
             binding.tvTime.text = activity.time
         }
     }
-
-
 }

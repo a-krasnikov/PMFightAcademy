@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
 import krasnikov.project.pmfightacademy.app.ui.base.BaseFragment
 import krasnikov.project.pmfightacademy.databinding.FragmentPlannedActivitiesBinding
 import krasnikov.project.pmfightacademy.utils.launchWhenStarted
 
+@AndroidEntryPoint
 class ActivitiesFragment: BaseFragment<PlannedActivitiesViewModel, FragmentPlannedActivitiesBinding>() {
 
     override val viewModel by viewModels<PlannedActivitiesViewModel>()

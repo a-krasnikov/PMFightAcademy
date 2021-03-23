@@ -1,6 +1,7 @@
 package krasnikov.project.pmfightacademy.activities.planned.ui
 
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
@@ -12,6 +13,7 @@ import krasnikov.project.pmfightacademy.app.ui.base.BaseViewModel
 import krasnikov.project.pmfightacademy.utils.State
 import javax.inject.Inject
 
+@HiltViewModel
 class PlannedActivitiesViewModel @Inject constructor(private val activitiesRepository: ActivitiesRepository) :
     BaseViewModel() {
 
