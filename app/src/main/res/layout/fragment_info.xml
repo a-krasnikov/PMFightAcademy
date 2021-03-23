@@ -11,12 +11,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:title="@string/info_screen_title" />
 
-    <TextView
-        android:id="@+id/tvInfoDescription"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mtTitle" />
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/mtTitle">
+        <TextView
+            android:id="@+id/tvInfoDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mtTitle" />
+    </ScrollView>
+
 
     <ProgressBar
         android:id="@+id/pbInfoLoading"
