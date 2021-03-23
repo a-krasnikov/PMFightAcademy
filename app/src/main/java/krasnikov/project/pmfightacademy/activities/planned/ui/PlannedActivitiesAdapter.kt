@@ -30,15 +30,17 @@ class PlannedActivitiesAdapter(loadMore: () -> Unit) :
         private val resources = itemView.resources
 
         fun bind(activity: Activity) {
-            binding.tvCoachName.text = resources.getString(
-                R.string.activity_coach_name,
-                activity.coachFirstName,
-                activity.coachLastName
-            )
+            with(binding) {
+                tvCoachName.text = resources.getString(
+                    R.string.activity_coach_name,
+                    activity.coachFirstName,
+                    activity.coachLastName
+                )
 
-            binding.tvServiceName.text = activity.serviceName
-            binding.tvDate.text = activity.date
-            binding.tvTime.text = activity.time
+                tvServiceName.text = activity.serviceName
+                tvDate.text = activity.date
+                tvTime.text = activity.time
+            }
         }
     }
 }
