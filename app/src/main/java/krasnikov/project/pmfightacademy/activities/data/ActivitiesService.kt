@@ -1,6 +1,6 @@
 package krasnikov.project.pmfightacademy.activities.data
 
-import krasnikov.project.pmfightacademy.app.pagination.PagedResponse
+import krasnikov.project.pmfightacademy.app.data.ResponseWithPaginationModel
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -9,11 +9,11 @@ interface ActivitiesService {
     fun getPlannedActivities(
         @Path("pageSize") pageSize: Int,
         @Path("page") page: Int
-    ): PagedResponse<Activity>
+    ): ResponseWithPaginationModel<Activity>
 
     @GET("/Booking/history/{pageSize}/{page}")
     fun getActivitiesHistory(
         @Path("pageSize") pageSize: Int,
         @Path("page") page: Int
-    ): PagedResponse<Activity>
+    ): ResponseWithPaginationModel<Activity>
 }
