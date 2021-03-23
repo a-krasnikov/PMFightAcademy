@@ -16,9 +16,10 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvActivities"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:paddingStart="@dimen/card_padding"
         android:paddingEnd="@dimen/card_padding"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/recycler_item_activity_planned"
         />
 

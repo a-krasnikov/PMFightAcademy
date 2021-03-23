@@ -5,14 +5,14 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface ActivitiesService {
-    @GET("/Booking/{pageSize}/{page}")
-    fun getPlannedActivities(
+    @GET("/Booking/active/{pageSize}/{page}")
+    suspend fun getPlannedActivities(
         @Path("pageSize") pageSize: Int,
         @Path("page") page: Int
     ): ResponseWithPaginationModel<Activity>
 
     @GET("/Booking/history/{pageSize}/{page}")
-    fun getActivitiesHistory(
+    suspend fun getActivitiesHistory(
         @Path("pageSize") pageSize: Int,
         @Path("page") page: Int
     ): ResponseWithPaginationModel<Activity>

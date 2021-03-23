@@ -1,7 +1,9 @@
 package krasnikov.project.pmfightacademy.activities.data
 
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Activity(
     @SerialName("serviceName")
     val serviceName: String,

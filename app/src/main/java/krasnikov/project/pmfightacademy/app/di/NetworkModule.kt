@@ -7,23 +7,49 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.delay
 import kotlinx.serialization.json.Json
+import krasnikov.project.pmfightacademy.activities.data.ActivitiesService
 import krasnikov.project.pmfightacademy.app.data.PaginationModel
 import krasnikov.project.pmfightacademy.app.data.ResponseWithPaginationModel
+import krasnikov.project.pmfightacademy.app.data.interceptors.MockAuthInterceptor
 import krasnikov.project.pmfightacademy.coaches.data.Coach
 import krasnikov.project.pmfightacademy.coaches.data.CoachesService
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
 import retrofit2.Converter
+import retrofit2.Retrofit
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
+    private const val BASE_URL = "https://pmfightacademyclient-92m8i.ondigitalocean.app"
 
     @Singleton
     @Provides
     fun provideConverterFactory(): Converter.Factory {
         return Json { ignoreUnknownKeys = true; coerceInputValues = true }
             .asConverterFactory("application/json".toMediaType())
+    }
+
+    @Singleton
+    @Provides
+    fun provideOkHttpClient(): OkHttpClient {
+        return OkHttpClient().newBuilder().addInterceptor(MockAuthInterceptor()).build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideRetrofit(okHttpClient: OkHttpClient, converterFactory: Converter.Factory): Retrofit {
+        return Retrofit.Builder()
+            .client(okHttpClient)
+            .baseUrl(BASE_URL)
+            .addConverterFactory(converterFactory)
+            .build()
+    }
+
+    @Provides
+    fun provideActivitiesService(retrofit: Retrofit): ActivitiesService {
+        return retrofit.create(ActivitiesService::class.java)
     }
 
     //TODO Change to retrofit service
@@ -66,7 +92,10 @@ object NetworkModule {
                 }
             }
 
-            override suspend fun getCoaches(pageSize: Int, page: Int): ResponseWithPaginationModel<Coach> {
+            override suspend fun getCoaches(
+                pageSize: Int,
+                page: Int
+            ): ResponseWithPaginationModel<Coach> {
                 delay(2000)
                 return listData[page]
             }

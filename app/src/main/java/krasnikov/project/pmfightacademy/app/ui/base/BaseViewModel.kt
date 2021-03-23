@@ -23,6 +23,7 @@ abstract class BaseViewModel : ViewModel() {
 
     private fun handleNotAuthorizedException(throwable: Throwable) {
         //TODO handleNotAuthorizedException
+        val c = 0
     }
 
     private fun navigateToLogin() {

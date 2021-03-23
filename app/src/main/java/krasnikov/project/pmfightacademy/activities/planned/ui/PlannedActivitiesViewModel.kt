@@ -11,6 +11,7 @@ import krasnikov.project.pmfightacademy.app.pagination.PaginationData
 import krasnikov.project.pmfightacademy.app.pagination.PaginationState
 import krasnikov.project.pmfightacademy.app.ui.base.BaseViewModel
 import krasnikov.project.pmfightacademy.utils.State
+import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
@@ -36,6 +37,7 @@ class PlannedActivitiesViewModel @Inject constructor(private val activitiesRepos
                 )
             }
         }
+        getPlannedActivities()
     }
 
     fun getPlannedActivities() {
@@ -47,6 +49,6 @@ class PlannedActivitiesViewModel @Inject constructor(private val activitiesRepos
 
 
     override fun handleError(throwable: Throwable) {
-        TODO("Not yet implemented")
+        _plannedActivitiesContent.value.stateToError(throwable as Exception)
     }
 }

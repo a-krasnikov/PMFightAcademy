@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 data class ResponseWithPaginationModel<T>(
     @SerialName("data")
     val data: List<T>,
-    @SerialName("pagination")
+    @SerialName("paggination")
     val pagination: PaginationModel
 )
 
