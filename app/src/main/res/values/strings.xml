@@ -13,4 +13,13 @@
     <string name="activities_bottom_label">Activities</string>
     <string name="history_bottom_label">History</string>
     <string name="settings_bottom_label">Settings</string>
+
+    <!-- Booking -->
+    <string name="title_booking">Booking</string>
+    <string name="title_choose_service">Choose training</string>
+    <string name="title_choose_coach">Choose coach</string>
+    <string name="title_choose_date">Choose date</string>
+    <string name="title_choose_time">Choose time</string>
+    <string name="btn_done">Done</string>
+
 </resources>

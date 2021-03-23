@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/materialToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_back"
+            app:title="@string/title_booking" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvLabelService"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/title_choose_service"
+            app:layout_constraintEnd_toStartOf="@+id/marginEnd"
+            app:layout_constraintStart_toEndOf="@id/marginStart"
+            app:layout_constraintTop_toBottomOf="@id/materialToolbar" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardService"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@+id/marginEnd"
+            app:layout_constraintStart_toEndOf="@id/marginStart"
+            app:layout_constraintTop_toBottomOf="@id/tvLabelService">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/spacing_medium"
+                android:paddingVertical="@dimen/spacing_small">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circle"
+                    tools:src="@drawable/coach_avatar" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvService"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/spacing_medium"
+                    android:drawablePadding="@dimen/spacing_small"
+                    android:gravity="center_vertical"
+                    android:textAllCaps="true"
+                    app:drawableEndCompat="@drawable/ic_forward"
+                    app:drawableTint="@color/white"
+                    tools:text="mma" />
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvLabelCoach"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/title_choose_coach"
+            app:layout_constraintEnd_toStartOf="@+id/marginEnd"
+            app:layout_constraintStart_toEndOf="@id/marginStart"
+            app:layout_constraintTop_toBottomOf="@id/cardService" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardCoach"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@+id/marginEnd"
+            app:layout_constraintStart_toEndOf="@id/marginStart"
+            app:layout_constraintTop_toBottomOf="@id/tvLabelCoach">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/spacing_medium"
+                android:paddingVertical="@dimen/spacing_small">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circle"
+                    tools:src="@drawable/coach_avatar" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvCoach"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/spacing_medium"
+                    android:drawablePadding="@dimen/spacing_small"
+                    android:gravity="center_vertical"
+                    app:drawableEndCompat="@drawable/ic_forward"
+                    app:drawableTint="@color/white"
+                    tools:text="Aleksandr Tarasov" />
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvLabelDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/title_choose_date"
+            app:layout_constraintEnd_toStartOf="@+id/marginEnd"
+            app:layout_constraintStart_toEndOf="@id/marginStart"
+            app:layout_constraintTop_toBottomOf="@id/cardCoach" />
+
+        <com.kizitonwose.calendarview.CalendarView
+            android:id="@+id/calendar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/dark_grey"
+            app:cv_dayViewResource="@layout/calendar_day_layout"
+            app:layout_constraintEnd_toStartOf="@+id/marginEnd"
+            app:layout_constraintStart_toEndOf="@id/marginStart"
+            app:layout_constraintTop_toBottomOf="@id/tvLabelDate" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvLabelTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/title_choose_time"
+            app:layout_constraintEnd_toStartOf="@+id/marginEnd"
+            app:layout_constraintStart_toEndOf="@id/marginStart"
+            app:layout_constraintTop_toBottomOf="@id/calendar" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/timeSlots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipSpacing="@dimen/spacing_small"
+            app:layout_constraintEnd_toStartOf="@+id/marginEnd"
+            app:layout_constraintStart_toEndOf="@id/marginStart"
+            app:layout_constraintTop_toBottomOf="@id/tvLabelTime"
+            app:singleSelection="true" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_done"
+            app:layout_constraintEnd_toStartOf="@+id/marginEnd"
+            app:layout_constraintStart_toEndOf="@id/marginStart"
+            app:layout_constraintTop_toBottomOf="@+id/timeSlots" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/marginStart"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/spacing_medium" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/marginEnd"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/spacing_medium" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
