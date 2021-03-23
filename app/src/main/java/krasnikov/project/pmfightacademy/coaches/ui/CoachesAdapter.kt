@@ -43,7 +43,7 @@ class CoachesAdapter(loadNextData: () -> Unit) :
                 tvName.text =
                     resources.getString(R.string.text_coach_name, coach.firstName, coach.lastName)
                 tvAge.text = resources.getString(R.string.text_coach_age, coach.age)
-                tvService.text = coach.services[0]
+                tvServices.text = coach.services[0]
                 tvPhoneNumber.text = coach.phoneNumber
                 tvDescription.text = coach.description
             }
