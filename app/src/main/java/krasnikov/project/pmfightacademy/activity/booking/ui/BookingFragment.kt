@@ -16,7 +16,19 @@ class BookingFragment : BaseFragment<BookingViewModel, FragmentBookingBinding>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupListeners()
         observeBookingContent()
+    }
+
+    private fun setupListeners() {
+        with(binding) {
+            cardService.setOnClickListener {
+                viewModel.onServiceClick()
+            }
+            cardCoach.setOnClickListener {
+                viewModel.onCoachClick()
+            }
+        }
     }
 
     private fun observeBookingContent() {

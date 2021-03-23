@@ -11,5 +11,6 @@
     <dimen name="card_padding">12dp</dimen>
 
     <dimen name="coach_avatar_size">64dp</dimen>
+    <dimen name="bottom_dialog_peek_height">640dp</dimen>
 
 </resources>

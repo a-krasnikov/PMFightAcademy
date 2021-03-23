@@ -22,4 +22,8 @@
     <string name="title_choose_time">Choose time</string>
     <string name="btn_done">Done</string>
 
+    <!-- Services -->
+    <string name="text_price">Price: %d UAH</string>
+    <string name="text_duration">Duration: 1 hour</string>
+
 </resources>

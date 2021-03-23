@@ -7,6 +7,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.delay
 import kotlinx.serialization.json.Json
+import krasnikov.project.pmfightacademy.activity.booking.services.data.Service
+import krasnikov.project.pmfightacademy.activity.booking.services.data.ServicesService
 import krasnikov.project.pmfightacademy.app.data.PaginationModel
 import krasnikov.project.pmfightacademy.app.data.ResponseWithPaginationModel
 import krasnikov.project.pmfightacademy.coaches.data.Coach
@@ -65,7 +67,50 @@ object NetworkModule {
                 }
             }
 
-            override suspend fun getCoaches(pageSize: Int, page: Int): ResponseWithPaginationModel<Coach> {
+            override suspend fun getCoaches(
+                pageSize: Int,
+                page: Int
+            ): ResponseWithPaginationModel<Coach> {
+                delay(2000)
+                return listData[page]
+            }
+        }
+    }
+
+    //TODO Change to retrofit service
+    @OptIn(ExperimentalStdlibApi::class)
+    @Provides
+    fun provideServicesService(): ServicesService {
+        return object : ServicesService {
+            private val listData: MutableList<ResponseWithPaginationModel<Service>> =
+                mutableListOf()
+
+            init {
+                var counterId = 0
+
+                repeat(3) {
+                    listData.add(
+                        ResponseWithPaginationModel(
+                            buildList {
+                                repeat(30) {
+                                    this.add(Service(counterId++, "Boxing", 100))
+                                }
+                            },
+                            PaginationModel(
+                                page = it,
+                                totalPages = 3,
+                                hasPreviousPage = it != 0,
+                                hasNextPage = it != 2
+                            )
+                        )
+                    )
+                }
+            }
+
+            override suspend fun getServices(
+                pageSize: Int,
+                page: Int
+            ): ResponseWithPaginationModel<Service> {
                 delay(2000)
                 return listData[page]
             }
