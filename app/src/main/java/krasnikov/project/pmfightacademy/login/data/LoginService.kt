@@ -1,27 +1,23 @@
 package krasnikov.project.pmfightacademy.login.data
 
 import krasnikov.project.pmfightacademy.login.data.model.AccessToken
+import krasnikov.project.pmfightacademy.login.data.model.Login
+import krasnikov.project.pmfightacademy.login.data.model.Register
 import retrofit2.Response
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.Headers
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface LoginService {
-    @Headers("Accept: application/json")
+    //@Headers("accept: text/plain")
+   // @Headers("accept: text/plain","Content-Type: application/json")
     @POST("/Clients/Login")
-    @FormUrlEncoded
+    //@FormUrlEncoded
     suspend fun getAccessToken(
-        @Field("login") login: String,
-        @Field("password") password: String
-    ): Response<AccessToken>
+        @Body login:Login
+    ): AccessToken
 
-    @Headers("Accept: application/json")
+
     @POST("/Clients/Register")
-    @FormUrlEncoded
         suspend fun getNewRegistration(
-        @Field("login") login: String,
-        @Field("password") password: String,
-        @Field("name") name:String
-    ): Response<AccessToken>
+        @Body register: Register
+    ): AccessToken
 }

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/launch_fragment"
-        android:name="krasnikov.project.pmfightacademy.launch.LaunchFragment"
+        android:name="krasnikov.project.pmfightacademy.launch.ui.LaunchFragment"
         tools:layout="@layout/fragment_launch">
         <action
             android:id="@+id/action_launch_to_main_content"
@@ -15,7 +15,6 @@
             app:popUpTo="@id/launch_fragment"
             app:popUpToInclusive="true" />
     </fragment>
-
 
     <navigation
         android:id="@+id/main_content"
@@ -36,7 +35,10 @@
     <navigation
         android:id="@+id/login_flow"
         app:startDestination="@id/login_fragment">
-        <fragment android:id="@+id/register_fragment">
+        <fragment
+            android:id="@+id/register_fragment"
+            android:name="krasnikov.project.pmfightacademy.login.registation.ui.RegistrationFragment">
+
             <action
                 android:id="@+id/action_register_to_login"
                 app:destination="@id/login_fragment" />
@@ -44,7 +46,8 @@
                 android:id="@+id/action_register_to_main_content"
                 app:destination="@id/main_content" />
         </fragment>
-        <fragment android:id="@+id/login_fragment">
+        <fragment android:id="@+id/login_fragment"
+            android:name="krasnikov.project.pmfightacademy.login.ui.LoginFragment">
             <action
                 android:id="@+id/action_login_to_register"
                 app:destination="@id/register_fragment" />

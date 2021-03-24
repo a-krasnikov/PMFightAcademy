@@ -14,6 +14,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import retrofit2.Converter
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 
@@ -21,17 +22,16 @@ import javax.inject.Singleton
 @Module
 class NetworkModule {
     companion object {
-        const val API_BASE_URL = "https://api.github.com"
-        const val OAUTH_BASE_URL = "https://jsonplaceholder.typicode.com/"
+        const val API_BASE_URL = "https://pmfightacademyclient-92m8i.ondigitalocean.app"
     }
 
-    @Provides
+   /* @Provides
     fun provideConverterFactory(): Converter.Factory {
         return Json { ignoreUnknownKeys = true; coerceInputValues = true }
             .asConverterFactory("application/json".toMediaType())
     }
-
-    @Singleton
+*/
+   /* @Singleton
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient, converterFactory: Converter.Factory): Retrofit {
         return Retrofit.Builder()
@@ -39,34 +39,40 @@ class NetworkModule {
             .baseUrl(API_BASE_URL)
             .addConverterFactory(converterFactory)
             .build()
-    }
+    }*/
 
 
     @Provides
     fun provideOkHttpClient(
         authInterceptor: AuthInterceptor,
-        errorInterceptor: ErrorInterceptor,
+        //errorInterceptor: ErrorInterceptor,
     ): OkHttpClient {
         return OkHttpClient().newBuilder()
             .addInterceptor(authInterceptor)
-            .addInterceptor(errorInterceptor)
+            // .addInterceptor(errorInterceptor)
             .build()
     }
 
     @Provides
-    fun provideAuthInterceptor(sharedPref: SharedPref): AuthInterceptor {
-        return AuthInterceptor(sharedPref)
+    fun provideGsonConverterFactory(
+    ): GsonConverterFactory {
+        return GsonConverterFactory.create()
+    }
+
+    @Provides
+    fun provideAuthInterceptor(/*sharedPref: SharedPref*/): AuthInterceptor {
+        return AuthInterceptor(/*sharedPref*/)
     }
 
     @Provides
     fun provideLoginService(
         okHttpClient: OkHttpClient,
-        converterFactory: Converter.Factory,
+        gsonConverterFactory : GsonConverterFactory
     ): LoginService {
         return Retrofit.Builder()
             .client(okHttpClient)
-            .baseUrl(OAUTH_BASE_URL)
-            .addConverterFactory(converterFactory)
+            .baseUrl(API_BASE_URL)
+            .addConverterFactory(gsonConverterFactory)
             .build().create(LoginService::class.java)
     }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import krasnikov.project.pmfightacademy.R
 import krasnikov.project.pmfightacademy.app.base.BaseFragment
 import krasnikov.project.pmfightacademy.databinding.FragmentRegistrationBinding
@@ -11,7 +12,8 @@ import krasnikov.project.pmfightacademy.login.registation.RegistrationViewModel
 import krasnikov.project.pmfightacademy.utils.State
 import krasnikov.project.pmfightacademy.utils.setSafeOnClickListener
 
-class RegistrationFragment : BaseFragment<FragmentRegistrationBinding, RegistrationViewModel>() {
+@AndroidEntryPoint
+class RegistrationFragment : BaseFragment<RegistrationViewModel, FragmentRegistrationBinding>() {
 
     override val viewModel: RegistrationViewModel by viewModels()
 
@@ -21,9 +23,7 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding, Registrat
         observeContent()
     }
 
-    override fun setupBinding() {
-        binding = FragmentRegistrationBinding.inflate(layoutInflater)
-    }
+
 
     private fun setupBtnListener() {
         binding.btnLogin.setSafeOnClickListener {
@@ -56,5 +56,9 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding, Registrat
                 }
             }
         }
+    }
+
+    override fun createViewBinding() {
+        mBinding = FragmentRegistrationBinding.inflate(layoutInflater)
     }
 }

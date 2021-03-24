@@ -26,7 +26,7 @@ abstract class BaseFragment<V : BaseViewModel, T : ViewBinding> : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         createViewBinding()
         return binding.root
@@ -54,7 +54,7 @@ abstract class BaseFragment<V : BaseViewModel, T : ViewBinding> : Fragment() {
         eventJob?.cancel()
     }
 
-    private fun showToast(@StringRes stringRes: Int) {
+    protected fun showToast(@StringRes stringRes: Int) {
         Toast.makeText(requireContext(), stringRes, Toast.LENGTH_SHORT).show()
     }
 
@@ -64,4 +64,5 @@ abstract class BaseFragment<V : BaseViewModel, T : ViewBinding> : Fragment() {
         super.onDestroyView()
         mBinding = null
     }
+
 }

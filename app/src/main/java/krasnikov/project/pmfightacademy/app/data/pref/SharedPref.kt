@@ -15,5 +15,5 @@ class SharedPref(context: Context) {
         )
     }
 
-    var token: String by SharedPrefDelegate(sharedPreferences, KEY_TOKEN, "")
+    var token: String by SharedPrefDelegate(sharedPreferences, KEY_TOKEN, "NoPref")
 }
