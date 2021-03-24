@@ -15,7 +15,7 @@ import krasnikov.project.pmfightacademy.databinding.FragmentPlannedActivitiesBin
 import krasnikov.project.pmfightacademy.utils.launchWhenStarted
 
 @AndroidEntryPoint
-class ActivitiesFragment: BaseFragment<PlannedActivitiesViewModel, FragmentPlannedActivitiesBinding>() {
+class PlannedActivitiesFragment: BaseFragment<PlannedActivitiesViewModel, FragmentPlannedActivitiesBinding>() {
 
     override val viewModel by viewModels<PlannedActivitiesViewModel>()
 

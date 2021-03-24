@@ -36,6 +36,9 @@
 
     <style name="Widget.App.Toolbar" parent="Widget.MaterialComponents.Toolbar">
         <item name="titleTextColor">@color/yellow_primary</item>
+    </style>
+
+    <style name="Theme.Toolbar" parent="ThemeOverlay.MaterialComponents.ActionBar">
         <item name="colorControlHighlight">@color/toolbarActionAccent</item>
     </style>
 

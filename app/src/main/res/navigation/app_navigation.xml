@@ -33,7 +33,7 @@
 
         <fragment
             android:id="@+id/current_activities_fragment"
-            android:name="krasnikov.project.pmfightacademy.activities.planned.ui.ActivitiesFragment"
+            android:name="krasnikov.project.pmfightacademy.activities.planned.ui.PlannedActivitiesFragment"
             tools:layout="@layout/fragment_planned_activities">
             <action
                 android:id="@+id/action_activities_to_booking"
