@@ -16,7 +16,8 @@ import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
-class ActivitiesHistoryViewModel@Inject constructor(private val activitiesHistoryRepository: ActivitiesHistoryRepository) :
+class ActivitiesHistoryViewModel
+@Inject constructor(private val activitiesHistoryRepository: ActivitiesHistoryRepository) :
     BaseViewModel() {
 
     private val _activitiesHistoryContent =
@@ -50,6 +51,7 @@ class ActivitiesHistoryViewModel@Inject constructor(private val activitiesHistor
 
 
     override fun handleError(throwable: Throwable) {
-        _activitiesHistoryContent.value = _activitiesHistoryContent.value.stateToError(throwable as Exception)
+        _activitiesHistoryContent.value =
+            _activitiesHistoryContent.value.stateToError(throwable as Exception)
     }
 }

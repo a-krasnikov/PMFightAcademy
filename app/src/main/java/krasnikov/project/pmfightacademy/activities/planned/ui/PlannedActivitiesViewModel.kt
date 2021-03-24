@@ -14,7 +14,8 @@ import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
-class PlannedActivitiesViewModel @Inject constructor(private val plannedActivitiesRepository: PlannedActivitiesRepository) :
+class PlannedActivitiesViewModel
+@Inject constructor(private val plannedActivitiesRepository: PlannedActivitiesRepository) :
     BaseViewModel() {
 
     private val _plannedActivitiesContent =

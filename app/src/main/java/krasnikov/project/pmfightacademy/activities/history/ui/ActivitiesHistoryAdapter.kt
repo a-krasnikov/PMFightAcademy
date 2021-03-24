@@ -45,5 +45,4 @@ class ActivitiesHistoryAdapter(loadMore: () -> Unit) :
         }
     }
 
-
 }

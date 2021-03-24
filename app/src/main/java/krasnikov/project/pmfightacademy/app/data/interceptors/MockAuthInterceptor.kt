@@ -3,6 +3,7 @@ package krasnikov.project.pmfightacademy.app.data.interceptors
 import okhttp3.Interceptor
 import okhttp3.Response
 
+@Suppress("MaxLineLength")
 class MockAuthInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val response = chain.request()
