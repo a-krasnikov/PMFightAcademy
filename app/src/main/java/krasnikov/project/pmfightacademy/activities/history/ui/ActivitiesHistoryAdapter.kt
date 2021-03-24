@@ -1,4 +1,4 @@
-package krasnikov.project.pmfightacademy.activities.planned.ui
+package krasnikov.project.pmfightacademy.activities.history.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,25 +6,26 @@ import androidx.recyclerview.widget.RecyclerView
 import krasnikov.project.pmfightacademy.R
 import krasnikov.project.pmfightacademy.activities.data.Activity
 import krasnikov.project.pmfightacademy.app.pagination.PaginationAdapter
-import krasnikov.project.pmfightacademy.databinding.RecyclerItemActivityPlannedBinding
+import krasnikov.project.pmfightacademy.databinding.RecyclerItemActivityCompletedBinding
 
-class PlannedActivitiesAdapter(loadMore: () -> Unit) :
-    PaginationAdapter<Activity, PlannedActivitiesAdapter.PlannedActivityViewHolder>(loadNextData = loadMore) {
+class ActivitiesHistoryAdapter(loadMore: () -> Unit) :
+    PaginationAdapter<Activity, ActivitiesHistoryAdapter.CompletedActivityViewHolder>(loadNextData = loadMore) {
 
-    override fun onCreateViewHolder(parent: ViewGroup): PlannedActivityViewHolder {
-        val binding = RecyclerItemActivityPlannedBinding.inflate(
+
+    override fun onCreateViewHolder(parent: ViewGroup): CompletedActivityViewHolder {
+        val binding = RecyclerItemActivityCompletedBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
-        return PlannedActivityViewHolder(binding)
+        return CompletedActivityViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: PlannedActivityViewHolder, item: Activity) {
+    override fun onBindViewHolder(holder: CompletedActivityViewHolder, item: Activity) {
         holder.bind(item)
     }
 
-    class PlannedActivityViewHolder(private val binding: RecyclerItemActivityPlannedBinding) :
+    class CompletedActivityViewHolder(private val binding: RecyclerItemActivityCompletedBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         private val resources = itemView.resources
@@ -39,9 +40,10 @@ class PlannedActivitiesAdapter(loadMore: () -> Unit) :
 
                 tvServiceName.text = activity.serviceName
                 tvDate.text = activity.date
-                tvTime.text = activity.time
                 tvActivityPrice.text = resources.getString(R.string.activity_price, activity.price)
             }
         }
     }
+
+
 }

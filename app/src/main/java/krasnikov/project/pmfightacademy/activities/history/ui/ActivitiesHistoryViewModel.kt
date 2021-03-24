@@ -1,4 +1,4 @@
-package krasnikov.project.pmfightacademy.activities.planned.ui
+package krasnikov.project.pmfightacademy.activities.history.ui
 
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -6,6 +6,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import krasnikov.project.pmfightacademy.activities.data.Activity
+import krasnikov.project.pmfightacademy.activities.history.data.ActivitiesHistoryRepository
 import krasnikov.project.pmfightacademy.activities.planned.data.PlannedActivitiesRepository
 import krasnikov.project.pmfightacademy.app.pagination.PaginationData
 import krasnikov.project.pmfightacademy.app.pagination.PaginationState
@@ -14,40 +16,40 @@ import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
-class PlannedActivitiesViewModel @Inject constructor(private val plannedActivitiesRepository: PlannedActivitiesRepository) :
+class ActivitiesHistoryViewModel@Inject constructor(private val activitiesHistoryRepository: ActivitiesHistoryRepository) :
     BaseViewModel() {
 
-    private val _plannedActivitiesContent =
-        MutableStateFlow<PaginationData<krasnikov.project.pmfightacademy.activities.data.Activity>>(
+    private val _activitiesHistoryContent =
+        MutableStateFlow<PaginationData<Activity>>(
             PaginationData(
                 emptyList(),
                 PaginationState.Loading
             )
         )
 
-    val plannedActivitiesContent = _plannedActivitiesContent.asStateFlow()
+    val activitiesHistoryContent = _activitiesHistoryContent.asStateFlow()
 
     init {
         viewModelScope.launch(exceptionHandler) {
-            plannedActivitiesRepository.plannedActivitiesFlow.collect { activities ->
-                _plannedActivitiesContent.value = PaginationData(
+            activitiesHistoryRepository.activitiesHistoryFlow.collect { activities ->
+                _activitiesHistoryContent.value = PaginationData(
                     activities,
                     PaginationState.Complete
                 )
             }
         }
-        getPlannedActivities()
+        getActivitiesHistory()
     }
 
-    fun getPlannedActivities() {
-        _plannedActivitiesContent.value = _plannedActivitiesContent.value.stateToLoading()
+    fun getActivitiesHistory() {
+        _activitiesHistoryContent.value = _activitiesHistoryContent.value.stateToLoading()
         viewModelScope.launch(exceptionHandler) {
-            plannedActivitiesRepository.getPlannedActivities()
+            activitiesHistoryRepository.getActivitiesHistory()
         }
     }
 
 
     override fun handleError(throwable: Throwable) {
-        _plannedActivitiesContent.value = _plannedActivitiesContent.value.stateToError(throwable as Exception)
+        _activitiesHistoryContent.value = _activitiesHistoryContent.value.stateToError(throwable as Exception)
     }
 }

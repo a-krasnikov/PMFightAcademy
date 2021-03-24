@@ -2,26 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/mtToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        style="@style/Widget.App.Toolbar"
-        app:title="@string/planned_activities_title"
-        />
+        app:title="@string/activities_history_title" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvActivities"
+        android:id="@+id/rvActivitiesHistory"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingStart="@dimen/card_padding"
         android:paddingEnd="@dimen/card_padding"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/recycler_item_activity_planned"
-        />
+        tools:listitem="@layout/recycler_item_activity_completed" />
 
 </LinearLayout>

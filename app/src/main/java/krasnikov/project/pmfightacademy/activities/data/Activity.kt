@@ -14,5 +14,7 @@ data class Activity(
     @SerialName("coachFirstName")
     val coachFirstName: String,
     @SerialName("coachLastName")
-    val coachLastName: String
+    val coachLastName: String,
+    @SerialName("price")
+    val price: Int
 )

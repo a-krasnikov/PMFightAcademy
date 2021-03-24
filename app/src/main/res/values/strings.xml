@@ -9,6 +9,7 @@
 
     <!-- Activity -->
     <string name="activity_coach_name">%s %s</string>
+    <string name="activity_price">%d UAH</string>
 
     <!-- Bottom Navigation -->
     <string name="info_bottom_label">Info</string>
@@ -20,4 +21,6 @@
     <string name="planned_activities_title">Planned Activities</string>
     <string name="book_new_activity_title">Book new activity</string>
     <string name="planned_activity_coach_string">Coach</string>
+    <string name="planned_activity_price_string">Price</string>
+    <string name="activities_history_title">History</string>
 </resources>
