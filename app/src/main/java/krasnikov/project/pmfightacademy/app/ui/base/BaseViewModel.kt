@@ -6,7 +6,6 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import krasnikov.project.pmfightacademy.LoginFragmentDirections
 import krasnikov.project.pmfightacademy.MainContentDirections
 import krasnikov.project.pmfightacademy.utils.Event
 

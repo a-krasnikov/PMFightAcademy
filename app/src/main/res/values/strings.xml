@@ -13,4 +13,5 @@
     <string name="activities_bottom_label">Activities</string>
     <string name="history_bottom_label">History</string>
     <string name="settings_bottom_label">Settings</string>
+    <string name="info_screen_title">About Fight Academy</string>
 </resources>

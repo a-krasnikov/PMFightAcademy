@@ -1,3 +1,4 @@
+@file:Suppress("WildcardImport")
 package krasnikov.project.pmfightacademy.view
 
 import android.content.Context
