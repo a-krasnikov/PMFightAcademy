@@ -7,6 +7,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import krasnikov.project.pmfightacademy.activities.planned.data.PlannedActivitiesRepository
+import krasnikov.project.pmfightacademy.activities.planned.ui.mapper.PlannedActivityUIMapper
+import krasnikov.project.pmfightacademy.activities.planned.ui.model.PlannedActivityUIModel
 import krasnikov.project.pmfightacademy.app.pagination.PaginationData
 import krasnikov.project.pmfightacademy.app.pagination.PaginationState
 import krasnikov.project.pmfightacademy.app.ui.base.BaseViewModel
@@ -15,11 +17,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PlannedActivitiesViewModel
-@Inject constructor(private val plannedActivitiesRepository: PlannedActivitiesRepository) :
+@Inject constructor(
+    private val plannedActivitiesRepository: PlannedActivitiesRepository,
+    private val plannedActivityUIMapper: PlannedActivityUIMapper
+) :
     BaseViewModel() {
 
     private val _plannedActivitiesContent =
-        MutableStateFlow<PaginationData<krasnikov.project.pmfightacademy.activities.data.Activity>>(
+        MutableStateFlow<PaginationData<PlannedActivityUIModel>>(
             PaginationData(
                 emptyList(),
                 PaginationState.Loading
@@ -32,7 +37,7 @@ class PlannedActivitiesViewModel
         viewModelScope.launch(exceptionHandler) {
             plannedActivitiesRepository.plannedActivitiesFlow.collect { activities ->
                 _plannedActivitiesContent.value = PaginationData(
-                    activities,
+                    plannedActivityUIMapper.map(activities),
                     PaginationState.Complete
                 )
             }
@@ -43,12 +48,13 @@ class PlannedActivitiesViewModel
     fun getPlannedActivities() {
         _plannedActivitiesContent.value = _plannedActivitiesContent.value.stateToLoading()
         viewModelScope.launch(exceptionHandler) {
-            plannedActivitiesRepository.getPlannedActivities()
+            plannedActivitiesRepository.loadPlannedActivities()
         }
     }
 
 
     override fun handleError(throwable: Throwable) {
-        _plannedActivitiesContent.value = _plannedActivitiesContent.value.stateToError(throwable as Exception)
+        _plannedActivitiesContent.value =
+            _plannedActivitiesContent.value.stateToError(throwable as Exception)
     }
 }

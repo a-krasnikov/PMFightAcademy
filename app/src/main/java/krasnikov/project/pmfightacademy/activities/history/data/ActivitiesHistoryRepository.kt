@@ -20,7 +20,7 @@ class ActivitiesHistoryRepository @Inject constructor(
 
     val activitiesHistoryFlow = activitiesHistoryPagination.flowData
 
-    suspend fun getActivitiesHistory() {
+    suspend fun loadActivitiesHistory() {
         withContext(ioDispatcher) {
             activitiesHistoryPagination.loadNextPage()
         }

@@ -8,6 +8,8 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import krasnikov.project.pmfightacademy.activities.data.Activity
 import krasnikov.project.pmfightacademy.activities.history.data.ActivitiesHistoryRepository
+import krasnikov.project.pmfightacademy.activities.history.ui.mapper.CompletedActivityUIMapper
+import krasnikov.project.pmfightacademy.activities.history.ui.model.CompletedActivityUIModel
 import krasnikov.project.pmfightacademy.activities.planned.data.PlannedActivitiesRepository
 import krasnikov.project.pmfightacademy.app.pagination.PaginationData
 import krasnikov.project.pmfightacademy.app.pagination.PaginationState
@@ -17,11 +19,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ActivitiesHistoryViewModel
-@Inject constructor(private val activitiesHistoryRepository: ActivitiesHistoryRepository) :
+@Inject constructor(
+    private val activitiesHistoryRepository: ActivitiesHistoryRepository,
+    private val completedActivityUIMapper: CompletedActivityUIMapper
+) :
     BaseViewModel() {
 
     private val _activitiesHistoryContent =
-        MutableStateFlow<PaginationData<Activity>>(
+        MutableStateFlow<PaginationData<CompletedActivityUIModel>>(
             PaginationData(
                 emptyList(),
                 PaginationState.Loading
@@ -34,7 +39,7 @@ class ActivitiesHistoryViewModel
         viewModelScope.launch(exceptionHandler) {
             activitiesHistoryRepository.activitiesHistoryFlow.collect { activities ->
                 _activitiesHistoryContent.value = PaginationData(
-                    activities,
+                    completedActivityUIMapper.map(activities),
                     PaginationState.Complete
                 )
             }
@@ -45,7 +50,7 @@ class ActivitiesHistoryViewModel
     fun getActivitiesHistory() {
         _activitiesHistoryContent.value = _activitiesHistoryContent.value.stateToLoading()
         viewModelScope.launch(exceptionHandler) {
-            activitiesHistoryRepository.getActivitiesHistory()
+            activitiesHistoryRepository.loadActivitiesHistory()
         }
     }
 

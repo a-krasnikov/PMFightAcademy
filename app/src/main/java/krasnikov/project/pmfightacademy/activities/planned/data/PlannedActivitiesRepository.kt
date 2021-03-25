@@ -20,7 +20,7 @@ class PlannedActivitiesRepository @Inject constructor(
 
     val plannedActivitiesFlow = plannedActivitiesPagination.flowData
 
-    suspend fun getPlannedActivities() {
+    suspend fun loadPlannedActivities() {
         withContext(ioDispatcher) {
             plannedActivitiesPagination.loadNextPage()
         }
