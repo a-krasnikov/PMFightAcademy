@@ -6,11 +6,11 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import krasnikov.project.pmfightacademy.R
 import krasnikov.project.pmfightacademy.app.pagination.PaginationAdapter
-import krasnikov.project.pmfightacademy.coaches.data.Coach
+import krasnikov.project.pmfightacademy.coaches.ui.model.CoachUIModel
 import krasnikov.project.pmfightacademy.databinding.RecyclerItemDetailCoachBinding
 
 class CoachesAdapter(loadNextData: () -> Unit) :
-    PaginationAdapter<Coach, CoachesAdapter.CoachViewHolder>(loadNextData = loadNextData) {
+    PaginationAdapter<CoachUIModel, CoachesAdapter.CoachViewHolder>(loadNextData = loadNextData) {
 
     override fun onCreateViewHolder(parent: ViewGroup): CoachViewHolder {
         return CoachViewHolder(
@@ -22,7 +22,7 @@ class CoachesAdapter(loadNextData: () -> Unit) :
         )
     }
 
-    override fun onBindViewHolder(holder: CoachViewHolder, item: Coach) {
+    override fun onBindViewHolder(holder: CoachViewHolder, item: CoachUIModel) {
         holder.bind(item)
     }
 
@@ -31,7 +31,7 @@ class CoachesAdapter(loadNextData: () -> Unit) :
 
         private val resources = itemView.resources
 
-        fun bind(coach: Coach) {
+        fun bind(coach: CoachUIModel) {
             with(binding) {
                 ivAvatar.setImageDrawable(
                     ResourcesCompat.getDrawable(
@@ -40,10 +40,9 @@ class CoachesAdapter(loadNextData: () -> Unit) :
                         null
                     )
                 )
-                tvName.text =
-                    resources.getString(R.string.text_coach_name, coach.firstName, coach.lastName)
-                tvAge.text = resources.getString(R.string.text_coach_age, coach.age)
-                tvService.text = coach.services[0]
+                tvName.text = coach.fullName
+                tvAge.text = coach.age
+                tvServices.text = coach.services
                 tvPhoneNumber.text = coach.phoneNumber
                 tvDescription.text = coach.description
             }

@@ -7,12 +7,15 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.delay
 import kotlinx.serialization.json.Json
+import krasnikov.project.pmfightacademy.app.data.PaginationModel
+import krasnikov.project.pmfightacademy.app.data.ResponseWithPaginationModel
 import krasnikov.project.pmfightacademy.coaches.data.Coach
 import krasnikov.project.pmfightacademy.coaches.data.CoachesService
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Converter
 import javax.inject.Singleton
 
+@Suppress("MagicNumber", "MaxLineLength")
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
@@ -30,8 +33,7 @@ object NetworkModule {
     @Provides
     fun provideCoachesService(): CoachesService {
         return object : CoachesService {
-
-            private val map: MutableMap<Int, List<Coach>> = mutableMapOf()
+            private val listData: MutableList<ResponseWithPaginationModel<Coach>> = mutableListOf()
 
             init {
                 val coach = Coach(
@@ -51,13 +53,23 @@ object NetworkModule {
                 }
 
                 repeat(3) {
-                    map[it] = list
+                    listData.add(
+                        ResponseWithPaginationModel(
+                            list,
+                            PaginationModel(
+                                page = it,
+                                totalPages = 3,
+                                hasPreviousPage = it != 0,
+                                hasNextPage = it != 2
+                            )
+                        )
+                    )
                 }
             }
 
-            override suspend fun getCoaches(pageSize: Int, page: Int): List<Coach> {
+            override suspend fun getCoaches(pageSize: Int, page: Int): ResponseWithPaginationModel<Coach> {
                 delay(2000)
-                return map[page] ?: throw Exception()
+                return listData[page]
             }
         }
     }
