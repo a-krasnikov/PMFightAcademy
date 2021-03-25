@@ -2,11 +2,15 @@ package krasnikov.project.pmfightacademy.app.pagination
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
+import krasnikov.project.pmfightacademy.app.data.ResponseWithPaginationModel
+import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicInteger
+import javax.inject.Inject
 
-class PageCounterPagination<T>(private val getRequest: suspend (Int) -> List<T>) {
+class PageCounterPagination<T>(private val getRequest: suspend (Int) -> ResponseWithPaginationModel<T>) {
 
     private val page = AtomicInteger(0)
+    private var hasNextPage = AtomicBoolean(true)
 
     private val dataSharedFlow = MutableSharedFlow<List<T>>(replay = 1)
 
@@ -14,17 +18,22 @@ class PageCounterPagination<T>(private val getRequest: suspend (Int) -> List<T>)
 
     suspend fun loadNextPage() {
         val oldData = dataSharedFlow.replayCache.firstOrNull() ?: emptyList()
-        val newData = getRequest(page.get())
+        if (hasNextPage.get()) {
+            val response = getRequest(page.get())
 
-        dataSharedFlow.emit(oldData + newData)
+            dataSharedFlow.emit(oldData + response.data)
 
-        page.incrementAndGet()
+            hasNextPage.set(response.pagination.hasNextPage)
+            page.incrementAndGet()
+        } else {
+            dataSharedFlow.emit(oldData)
+        }
     }
 }
 
-class Pagination {
+class Pagination @Inject constructor() {
 
-    fun <T> pagePagination(getRequest: suspend (Int) -> List<T>): PageCounterPagination<T> {
+    fun <T> pagePagination(getRequest: suspend (Int) -> ResponseWithPaginationModel<T>): PageCounterPagination<T> {
         return PageCounterPagination(getRequest)
     }
 }

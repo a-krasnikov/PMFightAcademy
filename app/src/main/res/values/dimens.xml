@@ -10,4 +10,6 @@
     <dimen name="card_corner_radius">24dp</dimen>
     <dimen name="card_padding">12dp</dimen>
 
+    <dimen name="coach_avatar_size">64dp</dimen>
+
 </resources>

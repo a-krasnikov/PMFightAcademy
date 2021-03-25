@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">PMFightAcademy</string>
-
     <string name="btn_retry">Retry</string>
-  
+    <string name="title_show_more">Show more</string>
+
+    <!-- Coach -->
+    <string name="title_coaches">Coaches</string>
+    <string name="text_coach_age">%d years old</string>
+
+    <!-- Bottom Navigation -->
     <string name="info_bottom_label">Info</string>
     <string name="coaches_bottom_label">Coaches</string>
     <string name="activities_bottom_label">Activities</string>
