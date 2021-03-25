@@ -16,4 +16,5 @@
     <dimen name="booking_icon_size">48dp</dimen>
     <dimen name="booking_item_min_height">64dp</dimen>
 
+    <dimen name="loading_error_view_elevation">8dp</dimen>
 </resources>

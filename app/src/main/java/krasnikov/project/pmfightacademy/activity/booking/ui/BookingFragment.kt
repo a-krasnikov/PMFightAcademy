@@ -8,6 +8,7 @@ import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipDrawable
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
@@ -33,6 +34,16 @@ class BookingFragment : BaseFragment<BookingViewModel, FragmentBookingBinding>()
             }
         }
 
+    private val disableAllDaysDecorator = object : DayViewDecorator {
+        override fun shouldDecorate(day: CalendarDay): Boolean {
+            return true
+        }
+
+        override fun decorate(view: DayViewFacade) {
+            view.setDaysDisabled(true)
+        }
+    }
+
     override fun createViewBinding() {
         mBinding = FragmentBookingBinding.inflate(layoutInflater)
     }
@@ -54,7 +65,7 @@ class BookingFragment : BaseFragment<BookingViewModel, FragmentBookingBinding>()
 
     private fun setupCalendar() {
         binding.calendar.setOnDateChangedListener { _, date, selected ->
-            if (selected) viewModel.onChoseDate(date.toString())
+            if (selected) viewModel.onChoseDate(date.getFormattedDate())
         }
     }
 
@@ -73,6 +84,10 @@ class BookingFragment : BaseFragment<BookingViewModel, FragmentBookingBinding>()
                     .text.toString()
 
                 viewModel.toBook(date, time)
+            }
+
+            timeSlots.setOnCheckedChangeListener { _, _ ->
+                binding.btnToBook.isEnabled = true
             }
         }
     }
@@ -148,13 +163,18 @@ class BookingFragment : BaseFragment<BookingViewModel, FragmentBookingBinding>()
                         is State.Empty -> {
                             calendar.clearSelection()
                             calendar.removeDecorators()
+                            stateCalendar.resetState()
+                            calendar.addDecorator(disableAllDaysDecorator)
                         }
                         State.Loading -> {
                             calendar.clearSelection()
                             calendar.removeDecorators()
+                            stateCalendar.showLoading()
                         }
                         is State.Content -> {
-                            binding.calendar.addDecorator(object : DayViewDecorator {
+                            calendar.removeDecorators()
+                            stateCalendar.resetState()
+                            calendar.addDecorator(object : DayViewDecorator {
                                 override fun shouldDecorate(day: CalendarDay): Boolean {
                                     return !data.contains(day.getFormattedDate())
                                 }
@@ -165,6 +185,14 @@ class BookingFragment : BaseFragment<BookingViewModel, FragmentBookingBinding>()
                             })
                         }
                         is State.Error -> {
+                            stateCalendar.showError(
+                                error.localizedMessage
+                            ) {
+                                val coachState = bookingUIState.coachState
+                                if (coachState is State.Content) {
+                                    viewModel.onChoseCoach(coachState.data)
+                                }
+                            }
                         }
                     }
                 }
@@ -177,26 +205,64 @@ class BookingFragment : BaseFragment<BookingViewModel, FragmentBookingBinding>()
                         is State.Empty -> {
                             tvLabelTime.isVisible = false
                             timeSlots.removeAllViews()
+                            stateTimeSlots.resetState()
                         }
                         State.Loading -> {
                             tvLabelTime.isVisible = true
                             timeSlots.removeAllViews()
+                            stateTimeSlots.showLoading()
                         }
                         is State.Content -> {
-                            this.data.forEach {
-                                val chip = Chip(
-                                    requireView().context,
-                                    null,
-                                    R.style.Theme_PMFightAcademy
-                                ).apply { text = it }
-                                binding.timeSlots.addView(chip)
-                            }
+                            stateTimeSlots.resetState()
+                            createTimeSlots(data)
                         }
                         is State.Error -> {
+                            stateTimeSlots.showError(
+                                error.localizedMessage
+                            ) {
+                                calendar.selectedDate?.let { viewModel.onChoseDate(it.getFormattedDate()) }
+                            }
                         }
                     }
                 }
             }
+
+            // update BookingUIState
+            with(bookingUIState.bookingState) {
+                if (currentUIState?.bookingState != this) {
+                    when (this) {
+                        is State.Empty -> {
+                            btnToBook.isEnabled = false
+                            stateBooking.resetState()
+                        }
+                        State.Loading -> {
+                            stateBooking.showLoading()
+                        }
+                        is State.Content -> {
+                            stateBooking.resetState()
+                        }
+                        is State.Error -> {
+                            showToast(error.localizedMessage)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun createTimeSlots(slots: List<String>) {
+        slots.forEach {
+            val chip = Chip(requireContext())
+                .apply {
+                    chipBackgroundColor = resources.getColorStateList(R.color.chip_color, null)
+                    text = it
+                    isClickable = true
+                    isCheckable = true
+                    isCheckedIconVisible = false
+                    setTextColor(resources.getColor(R.color.white, null))
+                }
+
+            binding.timeSlots.addView(chip)
         }
     }
 

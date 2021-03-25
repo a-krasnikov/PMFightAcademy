@@ -1,6 +1,7 @@
 package krasnikov.project.pmfightacademy.app.ui.base
 
 import android.os.Bundle
+import android.os.Message
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,8 +55,12 @@ abstract class BaseFragment<V : BaseViewModel, T : ViewBinding> : Fragment() {
         eventJob?.cancel()
     }
 
-    private fun showToast(@StringRes stringRes: Int) {
+    protected fun showToast(@StringRes stringRes: Int) {
         Toast.makeText(requireContext(), stringRes, Toast.LENGTH_SHORT).show()
+    }
+
+    protected fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     abstract fun createViewBinding()

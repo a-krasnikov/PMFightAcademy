@@ -126,6 +126,7 @@ object NetworkModule {
             }
 
             override suspend fun getAvailableDates(serviceId: Int, coachId: Int): List<String> {
+                delay(2000)
                 return listOf("25.03.2021", "27.03.2021")
             }
 
@@ -134,6 +135,7 @@ object NetworkModule {
                 coachId: Int,
                 date: String
             ): List<String> {
+                delay(2000)
                 return listOf("11:00", "13:00")
             }
 
