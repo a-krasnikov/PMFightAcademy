@@ -10,7 +10,9 @@ import krasnikov.project.pmfightacademy.app.pagination.PaginationAdapter
 import krasnikov.project.pmfightacademy.databinding.RecyclerItemActivityPlannedBinding
 
 class PlannedActivitiesAdapter(loadMore: () -> Unit) :
-    PaginationAdapter<PlannedActivityUIModel, PlannedActivitiesAdapter.PlannedActivityViewHolder>(loadNextData = loadMore) {
+    PaginationAdapter<PlannedActivityUIModel, PlannedActivitiesAdapter.PlannedActivityViewHolder>(
+        loadNextData = loadMore
+    ) {
 
     override fun onCreateViewHolder(parent: ViewGroup): PlannedActivityViewHolder {
         val binding = RecyclerItemActivityPlannedBinding.inflate(

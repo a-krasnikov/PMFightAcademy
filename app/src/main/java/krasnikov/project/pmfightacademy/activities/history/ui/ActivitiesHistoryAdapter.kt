@@ -10,7 +10,9 @@ import krasnikov.project.pmfightacademy.app.pagination.PaginationAdapter
 import krasnikov.project.pmfightacademy.databinding.RecyclerItemActivityCompletedBinding
 
 class ActivitiesHistoryAdapter(loadMore: () -> Unit) :
-    PaginationAdapter<CompletedActivityUIModel, ActivitiesHistoryAdapter.CompletedActivityViewHolder>(loadNextData = loadMore) {
+    PaginationAdapter<CompletedActivityUIModel, ActivitiesHistoryAdapter.CompletedActivityViewHolder>(
+        loadNextData = loadMore
+    ) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup): CompletedActivityViewHolder {
@@ -22,7 +24,10 @@ class ActivitiesHistoryAdapter(loadMore: () -> Unit) :
         return CompletedActivityViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: CompletedActivityViewHolder, item: CompletedActivityUIModel) {
+    override fun onBindViewHolder(
+        holder: CompletedActivityViewHolder,
+        item: CompletedActivityUIModel
+    ) {
         holder.bind(item)
     }
 
