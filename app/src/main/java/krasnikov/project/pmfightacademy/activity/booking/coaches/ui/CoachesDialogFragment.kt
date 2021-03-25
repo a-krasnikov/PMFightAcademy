@@ -1,4 +1,4 @@
-package krasnikov.project.pmfightacademy.activity.booking.services.ui
+package krasnikov.project.pmfightacademy.activity.booking.coaches.ui
 
 import android.os.Bundle
 import android.view.View
@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
@@ -14,30 +15,37 @@ import kotlinx.coroutines.flow.onEach
 import krasnikov.project.pmfightacademy.R
 import krasnikov.project.pmfightacademy.activity.booking.ui.BookingViewModel
 import krasnikov.project.pmfightacademy.app.ui.base.BaseBottomSheetDialogFragment
-import krasnikov.project.pmfightacademy.databinding.FragmentDialogServicesBinding
+import krasnikov.project.pmfightacademy.databinding.FragmentDialogCoachesBinding
 import krasnikov.project.pmfightacademy.utils.launchWhenStarted
 
 @AndroidEntryPoint
-class ServicesDialogFragment :
-    BaseBottomSheetDialogFragment<ServicesViewModel, FragmentDialogServicesBinding>() {
+class CoachesDialogFragment :
+    BaseBottomSheetDialogFragment<CoachesViewModel, FragmentDialogCoachesBinding>() {
 
-    override val viewModel by viewModels<ServicesViewModel>()
+    override val viewModel by viewModels<CoachesViewModel>()
 
     private val bookingViewModel by hiltNavGraphViewModels<BookingViewModel>(R.id.booking_flow)
 
-    private val adapter = ServicesAdapter {
+    private val args: CoachesDialogFragmentArgs by navArgs()
+
+    private val adapter = CoachesAdapter {
         viewModel.loadNextData()
     }
 
     override fun createViewBinding() {
-        mBinding = FragmentDialogServicesBinding.inflate(layoutInflater)
+        mBinding = FragmentDialogCoachesBinding.inflate(layoutInflater)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecycler()
-        observeServicesContent()
+        observeCoachesContent()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.loadData(args.serviceId)
     }
 
     private fun setupRecycler() {
@@ -46,17 +54,17 @@ class ServicesDialogFragment :
                 ContextCompat.getDrawable(requireContext(), R.drawable.divider_drawable)
                     ?.let { setDrawable(it) }
             }
-        binding.rvServices.addItemDecoration(dividerItemDecoration)
-        binding.rvServices.adapter = adapter.apply {
+        binding.rvCoaches.addItemDecoration(dividerItemDecoration)
+        binding.rvCoaches.adapter = adapter.apply {
             onItemClickListener = {
-                bookingViewModel.onChoseService(it)
+                bookingViewModel.onChoseCoach(it)
                 dismiss()
             }
         }
     }
 
-    private fun observeServicesContent() {
-        viewModel.contentServices.onEach {
+    private fun observeCoachesContent() {
+        viewModel.contentCoaches.onEach {
             adapter.submitData(it)
         }.launchWhenStarted(lifecycleScope)
     }

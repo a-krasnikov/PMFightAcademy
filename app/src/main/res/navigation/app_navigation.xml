@@ -16,7 +16,6 @@
             app:popUpToInclusive="true" />
     </fragment>
 
-
     <navigation
         android:id="@+id/main_content"
         app:startDestination="@id/info_fragment">
@@ -43,15 +42,30 @@
                 android:name="krasnikov.project.pmfightacademy.activity.booking.ui.BookingFragment"
                 tools:layout="@layout/fragment_booking">
                 <action
-                    android:id="@+id/action_booking_to_services"
+                    android:id="@+id/action_booking_to_services_dialog"
                     app:destination="@id/services_dialog" />
+                <action
+                    android:id="@+id/action_booking_to_coaches_dialog"
+                    app:destination="@id/coaches_dialog" />
             </fragment>
 
             <dialog
                 android:id="@+id/services_dialog"
                 android:name="krasnikov.project.pmfightacademy.activity.booking.services.ui.ServicesDialogFragment"
-                tools:layout="@layout/fragment_services" />
+                tools:layout="@layout/fragment_dialog_services" />
+
+            <dialog
+                android:id="@+id/coaches_dialog"
+                android:name="krasnikov.project.pmfightacademy.activity.booking.coaches.ui.CoachesDialogFragment"
+                tools:layout="@layout/fragment_dialog_coaches" >
+                <argument
+                    android:name="serviceId"
+                    app:argType="integer"
+                    android:defaultValue="0" />
+            </dialog>
+
         </navigation>
+
     </navigation>
 
     <navigation

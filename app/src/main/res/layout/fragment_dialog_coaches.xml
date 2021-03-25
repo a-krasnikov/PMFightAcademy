@@ -8,10 +8,9 @@
     android:orientation="vertical">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvServices"
+        android:id="@+id/rvCoaches"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/recycler_item_service" />
+        tools:listitem="@layout/recycler_item_booking_coach" />
 </LinearLayout>
-

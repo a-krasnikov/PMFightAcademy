@@ -7,8 +7,9 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.delay
 import kotlinx.serialization.json.Json
+import krasnikov.project.pmfightacademy.activity.booking.data.Booking
+import krasnikov.project.pmfightacademy.activity.booking.data.BookingService
 import krasnikov.project.pmfightacademy.activity.booking.services.data.Service
-import krasnikov.project.pmfightacademy.activity.booking.services.data.ServicesService
 import krasnikov.project.pmfightacademy.app.data.PaginationModel
 import krasnikov.project.pmfightacademy.app.data.ResponseWithPaginationModel
 import krasnikov.project.pmfightacademy.coaches.data.Coach
@@ -80,8 +81,9 @@ object NetworkModule {
     //TODO Change to retrofit service
     @OptIn(ExperimentalStdlibApi::class)
     @Provides
-    fun provideServicesService(): ServicesService {
-        return object : ServicesService {
+    fun provideServicesService(): BookingService {
+        return object : BookingService {
+
             private val listData: MutableList<ResponseWithPaginationModel<Service>> =
                 mutableListOf()
 
@@ -113,6 +115,30 @@ object NetworkModule {
             ): ResponseWithPaginationModel<Service> {
                 delay(2000)
                 return listData[page]
+            }
+
+            override suspend fun getCoaches(
+                serviceId: Int,
+                pageSize: Int,
+                page: Int
+            ): ResponseWithPaginationModel<Coach> {
+                return provideCoachesService().getCoaches(pageSize, page)
+            }
+
+            override suspend fun getAvailableDates(serviceId: Int, coachId: Int): List<String> {
+                return listOf("25.03.2021", "27.03.2021")
+            }
+
+            override suspend fun getAvailableTimeSlots(
+                serviceId: Int,
+                coachId: Int,
+                date: String
+            ): List<String> {
+                return listOf("11:00", "13:00")
+            }
+
+            override suspend fun book(booking: Booking) {
+                delay(2000)
             }
         }
     }

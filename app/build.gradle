@@ -59,6 +59,7 @@ dependencies {
 
     //hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
+    implementation 'androidx.hilt:hilt-navigation-fragment:1.0.0-beta01'
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
 
     //retrofit
@@ -89,6 +90,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     //Other
-    implementation 'com.github.kizitonwose:CalendarView:1.0.3'
-
+    implementation 'com.github.prolificinteractive:material-calendarview:2.0.0'
 }
