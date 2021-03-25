@@ -1,9 +1,9 @@
-@file:Suppress("WildcardImport")
 package krasnikov.project.pmfightacademy.info.ui
 
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import krasnikov.project.pmfightacademy.app.ui.base.BaseViewModel
 import krasnikov.project.pmfightacademy.info.data.InfoContent
