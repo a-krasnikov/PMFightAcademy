@@ -33,24 +33,22 @@ class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginBinding>() {
 
     private fun setupBtnListener() {
         binding.btnLogin.setSafeOnClickListener {
-            val register = Register("+380672336981", "Testpass2","Gleb")
             val etLogin: String? = binding.etPhoneNumber.text.toString()
             val password: String? = binding.etPassword.text.toString()
             val login = Login(etLogin, password)
-            if (login.login.isNullOrEmpty() || login.password.isNullOrEmpty()) {
-                Log.d("LOGINLOG", "(pass.isNullOrEmpty() || phone.isNullOrEmpty())")
-            } else {
-                Log.d("LOGINLOG", "LoginFragment -> setupBtnListener -> else")
+            if (getEtCheck(login)) {
                 startLogin(login)
             }
         }
 
         binding.btnCreateAccount.setSafeOnClickListener {
+            // TODO -> убрать showPref()
             viewModel.showPref()
             viewModel.navigateRegistration()
         }
 
         binding.tvDontHaveAccaut.setSafeOnClickListener {
+            // TODO -> убрать cleanPref()
             viewModel.cleanPref()
         }
     }
@@ -72,6 +70,18 @@ class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginBinding>() {
                 }
             }
         }.launchIn(lifecycleScope)
+    }
+
+    private fun getEtCheck(login: Login): Boolean {
+        if (login.login.isNullOrEmpty()) {
+            showToast(R.string.registrationFragmentLoginCheck)
+            return false
+        } else if (login.password.isNullOrEmpty()) {
+            showToast(R.string.registrationFragmentPasswordCheck)
+            return false
+        } else {
+            return true
+        }
     }
 
     override fun createViewBinding() {

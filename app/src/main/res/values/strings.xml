@@ -9,12 +9,12 @@
     <string name="activities_bottom_label">Activities</string>
     <string name="history_bottom_label">History</string>
     <string name="settings_bottom_label">Settings</string>
-    <string name="tvDontHaveAccaut">Don%\'t have account</string>
+    <string name="tvDontHaveAccaut">Don\'t have account</string>
     <string name="btnCreateAccount">Create account</string>
     <string name="btn_login">Log in</string>
     <string name="etPassword">Password</string>
     <string name="etPhoneNumber">Phone number</string>
-    <string name="toast_login_successful">login successful</string>
+    <string name="toast_login_successful">Login successful</string>
     <string name="error_user_not_identified">User Not Identified</string>
     <string name="error_network">Network Problem</string>
     <string name="error_unknown">"Unknown Error "</string>
@@ -22,4 +22,7 @@
 
     <!--TOAST-->
     <string name="registrationFragment">pass.isNullOrEmpty() || phone.isNullOrEmpty()</string>
+    <string name="registrationFragmentLoginCheck">Please provide correct number</string>
+    <string name="registrationFragmentPasswordCheck">Please provide correct password</string>
+    <string name="registrationFragmentNameChack">Please provide correct name</string>
 </resources>

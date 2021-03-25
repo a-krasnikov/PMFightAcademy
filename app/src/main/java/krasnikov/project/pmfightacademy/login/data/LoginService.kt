@@ -9,12 +9,11 @@ import retrofit2.http.*
 interface LoginService {
     @POST("/Clients/Login")
     suspend fun getAccessToken(
-        @Body login:Login?
+        @Body login: Login?,
     ): AccessToken
 
-
     @POST("/Clients/Register")
-        suspend fun getNewRegistration(
-        @Body register: Register?
+    suspend fun getNewRegistration(
+        @Body register: Register?,
     ): AccessToken
 }

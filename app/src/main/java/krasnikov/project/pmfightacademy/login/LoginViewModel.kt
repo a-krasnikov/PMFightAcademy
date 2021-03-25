@@ -33,13 +33,15 @@ class LoginViewModel @Inject constructor(
                 pref.token = token.toString()
                 Log.d("LOGINLOG", "token ${pref.token}")
                 emit(StateLogin.Success(token))
+                //TODO -> подставить правильный фрамент
                 //navigateAcademyInfo()
             } else {
                 Log.d("LOGINLOG", "LoginViewModel -> getAccessToken() -> else")
                 emit(StateLogin.Error(ErrorType.UserNotIdentified))
             }
         }.catch {
-            //
+            //TODO -> закончить catch
+            Log.d("LOGINLOG", "LoginViewModel -> getAccessToken() -> catch")
         }
     }
 
@@ -57,10 +59,13 @@ class LoginViewModel @Inject constructor(
         }
     }
 
+    // TODO -> убрать showPref()
+
     fun showPref() {
         Log.d("LOGINLOG", "token  = ${pref.token}")
     }
 
+    // TODO -> перенести cleanPref() на экран настроек
     fun cleanPref() {
         pref.token = ""
         Log.d("LOGINLOG", "LoginViewModel -> cleanPref() token  = ${pref.token}")

@@ -14,9 +14,10 @@ import javax.inject.Inject
 
 }*/
 @AndroidEntryPoint
-class LaunchFragment: Fragment(R.layout.fragment_launch) {
+class LaunchFragment : Fragment(R.layout.fragment_launch) {
 
-    @Inject lateinit var sharedPref : SharedPref
+    @Inject
+    lateinit var sharedPref: SharedPref
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -24,11 +25,12 @@ class LaunchFragment: Fragment(R.layout.fragment_launch) {
     }
 
     private fun checkSharedPref() {
-      //  if (sharedPref.token.isEmpty()|| sharedPref.token == "NoPref" ) {
+        if (sharedPref.token.isEmpty() || sharedPref.token == "NoPref") {
             navigateLoginFragment()
-        //} else{
-         //   navigateMainContent()
-        //}
+        } else {
+            //TODO -> подставить navigateMainContent()
+            navigateLoginFragment()
+        }
     }
 
     private fun navigateLoginFragment() {
