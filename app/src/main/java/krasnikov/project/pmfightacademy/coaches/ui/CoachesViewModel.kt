@@ -9,7 +9,6 @@ import kotlinx.coroutines.launch
 import krasnikov.project.pmfightacademy.app.pagination.PaginationData
 import krasnikov.project.pmfightacademy.app.pagination.PaginationState
 import krasnikov.project.pmfightacademy.app.ui.base.BaseViewModel
-import krasnikov.project.pmfightacademy.coaches.data.Coach
 import krasnikov.project.pmfightacademy.coaches.data.CoachRepository
 import krasnikov.project.pmfightacademy.coaches.ui.mapper.CoachUIMapper
 import krasnikov.project.pmfightacademy.coaches.ui.model.CoachUIModel

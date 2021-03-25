@@ -19,6 +19,7 @@ import retrofit2.Converter
 import retrofit2.Retrofit
 import javax.inject.Singleton
 
+@Suppress("MagicNumber", "MaxLineLength")
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
