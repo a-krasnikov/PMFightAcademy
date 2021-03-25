@@ -31,12 +31,19 @@
             android:name="krasnikov.project.pmfightacademy.coaches.ui.CoachesFragment"
             tools:layout="@layout/fragment_coaches" />
 
-        <fragment android:id="@+id/current_activities_fragment">
+        <fragment
+            android:id="@+id/current_activities_fragment"
+            android:name="krasnikov.project.pmfightacademy.activities.planned.ui.PlannedActivitiesFragment"
+            tools:layout="@layout/fragment_planned_activities">
             <action
                 android:id="@+id/action_activities_to_booking"
                 app:destination="@id/booking_fragment" />
         </fragment>
-        <fragment android:id="@+id/history_fragment" />
+
+        <fragment
+            android:id="@+id/history_fragment"
+            android:name="krasnikov.project.pmfightacademy.activities.history.ui.ActivitiesHistoryFragment"
+            tools:layout="@layout/fragment_activities_history" />
         <fragment android:id="@+id/settings_fragment" />
 
         <fragment android:id="@+id/booking_fragment" />

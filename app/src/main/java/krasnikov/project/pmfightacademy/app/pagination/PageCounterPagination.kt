@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class PageCounterPagination<T>(private val getRequest: suspend (Int) -> ResponseWithPaginationModel<T>) {
 
-    private val page = AtomicInteger(0)
+    private val page = AtomicInteger(1)
     private var hasNextPage = AtomicBoolean(true)
 
     private val dataSharedFlow = MutableSharedFlow<List<T>>(replay = 1)
