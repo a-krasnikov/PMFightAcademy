@@ -15,6 +15,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Converter
 import javax.inject.Singleton
 
+@Suppress("MagicNumber", "MaxLineLength")
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
