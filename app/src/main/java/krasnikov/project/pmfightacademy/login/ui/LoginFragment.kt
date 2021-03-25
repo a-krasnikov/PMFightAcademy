@@ -34,7 +34,6 @@ class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginBinding>() {
     private fun setupBtnListener() {
         binding.btnLogin.setSafeOnClickListener {
             val register = Register("+380672336981", "Testpass2","Gleb")
-            //viewModel.navigateRegistration()
             val etLogin: String? = binding.etPhoneNumber.text.toString()
             val password: String? = binding.etPassword.text.toString()
             val login = Login(etLogin, password)
@@ -48,16 +47,13 @@ class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginBinding>() {
 
         binding.btnCreateAccount.setSafeOnClickListener {
             viewModel.showPref()
-          //viewModel.navigateRegistration()
+            viewModel.navigateRegistration()
         }
 
         binding.tvDontHaveAccaut.setSafeOnClickListener {
             viewModel.cleanPref()
         }
     }
-
-
-
 
     private fun startLogin(login: Login) {
         Log.d("LOGINLOG", "LoginFragment -> setupBtnListener -> else")

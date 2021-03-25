@@ -19,4 +19,7 @@
     <string name="error_network">Network Problem</string>
     <string name="error_unknown">"Unknown Error "</string>
     <string name="etName">Name</string>
+
+    <!--TOAST-->
+    <string name="registrationFragment">pass.isNullOrEmpty() || phone.isNullOrEmpty()</string>
 </resources>

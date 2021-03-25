@@ -19,7 +19,7 @@ import javax.inject.Inject
 class LoginRepository @Inject constructor(
     private val loginService: LoginService,
     @IoDispatcher
-    private val ioDispatcher: CoroutineDispatcher
+    private val ioDispatcher: CoroutineDispatcher,
 ) {
 
     suspend fun getAccessToken(login: Login): AccessToken {
@@ -29,9 +29,8 @@ class LoginRepository @Inject constructor(
         }
     }
 
-    suspend fun getNewRegistration(
-        register: Register
-    ): AccessToken {
+    suspend fun getNewRegistration(register: Register): AccessToken {
+        Log.d("LOGINLOG", "LoginRepository -> getNewRegistration()")
         return withContext(ioDispatcher) {
             loginService.getNewRegistration(register)
         }

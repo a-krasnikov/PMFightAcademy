@@ -1,46 +1,49 @@
 package krasnikov.project.pmfightacademy.login.registation
 
-import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flow
 import krasnikov.project.pmfightacademy.app.base.BaseViewModel
 import krasnikov.project.pmfightacademy.app.data.pref.SharedPref
 import krasnikov.project.pmfightacademy.login.data.LoginRepository
+import krasnikov.project.pmfightacademy.login.data.model.Register
+import krasnikov.project.pmfightacademy.login.domain.RegistrationValidation
+import krasnikov.project.pmfightacademy.login.domain.ValidationLogin
 import krasnikov.project.pmfightacademy.utils.ErrorType
 import krasnikov.project.pmfightacademy.utils.State
+import krasnikov.project.pmfightacademy.utils.StateLogin
 import javax.inject.Inject
+
 @HiltViewModel
 class RegistrationViewModel @Inject constructor(
-    private val authHelper: LoginRepository,
+    private val loginRepository: LoginRepository,
     private val pref: SharedPref,
 ) : BaseViewModel() {
 
-    private val _content = MutableLiveData<State<Unit, ErrorType>>()
-    val content
-        get() = _content as LiveData<State<Unit, ErrorType>>
+    fun startRegistration(register: Register): Flow<StateLogin<ErrorType>> {
+        Log.d("LOGINLOG", "LoginViewModel -> startRegistration()")
+        return flow {
+            if (RegistrationValidation(register).getRegisterValidation()) {
+                Log.d("LOGINLOG", "LoginViewModel -> startRegistration() -> if")
+                emit(StateLogin.Loading)
+                Log.d("LOGINLOG", "1 token ${pref.token}")
+                val token = loginRepository.getNewRegistration(register)
+                pref.token = token.toString()
+                Log.d("LOGINLOG", "token ${pref.token}")
+                emit(StateLogin.Success(token))
+                //navigateAcademyInfo()
+            } else {
+                Log.d("LOGINLOG", "LoginViewModel -> getAccessToken() -> else")
+//                emit(StateLogin.Error(ErrorType.UserNotIdentified))
+            }
+        }.catch {
+            //
+        }
 
-    fun startRegistration(context: Context?, login: String, password: String, name: String) {
-//        if (ValidationPost(login, password, name).getRegisterValidation()) {
-//            baseViewModelScope.launch() {
-//                _content.postValue(State.Loading)
-//                val result = authHelper.getNewRegistration(login = login, password = password, name=name)
-//                pref.token = "${result.body()?.accessToken}"
-//                _content.postValue(State.Content(Unit))
-//                navigateAcademyInfo()
-//            }
-//        } else {
-//            Log.d("TestLog", "ValidationPost(phone,pass).invoke()")
-//            Toast.makeText(context, "Wrong phone or password", Toast.LENGTH_LONG).show()
-//        }
-    }
-
-    private fun navigateAcademyInfo() {
-//        _navigationEvent.postValue(NavigationEvent {
-//            Navigator.navigateToAcademyInfo(
-//                it
-//            )
-//        })
     }
 
     override fun handleError(throwable: Throwable) {

@@ -9,7 +9,7 @@ import krasnikov.project.pmfightacademy.app.base.BaseViewModel
 import krasnikov.project.pmfightacademy.login.data.LoginRepository
 import krasnikov.project.pmfightacademy.app.data.pref.SharedPref
 import krasnikov.project.pmfightacademy.login.data.model.Login
-import krasnikov.project.pmfightacademy.login.domain.ValidationPost
+import krasnikov.project.pmfightacademy.login.domain.ValidationLogin
 import krasnikov.project.pmfightacademy.login.ui.LoginFragmentDirections
 import krasnikov.project.pmfightacademy.utils.ErrorType
 import krasnikov.project.pmfightacademy.utils.Event
@@ -22,22 +22,18 @@ class LoginViewModel @Inject constructor(
     private val pref: SharedPref,
 ) : BaseViewModel() {
 
-//    private val _content = MutableStateFlow<StateLogin<ErrorType>>(StateLogin.)
-//    val content = _content.asStateFlow()
-
-
     fun getAccessToken(login: Login): Flow<StateLogin<ErrorType>> {
         return flow {
-            emit(StateLogin.Loading)
-            Log.d("LOGINLOG", "1 token ${pref.token.toString()}")
-            val token = loginRepository.getAccessToken(login)
-            Log.d("LOGINLOG", "LoginViewModel -> getAccessToken()")
-            pref.token = token.toString()
-            Log.d("LOGINLOG", "token ${pref.token}")
-            emit(StateLogin.Success(token))
-            //navigateAcademyInfo()
-            if (ValidationPost(login).getLoginValidation()) {
+            if (ValidationLogin(login).getLoginValidation()) {
                 Log.d("LOGINLOG", "LoginViewModel -> getAccessToken() -> if")
+                emit(StateLogin.Loading)
+                Log.d("LOGINLOG", "1 token ${pref.token.toString()}")
+                val token = loginRepository.getAccessToken(login)
+                Log.d("LOGINLOG", "LoginViewModel -> getAccessToken()")
+                pref.token = token.toString()
+                Log.d("LOGINLOG", "token ${pref.token}")
+                emit(StateLogin.Success(token))
+                //navigateAcademyInfo()
             } else {
                 Log.d("LOGINLOG", "LoginViewModel -> getAccessToken() -> else")
                 emit(StateLogin.Error(ErrorType.UserNotIdentified))
@@ -46,7 +42,6 @@ class LoginViewModel @Inject constructor(
             //
         }
     }
-
 
     private fun navigateAcademyInfo() {
         viewModelScope.launch {
@@ -62,20 +57,6 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    override fun handleError(throwable: Throwable) {
-//        when (throwable) {
-//            is RequestNotAuthorizedException -> {
-//                _content.postValue(State.Error(ErrorType.UserNotIdentified))
-//            }
-//            is NetworkRequestException -> {
-//                _content.postValue(State.Error(ErrorType.NetworkProblem))
-//            }
-//            else -> {
-//                _content.postValue(State.Error(ErrorType.UnknownError))
-//            }
-//        }
-    }
-
     fun showPref() {
         Log.d("LOGINLOG", "token  = ${pref.token}")
     }
@@ -85,4 +66,6 @@ class LoginViewModel @Inject constructor(
         Log.d("LOGINLOG", "LoginViewModel -> cleanPref() token  = ${pref.token}")
     }
 
+    override fun handleError(throwable: Throwable) {
+    }
 }

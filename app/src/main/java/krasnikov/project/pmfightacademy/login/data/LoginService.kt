@@ -7,17 +7,14 @@ import retrofit2.Response
 import retrofit2.http.*
 
 interface LoginService {
-    //@Headers("accept: text/plain")
-   // @Headers("accept: text/plain","Content-Type: application/json")
     @POST("/Clients/Login")
-    //@FormUrlEncoded
     suspend fun getAccessToken(
-        @Body login:Login
+        @Body login:Login?
     ): AccessToken
 
 
     @POST("/Clients/Register")
         suspend fun getNewRegistration(
-        @Body register: Register
+        @Body register: Register?
     ): AccessToken
 }

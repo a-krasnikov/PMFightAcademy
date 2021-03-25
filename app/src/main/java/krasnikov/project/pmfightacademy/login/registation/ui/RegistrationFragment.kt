@@ -3,13 +3,20 @@ package krasnikov.project.pmfightacademy.login.registation.ui
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import krasnikov.project.pmfightacademy.R
 import krasnikov.project.pmfightacademy.app.base.BaseFragment
 import krasnikov.project.pmfightacademy.databinding.FragmentRegistrationBinding
+import krasnikov.project.pmfightacademy.login.data.model.Login
+import krasnikov.project.pmfightacademy.login.data.model.Register
 import krasnikov.project.pmfightacademy.login.registation.RegistrationViewModel
 import krasnikov.project.pmfightacademy.utils.State
+import krasnikov.project.pmfightacademy.utils.StateLogin
 import krasnikov.project.pmfightacademy.utils.setSafeOnClickListener
 
 @AndroidEntryPoint
@@ -20,42 +27,44 @@ class RegistrationFragment : BaseFragment<RegistrationViewModel, FragmentRegistr
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupBtnListener()
-        observeContent()
     }
-
-
 
     private fun setupBtnListener() {
         binding.btnLogin.setSafeOnClickListener {
-            val login: String? = binding.etPhoneNumber.text.toString()
-            val password: String? = binding.etPassword.text.toString()
-            val name: String? = binding.etName.text.toString()
-            if (login.isNullOrEmpty() || password.isNullOrEmpty() || name.isNullOrEmpty()) {
-                Log.d("TestLog",
-                    "(pass.isNullOrEmpty() || phone.isNullOrEmpty()) || name.isNullOrEmpty()")
+        //    val etLogin: String? = binding.etPhoneNumber.text.toString()
+            val etLogin: String? = "+380931682232"
+
+        //    val password: String? = binding.etPassword.text.toString)
+            val password: String? = "Testpass1"
+
+            val register = Register(etLogin, password, "Gleb")
+            if (register.login.isNullOrEmpty() || register.password.isNullOrEmpty() || register.password.isNullOrEmpty()) {
+                Log.d("LOGINLOG", "(pass.isNullOrEmpty() || phone.isNullOrEmpty())")
+                showToast(R.string.registrationFragment)
             } else {
-                startRegistration(login, password, name)
+                Log.d("LOGINLOG", "RegistrationFragment -> setupBtnListener -> else")
+                startRegistration(register)
             }
         }
     }
 
-    private fun startRegistration(login: String, password: String, name: String) {
-        viewModel.startRegistration(context, login, password, name)
-    }
-
-    private fun observeContent() {
-        viewModel.content.observe(viewLifecycleOwner) {
+    private fun startRegistration(register: Register) {
+        Log.d("LOGINLOG", "RegistrationFragment -> startLogin() -> else")
+        viewModel.startRegistration(register).onEach {
             when (it) {
-                is State.Loading -> {
+                is StateLogin.Loading -> {
+                    Log.d("LOGINLOG", "RegistrationFragment -> startLogin() -> StateLogin.Loading")
                 }
-                is State.Content -> {
+                is StateLogin.Success -> {
+                    Log.d("LOGINLOG", "RegistrationFragment -> startLogin() -> StateLogin.Success")
                     showToast(R.string.toast_login_successful)
                 }
-                is State.Error -> {
+                is StateLogin.Error -> {
+                    Log.d("LOGINLOG", "LoginFragment -> startLogin() -> StateLogin.Error")
                     showToast(it.error.stringRes)
                 }
             }
-        }
+        }.launchIn(lifecycleScope)
     }
 
     override fun createViewBinding() {
