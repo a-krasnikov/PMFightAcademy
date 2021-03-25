@@ -7,39 +7,55 @@
 
     <ImageView
         android:id="@+id/ivLoginPageImage"
-        android:layout_width="@dimen/LoginPageImageWidth"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/LoginPageImageHeight"
         android:layout_marginTop="@dimen/ivLoginPageImageMargineTop"
-        android:background="@drawable/ic_launcher_background"
+        android:src="@drawable/pmfightacademy"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/etPhoneNumber"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layPhoneNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/etPhoneNumberMargineStartEnd"
         android:layout_marginTop="@dimen/etPhoneNumberMargineTop"
         android:layout_marginEnd="@dimen/etPhoneNumberMargineStartEnd"
-        android:background="@color/white"
-        android:maxLines="1"
-        android:hint="@string/etPhoneNumber"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivLoginPageImage" />
+        app:layout_constraintTop_toBottomOf="@+id/ivLoginPageImage"
+        app:hintEnabled="false">
 
-    <EditText
-        android:id="@+id/etPassword"
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/etPhoneNumber"
+            android:maxLines="1" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/etPasswordMargineStartEnd"
         android:layout_marginTop="@dimen/etPasswordMargineTop"
         android:layout_marginEnd="@dimen/etPasswordMargineStartEnd"
-        android:background="@color/white"
-        android:hint="@string/etPassword"
-        android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etPhoneNumber" />
+        app:layout_constraintTop_toBottomOf="@id/layPhoneNumber"
+        app:passwordToggleEnabled="true"
+        app:hintEnabled="false">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/etPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnLogin"
@@ -49,7 +65,7 @@
         android:text="@string/btn_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etPassword" />
+        app:layout_constraintTop_toBottomOf="@id/layPassword" />
 
     <TextView
         android:id="@+id/tvDontHaveAccaut"

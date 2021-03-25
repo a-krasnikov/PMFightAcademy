@@ -18,6 +18,7 @@ import krasnikov.project.pmfightacademy.utils.Event
 import krasnikov.project.pmfightacademy.utils.StateLogin
 import javax.inject.Inject
 
+@Suppress ("EmptyFunctionBlock")
 @HiltViewModel
 class RegistrationViewModel @Inject constructor(
     private val loginRepository: LoginRepository,

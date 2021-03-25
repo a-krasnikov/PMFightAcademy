@@ -10,8 +10,8 @@ class AuthInterceptor @Inject constructor(/*private val sharedPref: SharedPref*/
     override fun intercept(chain: Interceptor.Chain): Response {
         val request: Request =chain.request()
             .newBuilder()
-            .addHeader("accept","text/plain")
-            .addHeader("Content-Type","application/json")
+            //.addHeader("accept","text/plain")
+            //.addHeader("Content-Type","application/json")
             .build()
 
         return chain.proceed(request)

@@ -25,12 +25,12 @@ class NetworkModule {
         const val API_BASE_URL = "https://pmfightacademyclient-92m8i.ondigitalocean.app"
     }
 
-   /* @Provides
+    @Provides
     fun provideConverterFactory(): Converter.Factory {
         return Json { ignoreUnknownKeys = true; coerceInputValues = true }
             .asConverterFactory("application/json".toMediaType())
     }
-*/
+
    /* @Singleton
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient, converterFactory: Converter.Factory): Retrofit {
@@ -41,23 +41,22 @@ class NetworkModule {
             .build()
     }*/
 
-
     @Provides
     fun provideOkHttpClient(
         authInterceptor: AuthInterceptor,
-        //errorInterceptor: ErrorInterceptor,
+        errorInterceptor: ErrorInterceptor,
     ): OkHttpClient {
         return OkHttpClient().newBuilder()
             .addInterceptor(authInterceptor)
-            // .addInterceptor(errorInterceptor)
+            .addInterceptor(errorInterceptor)
             .build()
     }
 
-    @Provides
+    /*@Provides
     fun provideGsonConverterFactory(
     ): GsonConverterFactory {
         return GsonConverterFactory.create()
-    }
+    }*/
 
     @Provides
     fun provideAuthInterceptor(/*sharedPref: SharedPref*/): AuthInterceptor {
@@ -67,12 +66,12 @@ class NetworkModule {
     @Provides
     fun provideLoginService(
         okHttpClient: OkHttpClient,
-        gsonConverterFactory : GsonConverterFactory
+        converterFactory : Converter.Factory
     ): LoginService {
         return Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(API_BASE_URL)
-            .addConverterFactory(gsonConverterFactory)
+            .addConverterFactory(converterFactory)
             .build().create(LoginService::class.java)
     }
 }

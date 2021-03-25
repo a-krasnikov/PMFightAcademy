@@ -4,7 +4,7 @@ import android.content.SharedPreferences
 import java.lang.IllegalArgumentException
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
-
+@Suppress("ThrowingExceptionsWithoutMessageOrCause")
 class SharedPrefDelegate<T>(
     private val prefs: SharedPreferences,
     private val key: String,

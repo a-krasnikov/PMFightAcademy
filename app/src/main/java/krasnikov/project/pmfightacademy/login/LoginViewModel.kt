@@ -16,6 +16,7 @@ import krasnikov.project.pmfightacademy.utils.Event
 import krasnikov.project.pmfightacademy.utils.StateLogin
 import javax.inject.Inject
 
+@Suppress ("EmptyFunctionBlock")
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val loginRepository: LoginRepository,
@@ -70,6 +71,7 @@ class LoginViewModel @Inject constructor(
         pref.token = ""
         Log.d("LOGINLOG", "LoginViewModel -> cleanPref() token  = ${pref.token}")
     }
+
 
     override fun handleError(throwable: Throwable) {
     }
