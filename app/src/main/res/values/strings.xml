@@ -23,4 +23,5 @@
     <string name="planned_activity_coach_string">Coach</string>
     <string name="planned_activity_price_string">Price</string>
     <string name="activities_history_title">History</string>
+    <string name="button_log_out_text">Log out</string>
 </resources>

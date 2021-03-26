@@ -17,6 +17,7 @@
     </fragment>
 
 
+
     <navigation
         android:id="@+id/main_content"
         app:startDestination="@id/info_fragment">
@@ -44,9 +45,14 @@
             android:id="@+id/history_fragment"
             android:name="krasnikov.project.pmfightacademy.activities.history.ui.ActivitiesHistoryFragment"
             tools:layout="@layout/fragment_activities_history" />
-        <fragment android:id="@+id/settings_fragment" />
+
+        <fragment android:id="@+id/settings_fragment"
+            android:name="krasnikov.project.pmfightacademy.profile.ui.ProfileFragment"
+            tools:layout="@layout/fragment_profile"
+            />
 
         <fragment android:id="@+id/booking_fragment" />
+        
     </navigation>
 
     <navigation
