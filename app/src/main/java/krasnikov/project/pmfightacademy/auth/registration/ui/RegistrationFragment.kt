@@ -8,9 +8,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import krasnikov.project.pmfightacademy.app.base.BaseFragment
-import krasnikov.project.pmfightacademy.auth.registration.domain.RegistrationValidationError
+import krasnikov.project.pmfightacademy.auth.registration.domain.RegistrationError
 import krasnikov.project.pmfightacademy.databinding.FragmentRegistrationBinding
-import krasnikov.project.pmfightacademy.utils.StateRegistration
+import krasnikov.project.pmfightacademy.utils.State
 import krasnikov.project.pmfightacademy.utils.setSafeOnClickListener
 
 @AndroidEntryPoint
@@ -24,49 +24,53 @@ class RegistrationFragment : BaseFragment<RegistrationViewModel, FragmentRegistr
     }
 
     private fun setupBtnListener() {
-        binding.btnLogin.setSafeOnClickListener {
-            val phone: String = binding.etPhoneNumber.text.toString().trim()
-            val password: String = binding.etPassword.text.toString().trim()
-            val name: String = binding.etName.text.toString().trim()
+        with(binding) {
+            btnLogin.setSafeOnClickListener {
+                val phone = "${layoutPhoneNumber.prefixText}${etPhoneNumber.text.toString()}"
+                val password: String = etPassword.text.toString().trim()
+                val name: String = etName.text.toString().trim()
 
-            startRegistration(phone, password, name)
+                startRegistration(phone, password, name)
+            }
         }
+
     }
 
     private fun startRegistration(phone: String, password: String, name: String) {
         viewModel.startRegistration(phone, password, name).onEach {
             when (it) {
-                is StateRegistration.Loading -> {
+                is State.Loading -> {
                     //show loading
                 }
-                is StateRegistration.Success -> {
+                is State.Content -> {
                     viewModel.navigateToMainContent()
                 }
-                is StateRegistration.DataError -> {
-                    binding.etPhoneNumber.text?.clear()
-                    binding.etPassword.text?.clear()
-                    binding.etName.text?.clear()
-                }
-                is StateRegistration.ValidationError -> {
-                    when(it.validationError) {
-                        RegistrationValidationError.UserPhoneInvalid -> {
-                            binding.etPhoneNumber.text?.clear()
-                        }
-                        RegistrationValidationError.UserPasswordInvalid -> {
-                            binding.etPassword.text?.clear()
-                        }
-                        RegistrationValidationError.UserNameInvalid -> {
-                            binding.etName.text?.clear()
-                        }
-                        RegistrationValidationError.UserPhoneNameAndPasswordInvalid -> {
-                            binding.etPhoneNumber.text?.clear()
-                            binding.etPassword.text?.clear()
-                            binding.etName.text?.clear()
-                        }
-                    }
+                is State.Error -> {
+                    showError(it.error)
                 }
             }
         }.launchIn(lifecycleScope)
+    }
+
+    private fun showError(error: RegistrationError) {
+        when (error) {
+            RegistrationError.UserNameInvalid -> {
+                binding.etName.text?.clear()
+            }
+            RegistrationError.UserPasswordInvalid -> {
+                binding.etPassword.text?.clear()
+            }
+            RegistrationError.UserPhoneInvalid -> {
+                binding.etPhoneNumber.text?.clear()
+            }
+            RegistrationError.InvalidUserDataSent,
+            RegistrationError.SuchUserAlreadyExits,
+            RegistrationError.UnknownError -> {
+                binding.etPhoneNumber.text?.clear()
+                binding.etPassword.text?.clear()
+                binding.etName.text?.clear()
+            }
+        }
     }
 
     override fun createViewBinding() {

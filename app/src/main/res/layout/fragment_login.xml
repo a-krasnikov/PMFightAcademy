@@ -3,76 +3,76 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/spacing_medium"
-    >
+    android:padding="@dimen/spacing_medium">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivLoginPageImage"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.35"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/pmfightacademy" />
+        app:srcCompat="@drawable/launch_logo" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layPhoneNumber"
-        android:layout_width="match_parent"
+        android:id="@+id/layoutPhoneNumber"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_medium"
         app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivLoginPageImage">
-
+        app:layout_constraintTop_toBottomOf="@+id/ivLoginPageImage"
+        app:prefixText="@string/phone_prefix"
+        app:startIconDrawable="@drawable/ic_phone">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPhoneNumber"
-            android:inputType="phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/etPhoneNumber"
-            android:maxLines="1" />
+            android:inputType="phone"
+            android:maxLength="9" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layPassword"
-        android:layout_width="match_parent"
+        android:id="@+id/layoutPassword"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_medium"
         app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layPhoneNumber"
-        app:passwordToggleEnabled="true">
+        app:layout_constraintTop_toBottomOf="@id/layoutPhoneNumber"
+        app:passwordToggleEnabled="true"
+        app:startIconDrawable="@drawable/ic_password">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPassword"
-            android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/etPassword" />
+            android:hint="@string/etPassword"
+            android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_medium"
         android:text="@string/btn_login"
-        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layPassword" />
+        app:layout_constraintTop_toBottomOf="@id/layoutPassword" />
 
     <TextView
-        android:id="@+id/tvDontHaveAccaut"
+        android:id="@+id/tvNoAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spacing_large"
-        android:gravity="center"
         android:text="@string/no_account_string"
         android:textColor="@color/grey"
         app:layout_constraintBottom_toTopOf="@+id/btnCreateAccount"
@@ -80,17 +80,16 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.button.MaterialButton
-        style="?attr/materialButtonOutlinedStyle"
-        app:cornerRadius="@dimen/button_corner_radius"
-        app:strokeWidth="2dp"
-        app:strokeColor="@color/yellow_primary"
         android:id="@+id/btnCreateAccount"
-        android:layout_width="match_parent"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:inputType="text"
         android:text="@string/btnCreateAccount"
+        app:cornerRadius="@dimen/button_corner_radius"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="@color/yellow_primary"
+        app:strokeWidth="@dimen/button_stroke_width" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

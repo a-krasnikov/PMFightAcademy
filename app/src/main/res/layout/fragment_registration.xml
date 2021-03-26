@@ -7,42 +7,47 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivRegistrationPageImage"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/pmfightacademy" />
-
+        app:srcCompat="@drawable/launch_logo" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layPhoneNumber"
-        android:layout_width="match_parent"
+        android:id="@+id/layoutPhoneNumber"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_medium"
         app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivRegistrationPageImage">
+        app:layout_constraintTop_toBottomOf="@+id/ivRegistrationPageImage"
+        app:prefixText="@string/phone_prefix"
+        app:startIconDrawable="@drawable/ic_phone">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPhoneNumber"
-            android:inputType="phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/etPhoneNumber" />
+            android:hint="@string/etPhoneNumber"
+            android:inputType="phone"
+            android:maxLength="9" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layPassword"
-        android:layout_width="match_parent"
+        android:id="@+id/layoutPassword"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_medium"
         app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layPhoneNumber"
-        app:passwordToggleEnabled="true">
+        app:layout_constraintTop_toBottomOf="@id/layoutPhoneNumber"
+        app:passwordToggleEnabled="true"
+        app:startIconDrawable="@drawable/ic_password">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPassword"
@@ -54,24 +59,26 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layName"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_medium"
         app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layPassword">
+        app:layout_constraintTop_toBottomOf="@id/layoutPassword"
+        app:startIconDrawable="@drawable/ic_login">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:hint="@string/etName" />
+            android:hint="@string/etName"
+            android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_large"
         android:text="@string/register_button_text"

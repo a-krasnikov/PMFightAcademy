@@ -24,5 +24,7 @@
     <dimen name="avLoadingDotsMarginBottom">30dp</dimen>
 
     <dimen name="coach_avatar_size">64dp</dimen>
+    <dimen name="launch_loading_dots_size">100dp</dimen>
+    <dimen name="button_stroke_width">2dp</dimen>
 
 </resources>

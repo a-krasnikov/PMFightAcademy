@@ -1,20 +1,16 @@
 package krasnikov.project.pmfightacademy.auth.login.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import krasnikov.project.pmfightacademy.R
 import krasnikov.project.pmfightacademy.app.base.BaseFragment
 import krasnikov.project.pmfightacademy.databinding.FragmentLoginBinding
-import krasnikov.project.pmfightacademy.auth.data.model.Login
-import krasnikov.project.pmfightacademy.auth.login.domain.LoginValidationError
-import krasnikov.project.pmfightacademy.utils.StateLogin
+import krasnikov.project.pmfightacademy.auth.login.domain.LoginError
+import krasnikov.project.pmfightacademy.utils.State
 import krasnikov.project.pmfightacademy.utils.setSafeOnClickListener
 
 @AndroidEntryPoint
@@ -28,47 +24,51 @@ class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginBinding>() {
     }
 
     private fun setupBtnListener() {
-        binding.btnLogin.setSafeOnClickListener {
-            val phone: String = binding.etPhoneNumber.text.toString().trim()
-            val password: String = binding.etPassword.text.toString().trim()
+        with(binding) {
+            btnLogin.setSafeOnClickListener {
+                val phone = "${layoutPhoneNumber.prefixText}${etPhoneNumber.text.toString()}"
+                val password: String = etPassword.text.toString().trim()
 
-            startLogin(phone, password)
+                startLogin(phone, password)
+            }
+
+            btnCreateAccount.setSafeOnClickListener {
+                viewModel.navigateToRegistration()
+            }
         }
 
-        binding.btnCreateAccount.setSafeOnClickListener {
-            viewModel.navigateToRegistration()
-        }
     }
 
     private fun startLogin(phone: String, password: String) {
         viewModel.login(phone, password).onEach {
             when (it) {
-                is StateLogin.Loading -> {
+                is State.Loading -> {
                     //show loading
                 }
-                is StateLogin.Success -> {
+                is State.Content -> {
                     viewModel.navigateToMainContent()
                 }
-                is StateLogin.DataError -> {
-                    binding.etPhoneNumber.text?.clear()
-                    binding.etPassword.text?.clear()
-                }
-                is StateLogin.ValidationError -> {
-                    when(it.validationError) {
-                        LoginValidationError.UserPhoneInvalid -> {
-                            binding.etPhoneNumber.text?.clear()
-                        }
-                        LoginValidationError.UserPasswordInvalid -> {
-                            binding.etPassword.text?.clear()
-                        }
-                        LoginValidationError.UserPhoneAndPasswordInvalid -> {
-                            binding.etPhoneNumber.text?.clear()
-                            binding.etPassword.text?.clear()
-                        }
-                    }
+                is State.Error -> {
+                    showError(it.error)
                 }
             }
         }.launchIn(lifecycleScope)
+    }
+
+    private fun showError(error: LoginError) {
+        when (error) {
+            LoginError.UnknownError,
+            LoginError.InvalidUserDataSent -> {
+                binding.etPhoneNumber.text?.clear()
+                binding.etPassword.text?.clear()
+            }
+            LoginError.UserPhoneInvalid -> {
+                binding.etPhoneNumber.text?.clear()
+            }
+            LoginError.UserPasswordInvalid -> {
+                binding.etPassword.text?.clear()
+            }
+        }
     }
 
     override fun createViewBinding() {

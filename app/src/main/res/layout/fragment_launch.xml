@@ -7,19 +7,19 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:srcCompat="@drawable/pmfightacademy" />
-
+        app:srcCompat="@drawable/launch_logo" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/avLoadingDots"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="@dimen/avLoadingDotsMarginBottom"
-        app:lottie_rawRes="@raw/launchfragmentdots"
+        android:layout_width="@dimen/launch_loading_dots_size"
+        android:layout_height="@dimen/launch_loading_dots_size"
+        android:layout_marginBottom="@dimen/spacing_large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_colorFilter="@color/yellow_primary"
         app:lottie_loop="true"
-        app:lottie_autoPlay="true"/>
+        app:lottie_rawRes="@raw/loading_dots" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
