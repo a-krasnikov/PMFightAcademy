@@ -15,7 +15,8 @@ import krasnikov.project.pmfightacademy.utils.State
 import krasnikov.project.pmfightacademy.utils.setSafeOnClickListener
 
 @AndroidEntryPoint
-class RegistrationFragment : BaseFragment<RegistrationViewModel, FragmentRegistrationBinding>(R.layout.fragment_registration) {
+class RegistrationFragment :
+    BaseFragment<RegistrationViewModel, FragmentRegistrationBinding>(R.layout.fragment_registration) {
 
     override val viewModel: RegistrationViewModel by viewModels()
     override val bindingFactory = FragmentRegistrationBinding::bind
@@ -50,7 +51,8 @@ class RegistrationFragment : BaseFragment<RegistrationViewModel, FragmentRegistr
                 is State.Error -> {
                     showError(it.error)
                 }
-                is State.Empty -> {}
+                is State.Empty -> {
+                }
             }
         }.launchIn(lifecycleScope)
     }
