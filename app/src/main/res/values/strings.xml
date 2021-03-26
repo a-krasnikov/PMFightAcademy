@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">PMFightAcademy</string>
+    <string name="preference_login_key">login_pref</string>
     <string name="btn_retry">Retry</string>
     <string name="title_show_more">Show more</string>
 
@@ -9,6 +10,12 @@
 
     <!-- Activity -->
     <string name="activity_price">%d UAH</string>
+    <string name="planned_activities_title">Planned Activities</string>
+    <string name="book_new_activity_title">Book new activity</string>
+    <string name="planned_activity_coach_string">Coach</string>
+    <string name="planned_activity_price_string">Price</string>
+    <string name="activities_history_title">History</string>
+    <string name="button_log_out_text">Log out</string>
 
     <!-- Bottom Navigation -->
     <string name="info_bottom_label">Info</string>
@@ -38,4 +45,23 @@
     <string name="title_coach">Coach</string>
     <string name="title_price">Price</string>
     <string name="title_activities_history">History</string>
+
+    <!--Auth-->
+    <string name="no_account_string">Don\'t have an account?</string>
+    <string name="btnCreateAccount">Create an account</string>
+    <string name="btn_login">Log in</string>
+    <string name="etPassword">Password</string>
+    <string name="etPhoneNumber">Phone number</string>
+    <string name="passwordInvalid">Entered password is invalid</string>
+    <string name="phoneInvalid">Entered phone is invalid</string>
+    <string name="phoneAndPasswordInvalid">Entered phone and password are invalid</string>
+    <string name="etName">Name</string>
+
+    <!--TOAST-->
+    <string name="registrationFragment">pass.isNullOrEmpty() || phone.isNullOrEmpty()</string>
+    <string name="registrationFragmentLoginCheck">Please provide correct number</string>
+    <string name="registrationFragmentPasswordCheck">Please provide correct password</string>
+    <string name="registrationFragmentNameChack">Please provide correct name</string>
+    <string name="register_button_text">Done</string>
+    <string name="phone_prefix">+380</string>
 </resources>

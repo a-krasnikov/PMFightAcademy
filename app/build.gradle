@@ -54,6 +54,7 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:$fragment_version"
     implementation "androidx.lifecycle:lifecycle-common-java8:2.3.1"
 
+
     //navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
@@ -93,4 +94,7 @@ dependencies {
 
     //Other
     implementation 'com.github.prolificinteractive:material-calendarview:2.0.0'
+
+    //Lottie
+    implementation 'com.airbnb.android:lottie:3.6.1'
 }
