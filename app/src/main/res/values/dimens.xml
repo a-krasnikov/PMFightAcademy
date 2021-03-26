@@ -9,6 +9,19 @@
     <dimen name="input_text_corner_radius">24dp</dimen>
     <dimen name="card_corner_radius">12dp</dimen>
     <dimen name="card_padding">12dp</dimen>
+    <dimen name="btnCreateAccounMarginBottom">20dp</dimen>
+    <dimen name="tvDontHaveAccautMarginBottom">20dp</dimen>
+    <dimen name="btnLoginMarginTop">20dp</dimen>
+    <dimen name="etPasswordMargineStartEnd">20dp</dimen>
+    <dimen name="etPasswordMargineTop">20dp</dimen>
+    <dimen name="etPhoneNumberMargineStartEnd">20dp</dimen>
+    <dimen name="etPhoneNumberMargineTop">20dp</dimen>
+    <dimen name="ivLoginPageImageMargineTop">20dp</dimen>
+    <dimen name="LoginPageImageHeight">200dp</dimen>
+    <dimen name="LoginPageImageWidth">200dp</dimen>
+    <dimen name="avLoadingDotsWidth">100dp</dimen>
+    <dimen name="avLoadingDotsHeight">100dp</dimen>
+    <dimen name="avLoadingDotsMarginBottom">30dp</dimen>
 
     <dimen name="coach_avatar_size">64dp</dimen>
 
