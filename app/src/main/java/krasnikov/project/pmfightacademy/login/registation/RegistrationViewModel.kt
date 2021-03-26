@@ -27,7 +27,7 @@ class RegistrationViewModel @Inject constructor(
 
     fun startRegistration(register: Register): Flow<StateLogin<ErrorType>> {
         return flow {
-            if (RegistrationValidation(register).getRegisterValidation(register)) {
+            if (RegistrationValidation(register).getGeneralRegistrationValidation(register)) {
                 emit(StateLogin.Loading)
                 val token = loginRepository.getNewRegistration(register)
                 pref.token = token.toString()

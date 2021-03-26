@@ -25,7 +25,7 @@ class LoginViewModel @Inject constructor(
 
     fun getAccessToken(login: Login): Flow<StateLogin<ErrorType>> {
         return flow {
-            if (ValidationLogin(login).getLoginValidation()) {
+            if (ValidationLogin(login).getGeneralLoginValidation(login)) {
                 Log.d("LOGINLOG", "LoginViewModel -> getAccessToken() -> if")
                 emit(StateLogin.Loading)
                 Log.d("LOGINLOG", "1 token ${pref.token.toString()}")

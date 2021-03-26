@@ -19,5 +19,8 @@
     <dimen name="ivLoginPageImageMargineTop">20dp</dimen>
     <dimen name="LoginPageImageHeight">200dp</dimen>
     <dimen name="LoginPageImageWidth">200dp</dimen>
+    <dimen name="avLoadingDotsWidth">100dp</dimen>
+    <dimen name="avLoadingDotsHeight">100dp</dimen>
+    <dimen name="avLoadingDotsMarginBottom">30dp</dimen>
 
 </resources>

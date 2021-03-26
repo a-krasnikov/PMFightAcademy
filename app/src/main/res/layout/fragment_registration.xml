@@ -43,7 +43,8 @@
         android:layout_marginEnd="@dimen/etPasswordMargineStartEnd"
         app:hintEnabled="false"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layPhoneNumber">
+        app:layout_constraintTop_toBottomOf="@id/layPhoneNumber"
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPassword"
