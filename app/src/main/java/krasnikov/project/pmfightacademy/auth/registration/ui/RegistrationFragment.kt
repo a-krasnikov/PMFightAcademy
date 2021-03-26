@@ -7,16 +7,18 @@ import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import krasnikov.project.pmfightacademy.app.base.BaseFragment
+import krasnikov.project.pmfightacademy.R
+import krasnikov.project.pmfightacademy.app.ui.base.BaseFragment
 import krasnikov.project.pmfightacademy.auth.registration.domain.RegistrationError
 import krasnikov.project.pmfightacademy.databinding.FragmentRegistrationBinding
 import krasnikov.project.pmfightacademy.utils.State
 import krasnikov.project.pmfightacademy.utils.setSafeOnClickListener
 
 @AndroidEntryPoint
-class RegistrationFragment : BaseFragment<RegistrationViewModel, FragmentRegistrationBinding>() {
+class RegistrationFragment : BaseFragment<RegistrationViewModel, FragmentRegistrationBinding>(R.layout.fragment_registration) {
 
     override val viewModel: RegistrationViewModel by viewModels()
+    override val bindingFactory = FragmentRegistrationBinding::bind
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,6 +50,7 @@ class RegistrationFragment : BaseFragment<RegistrationViewModel, FragmentRegistr
                 is State.Error -> {
                     showError(it.error)
                 }
+                is State.Empty -> {}
             }
         }.launchIn(lifecycleScope)
     }
@@ -73,7 +76,4 @@ class RegistrationFragment : BaseFragment<RegistrationViewModel, FragmentRegistr
         }
     }
 
-    override fun createViewBinding() {
-        mBinding = FragmentRegistrationBinding.inflate(layoutInflater)
-    }
 }

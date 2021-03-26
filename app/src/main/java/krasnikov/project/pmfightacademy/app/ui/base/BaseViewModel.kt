@@ -29,5 +29,5 @@ abstract class BaseViewModel : ViewModel() {
         }
     }
 
-    abstract fun handleError(throwable: Throwable)
+    open fun handleError(throwable: Throwable) {/**/}
 }

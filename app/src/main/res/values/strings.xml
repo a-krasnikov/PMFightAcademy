@@ -8,15 +8,6 @@
     <string name="title_coaches">Coaches</string>
     <string name="text_coach_age">%d years old</string>
 
-    <!-- Activity -->
-    <string name="activity_price">%d UAH</string>
-    <string name="planned_activities_title">Planned Activities</string>
-    <string name="book_new_activity_title">Book new activity</string>
-    <string name="planned_activity_coach_string">Coach</string>
-    <string name="planned_activity_price_string">Price</string>
-    <string name="activities_history_title">History</string>
-    <string name="button_log_out_text">Log out</string>
-
     <!-- Bottom Navigation -->
     <string name="info_bottom_label">Info</string>
     <string name="coaches_bottom_label">Coaches</string>
@@ -45,23 +36,21 @@
     <string name="title_coach">Coach</string>
     <string name="title_price">Price</string>
     <string name="title_activities_history">History</string>
+    <string name="activity_price">%d UAH</string>
+    <string name="button_log_out_text">Log out</string>
 
     <!--Auth-->
-    <string name="no_account_string">Don\'t have an account?</string>
-    <string name="btnCreateAccount">Create an account</string>
+    <string name="text_no_account">Don\'t have an account?</string>
+    <string name="btn_create_account">Create an account</string>
     <string name="btn_login">Log in</string>
-    <string name="etPassword">Password</string>
-    <string name="etPhoneNumber">Phone number</string>
-    <string name="passwordInvalid">Entered password is invalid</string>
-    <string name="phoneInvalid">Entered phone is invalid</string>
-    <string name="phoneAndPasswordInvalid">Entered phone and password are invalid</string>
-    <string name="etName">Name</string>
-
-    <!--TOAST-->
-    <string name="registrationFragment">pass.isNullOrEmpty() || phone.isNullOrEmpty()</string>
-    <string name="registrationFragmentLoginCheck">Please provide correct number</string>
-    <string name="registrationFragmentPasswordCheck">Please provide correct password</string>
-    <string name="registrationFragmentNameChack">Please provide correct name</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_phone">Phone number</string>
+    <string name="hint_name">Name</string>
     <string name="register_button_text">Done</string>
     <string name="phone_prefix">+380</string>
+
+    <!--Login Errors-->
+    <string name="error_password_invalid">Entered password is invalid</string>
+    <string name="error_phone_invalid">Entered phone is invalid</string>
+
 </resources>

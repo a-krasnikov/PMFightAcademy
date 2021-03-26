@@ -8,7 +8,6 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import krasnikov.project.pmfightacademy.R
 import krasnikov.project.pmfightacademy.app.data.pref.SharedPref
-import krasnikov.project.pmfightacademy.auth.login.ui.LoginFragmentDirections
 import javax.inject.Inject
 
 @Suppress("EmptyFunctionBlock", "MagicNumber")

@@ -8,7 +8,9 @@ import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.json.Json
 import krasnikov.project.pmfightacademy.activity.booking.data.BookingService
 import krasnikov.project.pmfightacademy.activity.activities.data.ActivitiesService
-import krasnikov.project.pmfightacademy.app.data.interceptors.MockAuthInterceptor
+import krasnikov.project.pmfightacademy.app.data.interceptors.AuthInterceptor
+import krasnikov.project.pmfightacademy.app.data.pref.SharedPref
+import krasnikov.project.pmfightacademy.auth.data.AuthService
 import krasnikov.project.pmfightacademy.coaches.data.CoachesService
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -30,8 +32,8 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideOkHttpClient(): OkHttpClient {
-        return OkHttpClient().newBuilder().addInterceptor(MockAuthInterceptor()).build()
+    fun provideOkHttpClient(sharedPref: SharedPref): OkHttpClient {
+        return OkHttpClient().newBuilder().addInterceptor(AuthInterceptor(sharedPref)).build()
     }
 
     @Singleton
@@ -55,7 +57,12 @@ object NetworkModule {
     }
 
     @Provides
-    fun provideServicesService(retrofit: Retrofit): BookingService {
+    fun provideBookingService(retrofit: Retrofit): BookingService {
         return retrofit.create(BookingService::class.java)
+    }
+
+    @Provides
+    fun provideAuthService(retrofit: Retrofit): AuthService {
+        return retrofit.create(AuthService::class.java)
     }
 }

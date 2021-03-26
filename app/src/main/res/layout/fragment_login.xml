@@ -32,7 +32,7 @@
             android:id="@+id/etPhoneNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/etPhoneNumber"
+            android:hint="@string/hint_phone"
             android:inputType="phone"
             android:maxLength="9" />
 
@@ -54,7 +54,7 @@
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/etPassword"
+            android:hint="@string/hint_password"
             android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -74,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spacing_large"
-        android:text="@string/no_account_string"
+        android:text="@string/text_no_account"
         android:textColor="@color/grey"
         app:layout_constraintBottom_toTopOf="@+id/btnCreateAccount"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,10 +82,9 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnCreateAccount"
-        style="?attr/materialButtonOutlinedStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/btnCreateAccount"
+        android:text="@string/btn_create_account"
         app:cornerRadius="@dimen/button_corner_radius"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

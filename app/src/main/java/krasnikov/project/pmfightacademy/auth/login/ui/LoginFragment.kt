@@ -7,16 +7,18 @@ import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import krasnikov.project.pmfightacademy.app.base.BaseFragment
+import krasnikov.project.pmfightacademy.R
+import krasnikov.project.pmfightacademy.app.ui.base.BaseFragment
 import krasnikov.project.pmfightacademy.databinding.FragmentLoginBinding
 import krasnikov.project.pmfightacademy.auth.login.domain.LoginError
 import krasnikov.project.pmfightacademy.utils.State
 import krasnikov.project.pmfightacademy.utils.setSafeOnClickListener
 
 @AndroidEntryPoint
-class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginBinding>() {
+class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginBinding>(R.layout.fragment_login) {
 
     override val viewModel: LoginViewModel by viewModels()
+    override val bindingFactory = FragmentLoginBinding::bind
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,6 +53,7 @@ class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginBinding>() {
                 is State.Error -> {
                     showError(it.error)
                 }
+                is State.Empty -> {}
             }
         }.launchIn(lifecycleScope)
     }
@@ -71,7 +74,4 @@ class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginBinding>() {
         }
     }
 
-    override fun createViewBinding() {
-        mBinding = FragmentLoginBinding.inflate(layoutInflater)
-    }
 }

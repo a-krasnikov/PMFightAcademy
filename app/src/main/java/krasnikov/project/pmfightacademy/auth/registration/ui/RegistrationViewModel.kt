@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
-import krasnikov.project.pmfightacademy.app.base.BaseViewModel
 import krasnikov.project.pmfightacademy.app.data.pref.SharedPref
+import krasnikov.project.pmfightacademy.app.ui.base.BaseViewModel
 import krasnikov.project.pmfightacademy.auth.data.model.Register
 import krasnikov.project.pmfightacademy.auth.registration.domain.RegisterUserUseCase
 import krasnikov.project.pmfightacademy.auth.registration.domain.RegistrationError
