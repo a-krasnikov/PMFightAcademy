@@ -1,9 +1,11 @@
 package krasnikov.project.pmfightacademy.utils
 
-import krasnikov.project.pmfightacademy.login.data.model.AccessToken
+import krasnikov.project.pmfightacademy.auth.data.model.AccessToken
+import krasnikov.project.pmfightacademy.auth.login.domain.LoginValidationError
 
-sealed class StateLogin<out E> {
-    object Loading : StateLogin<Nothing>()
-    data class Success (val accessToken: AccessToken) : StateLogin<Nothing>()
-    data class Error<E>(val error: E) : StateLogin<E>()
+sealed class StateLogin {
+    object Loading : StateLogin()
+    data class Success(val accessToken: AccessToken) : StateLogin()
+    data class ValidationError(val validationError: LoginValidationError) : StateLogin()
+    object DataError : StateLogin()
 }

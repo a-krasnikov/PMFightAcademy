@@ -9,6 +9,7 @@ import kotlinx.coroutines.launch
 import krasnikov.project.pmfightacademy.MainContentDirections
 import krasnikov.project.pmfightacademy.utils.Event
 
+@Suppress("UnusedPrivateMember")
 abstract class BaseViewModel : ViewModel() {
 
     protected val exceptionHandler = CoroutineExceptionHandler { _, throwable ->

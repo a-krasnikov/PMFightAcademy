@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">PMFightAcademy</string>
+    <string name="preference_login_key">login_pref</string>
     <string name="btn_retry">Retry</string>
     <string name="title_show_more">Show more</string>
 
@@ -7,9 +8,15 @@
     <string name="title_coaches">Coaches</string>
     <string name="text_coach_age">%d years old</string>
 
-    <!-- Activity -->
+    <!-- Activities -->
     <string name="activity_coach_name">%s %s</string>
     <string name="activity_price">%d UAH</string>
+    <string name="planned_activities_title">Planned Activities</string>
+    <string name="book_new_activity_title">Book new activity</string>
+    <string name="planned_activity_coach_string">Coach</string>
+    <string name="planned_activity_price_string">Price</string>
+    <string name="activities_history_title">History</string>
+    <string name="button_log_out_text">Log out</string>
 
     <!-- Bottom Navigation -->
     <string name="info_bottom_label">Info</string>
@@ -18,22 +25,16 @@
     <string name="history_bottom_label">History</string>
     <string name="settings_bottom_label">Settings</string>
     <string name="info_screen_title">About Fight Academy</string>
-    <string name="planned_activities_title">Planned Activities</string>
-    <string name="book_new_activity_title">Book new activity</string>
-    <string name="planned_activity_coach_string">Coach</string>
-    <string name="planned_activity_price_string">Price</string>
-    <string name="activities_history_title">History</string>
-    <string name="button_log_out_text">Log out</string>
 
-    <string name="tvDontHaveAccaut">Don\'t have account</string>
-    <string name="btnCreateAccount">Create account</string>
+    <!--Auth-->
+    <string name="no_account_string">Don\'t have an account?</string>
+    <string name="btnCreateAccount">Create an account</string>
     <string name="btn_login">Log in</string>
     <string name="etPassword">Password</string>
     <string name="etPhoneNumber">Phone number</string>
-    <string name="toast_login_successful">Login successful</string>
-    <string name="error_user_not_identified">User Not Identified</string>
-    <string name="error_network">Network Problem</string>
-    <string name="error_unknown">"Unknown Error "</string>
+    <string name="passwordInvalid">Entered password is invalid</string>
+    <string name="phoneInvalid">Entered phone is invalid</string>
+    <string name="phoneAndPasswordInvalid">Entered phone and password are invalid</string>
     <string name="etName">Name</string>
 
     <!--TOAST-->
@@ -41,4 +42,5 @@
     <string name="registrationFragmentLoginCheck">Please provide correct number</string>
     <string name="registrationFragmentPasswordCheck">Please provide correct password</string>
     <string name="registrationFragmentNameChack">Please provide correct name</string>
+    <string name="register_button_text">Done</string>
 </resources>

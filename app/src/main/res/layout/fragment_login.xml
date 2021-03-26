@@ -3,32 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
+    android:padding="@dimen/spacing_medium"
+    >
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivLoginPageImage"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/LoginPageImageHeight"
-        android:layout_marginTop="@dimen/ivLoginPageImageMargineTop"
-        android:src="@drawable/pmfightacademy"
+        android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.35"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/pmfightacademy" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layPhoneNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/etPhoneNumberMargineStartEnd"
-        android:layout_marginTop="@dimen/etPhoneNumberMargineTop"
-        android:layout_marginEnd="@dimen/etPhoneNumberMargineStartEnd"
+        android:layout_marginTop="@dimen/spacing_medium"
+        app:hintEnabled="false"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivLoginPageImage"
-        app:hintEnabled="false">
+        app:layout_constraintTop_toBottomOf="@+id/ivLoginPageImage">
 
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPhoneNumber"
+            android:inputType="phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/etPhoneNumber"
@@ -40,16 +40,15 @@
         android:id="@+id/layPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/etPasswordMargineStartEnd"
-        android:layout_marginTop="@dimen/etPasswordMargineTop"
-        android:layout_marginEnd="@dimen/etPasswordMargineStartEnd"
+        android:layout_marginTop="@dimen/spacing_medium"
+        app:hintEnabled="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layPhoneNumber"
-        app:passwordToggleEnabled="true"
-        app:hintEnabled="false">
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPassword"
+            android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/etPassword" />
@@ -59,10 +58,11 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnLogin"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/btnLoginMarginTop"
+        android:layout_marginTop="@dimen/spacing_medium"
         android:text="@string/btn_login"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layPassword" />
@@ -71,19 +71,23 @@
         android:id="@+id/tvDontHaveAccaut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/tvDontHaveAccautMarginBottom"
+        android:layout_marginBottom="@dimen/spacing_large"
         android:gravity="center"
-        android:text="@string/tvDontHaveAccaut"
+        android:text="@string/no_account_string"
         android:textColor="@color/grey"
         app:layout_constraintBottom_toTopOf="@+id/btnCreateAccount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.button.MaterialButton
+        style="?attr/materialButtonOutlinedStyle"
+        app:cornerRadius="@dimen/button_corner_radius"
+        app:strokeWidth="2dp"
+        app:strokeColor="@color/yellow_primary"
         android:id="@+id/btnCreateAccount"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/btnCreateAccounMarginBottom"
+        android:inputType="text"
         android:text="@string/btnCreateAccount"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

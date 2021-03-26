@@ -3,44 +3,42 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
+    android:padding="@dimen/spacing_medium">
 
-    <ImageView
-        android:id="@+id/ivLoginPageImage"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivRegistrationPageImage"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/LoginPageImageHeight"
-        android:layout_marginTop="@dimen/ivLoginPageImageMargineTop"
-        android:src="@drawable/pmfightacademy"
+        android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/pmfightacademy" />
 
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layPhoneNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/etPhoneNumberMargineStartEnd"
-        android:layout_marginTop="@dimen/etPhoneNumberMargineTop"
-        android:layout_marginEnd="@dimen/etPhoneNumberMargineStartEnd"
+        android:layout_marginTop="@dimen/spacing_medium"
         app:hintEnabled="false"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivLoginPageImage">
+        app:layout_constraintTop_toBottomOf="@+id/ivRegistrationPageImage">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPhoneNumber"
+            android:inputType="phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/etPhoneNumber" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/etPasswordMargineStartEnd"
-        android:layout_marginTop="@dimen/etPasswordMargineTop"
-        android:layout_marginEnd="@dimen/etPasswordMargineStartEnd"
+        android:layout_marginTop="@dimen/spacing_medium"
         app:hintEnabled="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layPhoneNumber"
@@ -58,9 +56,7 @@
         android:id="@+id/layName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/etPasswordMargineStartEnd"
-        android:layout_marginTop="@dimen/etPasswordMargineTop"
-        android:layout_marginEnd="@dimen/etPasswordMargineStartEnd"
+        android:layout_marginTop="@dimen/spacing_medium"
         app:hintEnabled="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layPassword">
@@ -69,15 +65,16 @@
             android:id="@+id/etName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPersonName"
             android:hint="@string/etName" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnLogin"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/btnLoginMarginTop"
-        android:text="@string/btn_login"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:text="@string/register_button_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layName" />

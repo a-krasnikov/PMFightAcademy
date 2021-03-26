@@ -17,7 +17,6 @@
     </fragment>
 
 
-
     <navigation
         android:id="@+id/main_content"
         app:startDestination="@id/info_fragment">
@@ -46,19 +45,22 @@
             android:name="krasnikov.project.pmfightacademy.activities.history.ui.ActivitiesHistoryFragment"
             tools:layout="@layout/fragment_activities_history" />
 
-        <fragment android:id="@+id/settings_fragment"
+        <fragment
+            android:id="@+id/settings_fragment"
             android:name="krasnikov.project.pmfightacademy.profile.ui.ProfileFragment"
-            tools:layout="@layout/fragment_profile"
-            />
+            tools:layout="@layout/fragment_profile" />
 
         <fragment android:id="@+id/booking_fragment" />
-        
+
     </navigation>
 
     <navigation
         android:id="@+id/login_flow"
         app:startDestination="@id/login_fragment">
-        <fragment android:id="@+id/register_fragment">
+
+        <fragment
+            android:id="@+id/register_fragment"
+            android:name="krasnikov.project.pmfightacademy.auth.registration.ui.RegistrationFragment">
             <action
                 android:id="@+id/action_register_to_login"
                 app:destination="@id/login_fragment" />
@@ -66,7 +68,10 @@
                 android:id="@+id/action_register_to_main_content"
                 app:destination="@id/main_content" />
         </fragment>
-        <fragment android:id="@+id/login_fragment">
+
+        <fragment
+            android:id="@+id/login_fragment"
+            android:name="krasnikov.project.pmfightacademy.auth.login.ui.LoginFragment">
             <action
                 android:id="@+id/action_login_to_register"
                 app:destination="@id/register_fragment" />
@@ -74,6 +79,7 @@
                 android:id="@+id/action_login_to_main_content"
                 app:destination="@id/main_content" />
         </fragment>
+
     </navigation>
 
     <action

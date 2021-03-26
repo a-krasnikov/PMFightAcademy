@@ -3,15 +3,15 @@ package krasnikov.project.pmfightacademy.launch.ui
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import krasnikov.project.pmfightacademy.R
 import krasnikov.project.pmfightacademy.app.data.pref.SharedPref
-import krasnikov.project.pmfightacademy.login.ui.LoginFragmentDirections
+import krasnikov.project.pmfightacademy.auth.login.ui.LoginFragmentDirections
 import javax.inject.Inject
 
+@Suppress("EmptyFunctionBlock", "MagicNumber")
 @AndroidEntryPoint
 class LaunchFragment : Fragment(R.layout.fragment_launch) {
 
@@ -25,29 +25,25 @@ class LaunchFragment : Fragment(R.layout.fragment_launch) {
 
 
     private fun checkSharedPref() {
-        if (sharedPref.token.isEmpty() || sharedPref.token == "NoPref") {
+        if (sharedPref.token == SharedPref.TOKEN_DEFAULT_VALUE || sharedPref.token.isEmpty()) {
             navigateLoginFragment()
         } else {
-            //TODO -> подставить navigateMainContent()
-            navigateLoginFragment()
+            navigateMainContent()
         }
     }
 
     private fun navigateLoginFragment() {
-        findNavController().navigate(LoginFragmentDirections.actionGlobalToLogin())
+        findNavController().navigate(LaunchFragmentDirections.actionGlobalToLogin())
     }
 
     private fun navigateMainContent() {
-        findNavController().navigate(LoginFragmentDirections.actionLoginToMainContent())
+        findNavController().navigate(LaunchFragmentDirections.actionLaunchToMainContent())
     }
 
 
     private fun timeCalculation() {
-        val TIME_CONST: Long = 2000
-        lateinit var countDownTimer: CountDownTimer
-        countDownTimer = object : CountDownTimer(TIME_CONST, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-            }
+        object : CountDownTimer(LAUNCH_TIME, 1000) {
+            override fun onTick(millisUntilFinished: Long) {}
 
             override fun onFinish() {
                 checkSharedPref()
@@ -55,5 +51,8 @@ class LaunchFragment : Fragment(R.layout.fragment_launch) {
         }.start()
     }
 
+    private companion object {
+        const val LAUNCH_TIME = 2000L
+    }
 
 }

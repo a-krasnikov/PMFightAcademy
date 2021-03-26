@@ -5,8 +5,9 @@ import android.content.SharedPreferences
 import krasnikov.project.pmfightacademy.R
 
 class SharedPref(context: Context) {
-    private companion object {
-        const val KEY_TOKEN = "KEY_TOKEN"
+    companion object {
+        private const val KEY_TOKEN = "KEY_TOKEN"
+        const val TOKEN_DEFAULT_VALUE = "NoPref"
     }
 
     private val sharedPreferences: SharedPreferences by lazy {
@@ -15,5 +16,5 @@ class SharedPref(context: Context) {
         )
     }
 
-    var token: String by SharedPrefDelegate(sharedPreferences, KEY_TOKEN, "NoPref")
+    var token: String by SharedPrefDelegate(sharedPreferences, KEY_TOKEN, TOKEN_DEFAULT_VALUE)
 }

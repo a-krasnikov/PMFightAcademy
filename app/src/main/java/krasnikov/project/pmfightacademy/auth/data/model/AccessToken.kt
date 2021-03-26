@@ -1,9 +1,10 @@
-package krasnikov.project.pmfightacademy.login.data.model
+package krasnikov.project.pmfightacademy.auth.data.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class AccessToken(
-    val token: String?,
+    @SerialName("token")
+    val token: String
 )
