@@ -6,7 +6,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,7 +42,7 @@ class ServicesDialogFragment :
     private fun setupRecycler() {
         val dividerItemDecoration = DividerItemDecoration(requireContext(), RecyclerView.VERTICAL)
             .apply {
-                ContextCompat.getDrawable(requireContext(), R.drawable.divider_drawable)
+                ContextCompat.getDrawable(requireContext(), R.drawable.divider_recycler)
                     ?.let { setDrawable(it) }
             }
         binding.rvServices.addItemDecoration(dividerItemDecoration)

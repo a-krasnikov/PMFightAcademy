@@ -30,7 +30,8 @@ class CoachesViewModel @Inject constructor(
     val contentCoaches = _contentCoaches.asStateFlow()
 
     override fun handleError(throwable: Throwable) {
-        _contentCoaches.value.stateToError(throwable as Exception)
+        _contentCoaches.value =
+            _contentCoaches.value.copy(currentState = PaginationState.Error(throwable as Exception))
     }
 
     fun loadData(serviceId: Int) {
@@ -44,7 +45,7 @@ class CoachesViewModel @Inject constructor(
     }
 
     fun loadNextData() {
-        _contentCoaches.value = _contentCoaches.value.stateToLoading()
+        _contentCoaches.value = _contentCoaches.value.copy(currentState = PaginationState.Loading)
         viewModelScope.launch(exceptionHandler) {
             coachRepository.loadNextData()
         }

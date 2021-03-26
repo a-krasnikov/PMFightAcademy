@@ -39,6 +39,10 @@
         <item name="navigationIconTint">@color/yellow_primary</item>
     </style>
 
+    <style name="Theme.Toolbar" parent="ThemeOverlay.MaterialComponents.ActionBar">
+        <item name="colorControlHighlight">@color/toolbarActionAccent</item>
+    </style>
+
     <!--  Button Style -->
 
     <style name="Widget.App.Button" parent="Widget.MaterialComponents.Button">
@@ -105,7 +109,7 @@
         <item name="android:elevation">@dimen/loading_error_view_elevation</item>
         <item name="textErrorAppearance">@style/LoadingErrorView.TextErrorAppearance</item>
         <item name="android:padding">@dimen/spacing_medium</item>
-        <item name="android:background">@drawable/error_text_background</item>
+        <item name="android:background">@drawable/loading_error_background</item>
     </style>
 
 </resources>

@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textAlignment="center"
-        android:textColor="?android:textColorPrimary"
+        android:textColor="?android:colorPrimary"
         tools:text="Timeout" />
 
     <ProgressBar

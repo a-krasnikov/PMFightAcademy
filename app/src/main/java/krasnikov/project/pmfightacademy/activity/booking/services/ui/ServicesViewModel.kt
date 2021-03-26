@@ -40,11 +40,12 @@ class ServicesViewModel @Inject constructor(
     }
 
     override fun handleError(throwable: Throwable) {
-        _contentServices.value.stateToError(throwable as Exception)
+        _contentServices.value =
+            _contentServices.value.copy(currentState = PaginationState.Error(throwable as Exception))
     }
 
     fun loadNextData() {
-        _contentServices.value = _contentServices.value.stateToLoading()
+        _contentServices.value = _contentServices.value.copy(currentState = PaginationState.Loading)
         viewModelScope.launch(exceptionHandler) {
             serviceRepository.loadNextData()
         }

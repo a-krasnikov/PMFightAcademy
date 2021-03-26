@@ -26,7 +26,9 @@ class BookingViewModel @Inject constructor(
     private val _contentBooking = MutableStateFlow(BookingUIState())
     val contentBooking = _contentBooking.asStateFlow()
 
-    override fun handleError(throwable: Throwable) {}
+    override fun handleError(throwable: Throwable) {
+        //TODO handleError
+    }
 
     fun onServiceClick() {
         viewModelScope.launch {
@@ -103,9 +105,7 @@ class BookingViewModel @Inject constructor(
 
     fun toBook(date: String, time: String) {
         with(_contentBooking.value) {
-            if (serviceState is State.Content && coachState is State.Content
-                && calendarState is State.Content && timeSlotsState is State.Content
-            ) {
+            if (serviceState is State.Content && coachState is State.Content) {
                 _contentBooking.value = this.copy(bookingState = State.Loading)
                 viewModelScope.launch(ioDispatcher) {
                     bookingService.book(

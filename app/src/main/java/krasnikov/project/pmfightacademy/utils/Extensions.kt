@@ -2,8 +2,8 @@ package krasnikov.project.pmfightacademy.utils
 
 import com.prolificinteractive.materialcalendarview.CalendarDay
 
-private const val formatDayAndMonth = "%02d"
+private const val FORMAT_DAY_AND_MONTH = "%02d"
 
 fun CalendarDay.getFormattedDate(): String {
-    return "${formatDayAndMonth.format(day)}.${formatDayAndMonth.format(month)}.$year"
+    return "${FORMAT_DAY_AND_MONTH.format(month)}/${FORMAT_DAY_AND_MONTH.format(day)}/$year"
 }

@@ -7,6 +7,9 @@
     <string name="title_coaches">Coaches</string>
     <string name="text_coach_age">%d years old</string>
 
+    <!-- Activity -->
+    <string name="activity_price">%d UAH</string>
+
     <!-- Bottom Navigation -->
     <string name="info_bottom_label">Info</string>
     <string name="coaches_bottom_label">Coaches</string>
@@ -23,7 +26,16 @@
     <string name="btn_done">Done</string>
 
     <!-- Services -->
-    <string name="text_price">Price: %d UAH</string>
-    <string name="text_duration">Duration: 1 hour</string>
+    <string name="service_price">Price: %d UAH</string>
+    <string name="service_duration">Duration: 1 hour</string>
 
+    <!-- Info -->
+    <string name="title_info_screen">About Fight Academy</string>
+
+    <!-- Activities -->
+    <string name="title_planned_activities">Planned Activities</string>
+    <string name="title_book_new_activity">Book new activity</string>
+    <string name="title_coach">Coach</string>
+    <string name="title_price">Price</string>
+    <string name="title_activities_history">History</string>
 </resources>

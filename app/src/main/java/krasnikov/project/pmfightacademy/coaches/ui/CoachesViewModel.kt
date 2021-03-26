@@ -9,7 +9,6 @@ import kotlinx.coroutines.launch
 import krasnikov.project.pmfightacademy.app.pagination.PaginationData
 import krasnikov.project.pmfightacademy.app.pagination.PaginationState
 import krasnikov.project.pmfightacademy.app.ui.base.BaseViewModel
-import krasnikov.project.pmfightacademy.coaches.data.Coach
 import krasnikov.project.pmfightacademy.coaches.data.CoachRepository
 import krasnikov.project.pmfightacademy.coaches.ui.mapper.CoachUIMapper
 import krasnikov.project.pmfightacademy.coaches.ui.model.CoachUIModel
@@ -37,17 +36,17 @@ class CoachesViewModel @Inject constructor(
                     PaginationData(coachUIMapper.map(it), PaginationState.Complete)
             }
         }
-        loadNextData()
     }
 
     override fun handleError(throwable: Throwable) {
-        _contentCoaches.value.stateToError(throwable as Exception)
+        _contentCoaches.value =
+            _contentCoaches.value.copy(currentState = PaginationState.Error(throwable as Exception))
     }
 
-    fun loadNextData() {
-        _contentCoaches.value = _contentCoaches.value.stateToLoading()
+    fun loadCoaches(forceRefresh: Boolean = false) {
+        _contentCoaches.value = _contentCoaches.value.copy(currentState = PaginationState.Loading)
         viewModelScope.launch(exceptionHandler) {
-            coachRepository.loadNextData()
+            coachRepository.loadNextData(forceRefresh)
         }
     }
 }

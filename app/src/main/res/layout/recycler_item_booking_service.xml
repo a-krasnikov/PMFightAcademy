@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/spacing_medium"
     android:layout_marginTop="@dimen/spacing_medium"
+    android:layout_marginEnd="@dimen/spacing_medium"
     android:layout_marginBottom="@dimen/spacing_medium"
     android:minHeight="@dimen/booking_item_min_height">
 
@@ -18,7 +20,7 @@
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/barrierPriceDuration"
-        app:layout_constraintStart_toEndOf="@id/marginStart"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Boxing" />
 
@@ -27,7 +29,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/tvDuration"
-        app:layout_constraintEnd_toEndOf="@+id/marginEnd"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
         tools:text="Price: 100 UAH" />
@@ -38,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_micro"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/marginEnd"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvPrice"
         tools:text="Duration: 1 hour" />
 
@@ -48,19 +50,5 @@
         android:layout_height="0dp"
         app:barrierDirection="start"
         app:constraint_referenced_ids="tvPrice, tvDuration" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/marginStart"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="@dimen/spacing_medium" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/marginEnd"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="@dimen/spacing_medium" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

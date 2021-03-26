@@ -10,13 +10,13 @@ import retrofit2.http.Path
 
 interface BookingService {
 
-    @GET("/Booking/{pageSize}/{page}")
+    @GET("/Booking/services/{pageSize}/{page}")
     suspend fun getServices(
         @Path("pageSize") pageSize: Int,
         @Path("page") page: Int,
     ): ResponseWithPaginationModel<Service>
 
-    @GET("/Booking/{serviceId}/{pageSize}/{page}")
+    @GET("/Booking/coaches/{serviceId}/{pageSize}/{page}")
     suspend fun getCoaches(
         @Path("serviceId") serviceId: Int,
         @Path("pageSize") pageSize: Int,

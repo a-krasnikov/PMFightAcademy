@@ -6,21 +6,20 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
+import krasnikov.project.pmfightacademy.R
 import krasnikov.project.pmfightacademy.app.ui.base.BaseFragment
 import krasnikov.project.pmfightacademy.databinding.FragmentCoachesBinding
 import krasnikov.project.pmfightacademy.utils.launchWhenStarted
 
 @AndroidEntryPoint
-class CoachesFragment : BaseFragment<CoachesViewModel, FragmentCoachesBinding>() {
+class CoachesFragment :
+    BaseFragment<CoachesViewModel, FragmentCoachesBinding>(R.layout.fragment_coaches) {
 
     override val viewModel by viewModels<CoachesViewModel>()
+    override val bindingFactory = FragmentCoachesBinding::bind
 
     private val adapter = CoachesAdapter {
-        viewModel.loadNextData()
-    }
-
-    override fun createViewBinding() {
-        mBinding = FragmentCoachesBinding.inflate(layoutInflater)
+        viewModel.loadCoaches()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -28,6 +27,11 @@ class CoachesFragment : BaseFragment<CoachesViewModel, FragmentCoachesBinding>()
 
         setupRecycler()
         observeCoachesContent()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.loadCoaches()
     }
 
     private fun setupRecycler() {

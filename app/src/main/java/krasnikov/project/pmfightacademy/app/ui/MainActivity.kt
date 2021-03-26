@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -24,14 +23,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupBottomNavigation(controller: NavController) {
-        val bottomNav = findViewById<BottomNavigationView>(R.id.main_content)
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation_main)
 
         controller.addOnDestinationChangedListener { _, destination, _ ->
-            when(destination.id) {
+            when (destination.id) {
                 R.id.info_fragment,
                 R.id.coaches_fragment,
-                R.id.current_activities_fragment,
-                R.id.history_fragment,
+                R.id.planned_activities_fragment,
+                R.id.history_activities_fragment,
                 R.id.settings_fragment -> {
                     bottomNav.isVisible = true
                 }

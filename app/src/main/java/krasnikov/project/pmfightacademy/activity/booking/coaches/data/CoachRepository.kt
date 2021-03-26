@@ -8,7 +8,6 @@ import krasnikov.project.pmfightacademy.app.di.IoDispatcher
 import krasnikov.project.pmfightacademy.app.pagination.PageCounterPagination
 import krasnikov.project.pmfightacademy.app.pagination.Pagination
 import krasnikov.project.pmfightacademy.coaches.data.Coach
-import java.lang.IllegalStateException
 import javax.inject.Inject
 
 class CoachRepository @Inject constructor(
@@ -22,10 +21,10 @@ class CoachRepository @Inject constructor(
 
     fun flowData(serviceId: Int): Flow<List<Coach>> {
         coachesPagination = pagination.pagePagination { page ->
-            bookingService.getCoaches(PER_PAGE, page, serviceId)
+            bookingService.getCoaches(serviceId, PER_PAGE, page)
         }
 
-        return coachesPagination?.flowData ?: throw IllegalStateException()
+        return coachesPagination!!.flowData
     }
 
     suspend fun loadNextData() {

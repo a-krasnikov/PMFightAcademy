@@ -1,0 +1,46 @@
+package krasnikov.project.pmfightacademy.info.ui
+
+import android.os.Bundle
+import android.view.View
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.onEach
+import krasnikov.project.pmfightacademy.R
+import krasnikov.project.pmfightacademy.app.ui.base.BaseFragment
+import krasnikov.project.pmfightacademy.databinding.FragmentInfoBinding
+import krasnikov.project.pmfightacademy.utils.State
+import krasnikov.project.pmfightacademy.utils.launchWhenStarted
+
+@AndroidEntryPoint
+class InfoFragment : BaseFragment<InfoViewModel, FragmentInfoBinding>(R.layout.fragment_info) {
+    override val viewModel by viewModels<InfoViewModel>()
+
+    override val bindingFactory = FragmentInfoBinding::bind
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        subscribeToContentFlow()
+        viewModel.getInfo()
+    }
+
+    private fun subscribeToContentFlow() {
+        viewModel.infoScreenContent.onEach { state ->
+            when (state) {
+                is State.Content -> {
+                    binding.stateInfo.resetState()
+                    binding.tvInfoDescription.text = state.data.description
+                }
+                is State.Loading -> {
+                    binding.stateInfo.showLoading()
+                }
+                is State.Error -> {
+                    //show error message
+                }
+                State.Empty -> {
+                }
+            }
+        }.launchWhenStarted(lifecycleScope)
+    }
+}

@@ -24,7 +24,8 @@ class CoachUIMapper @Inject constructor(
         )
     }
 
-    suspend fun map(source: List<Coach>): List<CoachUIModel> {
-        return source.map { map(it) }
+    suspend fun map(source: List<Coach>): List<CoachUIModel> = withContext(defaultDispatcher) {
+        source.map { map(it) }
     }
+
 }

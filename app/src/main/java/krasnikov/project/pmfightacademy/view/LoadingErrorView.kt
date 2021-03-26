@@ -28,6 +28,8 @@ class LoadingErrorView @JvmOverloads constructor(
         inflate(context, R.layout.loading_error_view, this)
         orientation = VERTICAL
         gravity = Gravity.CENTER
+        isVisible = false
+        isClickable = true
 
         val attributes =
             context.obtainStyledAttributes(attrs, R.styleable.LoadingErrorView, defStyleAttr, 0)
@@ -47,58 +49,47 @@ class LoadingErrorView @JvmOverloads constructor(
         )
 
         attributes.recycle()
-        resetState()
     }
 
     fun showError(message: String, retryAction: () -> Unit) {
-        resetState()
-        isClickable = true
-        isVisible = true
         tvError.text = message
-        tvError.isVisible = true
         btnRetry.isVisible = retryBtnShow
         btnRetry.setOnClickListener { retryAction() }
+        showError()
     }
 
     fun showError(@StringRes resId: Int, retryAction: () -> Unit) {
-        resetState()
-        isClickable = true
-        isVisible = true
         tvError.text = context.getText(resId)
-        tvError.isVisible = true
         btnRetry.isVisible = retryBtnShow
         btnRetry.setOnClickListener { retryAction() }
+        showError()
     }
 
     fun showError(message: String) {
-        resetState()
-        isClickable = true
-        isVisible = true
         tvError.text = message
-        tvError.isVisible = true
+        showError()
     }
 
     fun showError(@StringRes resId: Int) {
-        resetState()
-        isClickable = true
-        isVisible = true
         tvError.text = context.getText(resId)
-        tvError.isVisible = true
+        showError()
     }
 
     fun showLoading() {
-        resetState()
-        isClickable = true
-        isVisible = true
+        tvError.isVisible = false
+        btnRetry.isVisible = false
         progress.isVisible = true
+        isVisible = true
     }
 
     fun resetState() {
         isVisible = false
-        isClickable = false
-        tvError.isVisible = false
-        btnRetry.isVisible = false
-        progress.isVisible = false
         btnRetry.setOnClickListener(null)
+    }
+
+    private fun showError() {
+        progress.isVisible = false
+        tvError.isVisible = true
+        isVisible = true
     }
 }

@@ -18,8 +18,8 @@ class ServiceUIMapper @Inject constructor(
         ServiceUIModel(
             id = source.id,
             name = source.name,
-            price = resources.getString(R.string.text_price, source.price),
-            duration = resources.getString(R.string.text_duration)
+            price = resources.getString(R.string.service_price, source.price),
+            duration = resources.getString(R.string.service_duration)
         )
     }
 
