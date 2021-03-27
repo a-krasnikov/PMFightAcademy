@@ -2,6 +2,7 @@ package krasnikov.project.pmfightacademy.activity.activities.planned.ui
 
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
@@ -9,6 +10,7 @@ import kotlinx.coroutines.launch
 import krasnikov.project.pmfightacademy.activity.activities.planned.data.PlannedActivitiesRepository
 import krasnikov.project.pmfightacademy.activity.activities.planned.ui.mapper.PlannedActivityUIMapper
 import krasnikov.project.pmfightacademy.activity.activities.planned.ui.model.PlannedActivityUIModel
+import krasnikov.project.pmfightacademy.app.domain.ResolveGeneralErrorUseCase
 import krasnikov.project.pmfightacademy.app.pagination.PaginationData
 import krasnikov.project.pmfightacademy.app.pagination.PaginationState
 import krasnikov.project.pmfightacademy.app.ui.base.BaseViewModel
@@ -19,6 +21,7 @@ import javax.inject.Inject
 @HiltViewModel
 class PlannedActivitiesViewModel @Inject constructor(
     private val plannedActivitiesRepository: PlannedActivitiesRepository,
+    private val resolveGeneralErrorUseCase: ResolveGeneralErrorUseCase,
     private val plannedActivityUIMapper: PlannedActivityUIMapper
 ) : BaseViewModel() {
 
@@ -52,7 +55,7 @@ class PlannedActivitiesViewModel @Inject constructor(
     }
 
     fun openBooking() {
-        viewModelScope.launch {
+        viewModelScope.launch(exceptionHandler) {
             eventChannel.send(
                 Event.Navigation(PlannedActivitiesFragmentDirections.actionActivitiesToBooking())
             )
@@ -61,6 +64,10 @@ class PlannedActivitiesViewModel @Inject constructor(
 
     override fun handleError(throwable: Throwable) {
         _plannedActivitiesContent.value =
-            _plannedActivitiesContent.value.copy(currentState = PaginationState.Error(throwable as Exception))
+            _plannedActivitiesContent.value.copy(
+                currentState = PaginationState.Error(
+                    resolveGeneralErrorUseCase.execute(throwable)
+                )
+            )
     }
 }

@@ -59,7 +59,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layName"
+        android:id="@+id/layoutName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_medium"
@@ -85,5 +85,16 @@
         android:text="@string/register_button_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layName" />
+        app:layout_constraintTop_toBottomOf="@id/layoutName" />
+
+    <krasnikov.project.pmfightacademy.view.LoadingErrorView
+        android:id="@+id/stateInfo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/btnLogin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

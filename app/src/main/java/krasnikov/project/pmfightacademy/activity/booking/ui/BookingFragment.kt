@@ -22,6 +22,7 @@ import krasnikov.project.pmfightacademy.utils.State
 import krasnikov.project.pmfightacademy.utils.getFormattedDate
 import krasnikov.project.pmfightacademy.utils.launchWhenStarted
 import krasnikov.project.pmfightacademy.utils.setSafeOnClickListener
+import krasnikov.project.pmfightacademy.utils.ErrorWrapper
 
 @Suppress("TooManyFunctions")
 @AndroidEntryPoint
@@ -117,7 +118,7 @@ class BookingFragment :
             updateBookingState(bookingUIState.bookingState)
     }
 
-    private fun updateServiceState(serviceState: State<ServiceUIModel, Exception>) {
+    private fun updateServiceState(serviceState: State<ServiceUIModel, ErrorWrapper.General>) {
         with(binding) {
             when (serviceState) {
                 is State.Loading -> {
@@ -132,7 +133,7 @@ class BookingFragment :
         }
     }
 
-    private fun updateCoachState(coachState: State<CoachUIModel, Exception>) {
+    private fun updateCoachState(coachState: State<CoachUIModel, ErrorWrapper.General>) {
         with(binding) {
             when (coachState) {
                 is State.Empty -> {
@@ -162,8 +163,8 @@ class BookingFragment :
     }
 
     private fun updateCalendarState(
-        calendarState: State<List<String>, Exception>,
-        coachState: State<CoachUIModel, Exception>
+        calendarState: State<List<String>, ErrorWrapper.General>,
+        coachState: State<CoachUIModel, ErrorWrapper.General>
     ) {
         with(binding) {
             when (calendarState) {
@@ -192,7 +193,7 @@ class BookingFragment :
                     })
                 }
                 is State.Error -> {
-                    stateCalendar.showError(calendarState.error.localizedMessage) {
+                    stateCalendar.showError(calendarState.error.errorType.errorStringRes) {
                         if (coachState is State.Content) {
                             viewModel.onChoseCoach(coachState.data)
                         }
@@ -202,7 +203,7 @@ class BookingFragment :
         }
     }
 
-    private fun updateTimeSlotsState(timeSlotsState: State<List<String>, Exception>) {
+    private fun updateTimeSlotsState(timeSlotsState: State<List<String>, ErrorWrapper.General>) {
         with(binding) {
             when (timeSlotsState) {
                 is State.Empty -> {
@@ -220,7 +221,7 @@ class BookingFragment :
                     createTimeSlots(timeSlotsState.data)
                 }
                 is State.Error -> {
-                    stateTimeSlots.showError(timeSlotsState.error.localizedMessage) {
+                    stateTimeSlots.showError(timeSlotsState.error.errorType.errorStringRes) {
                         calendar.selectedDate?.let { viewModel.onChoseDate(it.getFormattedDate()) }
                     }
                 }
@@ -228,7 +229,7 @@ class BookingFragment :
         }
     }
 
-    private fun updateBookingState(bookingState: State<Unit, Exception>) {
+    private fun updateBookingState(bookingState: State<Unit, ErrorWrapper.General>) {
         with(binding) {
             when (bookingState) {
                 is State.Empty -> {
@@ -243,7 +244,7 @@ class BookingFragment :
                     findNavController().popBackStack()
                 }
                 is State.Error -> {
-                    showToast(bookingState.error.localizedMessage)
+                    showToast(bookingState.error.errorType.errorStringRes)
                 }
             }
         }

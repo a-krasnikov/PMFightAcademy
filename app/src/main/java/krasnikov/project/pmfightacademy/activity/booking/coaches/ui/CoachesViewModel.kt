@@ -2,6 +2,7 @@ package krasnikov.project.pmfightacademy.activity.booking.coaches.ui
 
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
@@ -9,6 +10,7 @@ import kotlinx.coroutines.launch
 import krasnikov.project.pmfightacademy.activity.booking.coaches.data.CoachRepository
 import krasnikov.project.pmfightacademy.activity.booking.coaches.ui.mapper.CoachUIMapper
 import krasnikov.project.pmfightacademy.activity.booking.coaches.ui.model.CoachUIModel
+import krasnikov.project.pmfightacademy.app.domain.ResolveGeneralErrorUseCase
 import krasnikov.project.pmfightacademy.app.pagination.PaginationData
 import krasnikov.project.pmfightacademy.app.pagination.PaginationState
 import krasnikov.project.pmfightacademy.app.ui.base.BaseViewModel
@@ -18,6 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CoachesViewModel @Inject constructor(
     private val coachRepository: CoachRepository,
+    private val resolveGeneralErrorUseCase: ResolveGeneralErrorUseCase,
     private val coachUIMapper: CoachUIMapper
 ) : BaseViewModel() {
 
@@ -31,7 +34,13 @@ class CoachesViewModel @Inject constructor(
 
     override fun handleError(throwable: Throwable) {
         _contentCoaches.value =
-            _contentCoaches.value.copy(currentState = PaginationState.Error(throwable as Exception))
+            _contentCoaches.value.copy(
+                currentState = PaginationState.Error(
+                    resolveGeneralErrorUseCase.execute(
+                        throwable
+                    )
+                )
+            )
     }
 
     fun loadData(serviceId: Int) {

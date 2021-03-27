@@ -96,7 +96,7 @@ abstract class PaginationAdapter<T, VH : RecyclerView.ViewHolder>(
 
         fun bind(state: PaginationState) {
             if (state is PaginationState.Error) {
-                binding.errorMsg.text = state.error.localizedMessage
+                binding.errorMsg.text = itemView.resources.getString(state.error.errorType.errorStringRes)
             }
             binding.progressBar.isVisible = state is PaginationState.Loading
             binding.btnRetry.isVisible = state is PaginationState.Error

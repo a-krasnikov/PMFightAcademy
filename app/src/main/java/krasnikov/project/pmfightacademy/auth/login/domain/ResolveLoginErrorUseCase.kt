@@ -1,22 +1,25 @@
 package krasnikov.project.pmfightacademy.auth.login.domain
 
+import krasnikov.project.pmfightacademy.app.domain.ResolveGeneralErrorUseCase
 import krasnikov.project.pmfightacademy.auth.domain.verfication.exceptions.PasswordNotValidException
 import krasnikov.project.pmfightacademy.auth.domain.verfication.exceptions.PhoneNotValidException
+import krasnikov.project.pmfightacademy.utils.ErrorWrapper
 import javax.inject.Inject
 
-class ResolveLoginErrorUseCase @Inject constructor() {
+class ResolveLoginErrorUseCase @Inject constructor(
+    private val resolveGeneralErrorUseCase: ResolveGeneralErrorUseCase
+) {
 
-    fun execute(throwable: Throwable): LoginError {
+    fun execute(throwable: Throwable): ErrorWrapper<LoginError> {
         return when (throwable) {
             is PhoneNotValidException -> {
-                LoginError.UserPhoneInvalid
+                ErrorWrapper.ClassSpecific(LoginError.UserPhoneInvalid)
             }
             is PasswordNotValidException -> {
-                LoginError.UserPasswordInvalid
+                ErrorWrapper.ClassSpecific(LoginError.UserPasswordInvalid)
             }
-            // is http 409
             else -> {
-                LoginError.UnknownError
+                resolveGeneralErrorUseCase.execute(throwable)
             }
         }
     }
