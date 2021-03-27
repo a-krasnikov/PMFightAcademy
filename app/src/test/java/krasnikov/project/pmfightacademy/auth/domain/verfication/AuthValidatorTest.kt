@@ -13,7 +13,7 @@ internal class AuthValidatorTest {
     fun `phone validation works as intended`(): List<DynamicTest> {
         val authValidator = AuthValidator()
 
-        return listOf(
+        val testList = listOf(
             "380991234567",
             "12351251595695",
             "991234567"
@@ -23,14 +23,24 @@ internal class AuthValidatorTest {
                     authValidator.validatePhone(phone)
                 }
             }
-        }
+        }.toMutableList()
+        val validPhone = "+380991234567"
+        testList.add(
+            DynamicTest.dynamicTest("Phone number: $validPhone is valid") {
+                assertDoesNotThrow {
+                    authValidator.validatePhone(validPhone)
+                }
+            }
+        )
+
+        return testList
     }
 
     @TestFactory
     fun `password validation works as intended`(): List<DynamicTest> {
         val authValidator = AuthValidator()
 
-        return listOf(
+        val testList = listOf(
             "12351251595695",
             "12351251595695p",
             "password",
@@ -42,14 +52,24 @@ internal class AuthValidatorTest {
                     authValidator.validatePassword(password)
                 }
             }
-        }
+        }.toMutableList()
+        val validPassword = "Aa123456"
+        testList.add(
+            DynamicTest.dynamicTest("Password: $validPassword is valid") {
+                assertDoesNotThrow {
+                    authValidator.validatePassword(validPassword)
+                }
+            }
+        )
+
+        return testList
     }
 
     @TestFactory
     fun `name validation works as intended`(): List<DynamicTest> {
         val authValidator = AuthValidator()
 
-        return listOf(
+        val testList = listOf(
             "Name1",
             "A",
         ).map { name ->
@@ -58,7 +78,17 @@ internal class AuthValidatorTest {
                     authValidator.validateName(name)
                 }
             }
-        }
+        }.toMutableList()
+        val validName = "Name Surname"
+        testList.add(
+            DynamicTest.dynamicTest("Name: $validName is valid") {
+                assertDoesNotThrow {
+                    authValidator.validateName(validName)
+                }
+            }
+        )
+
+        return testList
     }
 
 }
