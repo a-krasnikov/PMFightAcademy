@@ -18,4 +18,6 @@
     <dimen name="button_stroke_width">2dp</dimen>
 
     <dimen name="loading_error_view_elevation">8dp</dimen>
+
+    <dimen name="booking_time_slots_min_height">96dp</dimen>
 </resources>

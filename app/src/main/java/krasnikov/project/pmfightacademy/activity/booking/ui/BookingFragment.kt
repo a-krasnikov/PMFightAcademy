@@ -65,8 +65,12 @@ class BookingFragment :
     }
 
     private fun setupCalendar() {
-        binding.calendar.setOnDateChangedListener { _, date, selected ->
-            if (selected) viewModel.onChoseDate(date.getFormattedDate())
+        with(binding) {
+            calendar.setOnDateChangedListener { _, date, selected ->
+                if (selected) viewModel.onChoseDate(date.getFormattedDate())
+            }
+            calendar.leftArrow.setTint(resources.getColor(R.color.white, null))
+            calendar.rightArrow.setTint(resources.getColor(R.color.white, null))
         }
     }
 
