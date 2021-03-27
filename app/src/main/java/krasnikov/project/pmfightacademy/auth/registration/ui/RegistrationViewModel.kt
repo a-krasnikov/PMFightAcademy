@@ -12,6 +12,7 @@ import krasnikov.project.pmfightacademy.auth.data.model.Register
 import krasnikov.project.pmfightacademy.auth.registration.domain.RegisterUserUseCase
 import krasnikov.project.pmfightacademy.auth.registration.domain.RegistrationError
 import krasnikov.project.pmfightacademy.auth.registration.domain.ResolveRegistrationErrorUseCase
+import krasnikov.project.pmfightacademy.utils.ErrorWrapper
 import krasnikov.project.pmfightacademy.utils.Event
 import krasnikov.project.pmfightacademy.utils.State
 import javax.inject.Inject
@@ -24,12 +25,15 @@ class RegistrationViewModel @Inject constructor(
     private val pref: SharedPref,
 ) : BaseViewModel() {
 
-    fun startRegistration(phone: String, password: String, name: String): Flow<State<Unit, RegistrationError>> {
-        return flow<State<Unit, RegistrationError>> {
+    fun startRegistration(
+        phone: String,
+        password: String,
+        name: String
+    ): Flow<State<Unit, ErrorWrapper<RegistrationError>>> {
+        return flow<State<Unit, ErrorWrapper<RegistrationError>>> {
             emit(State.Loading)
             pref.token = registerUserUseCase.execute(Register(phone, password, name)).token
             emit(State.Content(Unit))
-
         }.catch { exception ->
             emit(State.Error(resolveRegistrationErrorUseCase.execute(exception)))
         }
@@ -37,7 +41,8 @@ class RegistrationViewModel @Inject constructor(
 
     fun navigateToMainContent() {
         viewModelScope.launch {
-            eventChannel.send(Event.Navigation(RegistrationFragmentDirections.actionRegisterToMainContent())
+            eventChannel.send(
+                Event.Navigation(RegistrationFragmentDirections.actionRegisterToMainContent())
             )
         }
     }

@@ -2,6 +2,7 @@ package krasnikov.project.pmfightacademy.activity.activities.history.ui
 
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
@@ -9,6 +10,7 @@ import kotlinx.coroutines.launch
 import krasnikov.project.pmfightacademy.activity.activities.history.data.ActivitiesHistoryRepository
 import krasnikov.project.pmfightacademy.activity.activities.history.ui.mapper.CompletedActivityUIMapper
 import krasnikov.project.pmfightacademy.activity.activities.history.ui.model.CompletedActivityUIModel
+import krasnikov.project.pmfightacademy.app.domain.ResolveGeneralErrorUseCase
 import krasnikov.project.pmfightacademy.app.pagination.PaginationData
 import krasnikov.project.pmfightacademy.app.pagination.PaginationState
 import krasnikov.project.pmfightacademy.app.ui.base.BaseViewModel
@@ -18,6 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ActivitiesHistoryViewModel @Inject constructor(
     private val activitiesHistoryRepository: ActivitiesHistoryRepository,
+    private val resolveGeneralErrorUseCase: ResolveGeneralErrorUseCase,
     private val completedActivityUIMapper: CompletedActivityUIMapper
 ) : BaseViewModel() {
 
@@ -52,6 +55,10 @@ class ActivitiesHistoryViewModel @Inject constructor(
 
     override fun handleError(throwable: Throwable) {
         _activitiesHistoryContent.value =
-            _activitiesHistoryContent.value.copy(currentState = PaginationState.Error(throwable as Exception))
+            _activitiesHistoryContent.value.copy(
+                currentState = PaginationState.Error(
+                    resolveGeneralErrorUseCase.execute(throwable)
+                )
+            )
     }
 }

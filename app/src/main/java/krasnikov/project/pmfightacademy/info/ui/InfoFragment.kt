@@ -32,13 +32,11 @@ class InfoFragment : BaseFragment<InfoViewModel, FragmentInfoBinding>(R.layout.f
                     binding.stateInfo.resetState()
                     binding.tvInfoDescription.text = state.data.description
                 }
-                is State.Loading -> {
+                is State.Loading, State.Empty -> {
                     binding.stateInfo.showLoading()
                 }
                 is State.Error -> {
-                    //show error message
-                }
-                State.Empty -> {
+                    binding.stateInfo.showError(state.error.errorType.errorStringRes)
                 }
             }
         }.launchWhenStarted(lifecycleScope)

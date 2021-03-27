@@ -12,6 +12,7 @@ import krasnikov.project.pmfightacademy.auth.data.model.Login
 import krasnikov.project.pmfightacademy.auth.login.domain.LoginError
 import krasnikov.project.pmfightacademy.auth.login.domain.LoginUserUseCase
 import krasnikov.project.pmfightacademy.auth.login.domain.ResolveLoginErrorUseCase
+import krasnikov.project.pmfightacademy.utils.ErrorWrapper
 import krasnikov.project.pmfightacademy.utils.Event
 import krasnikov.project.pmfightacademy.utils.State
 import javax.inject.Inject
@@ -23,8 +24,8 @@ class LoginViewModel @Inject constructor(
     private val pref: SharedPref,
 ) : BaseViewModel() {
 
-    fun login(phone: String, password: String): Flow<State<Unit, LoginError>> {
-        return flow<State<Unit, LoginError>> {
+    fun login(phone: String, password: String): Flow<State<Unit, ErrorWrapper<LoginError>>> {
+        return flow<State<Unit, ErrorWrapper<LoginError>>> {
             emit(State.Loading)
             pref.token = loginUserUseCase.execute(Login(phone, password)).token
             emit(State.Content(Unit))

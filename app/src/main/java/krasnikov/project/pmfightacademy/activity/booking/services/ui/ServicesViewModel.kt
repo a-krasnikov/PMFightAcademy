@@ -2,6 +2,7 @@ package krasnikov.project.pmfightacademy.activity.booking.services.ui
 
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
@@ -9,6 +10,7 @@ import kotlinx.coroutines.launch
 import krasnikov.project.pmfightacademy.activity.booking.services.data.ServiceRepository
 import krasnikov.project.pmfightacademy.activity.booking.services.ui.mapper.ServiceUIMapper
 import krasnikov.project.pmfightacademy.activity.booking.services.ui.model.ServiceUIModel
+import krasnikov.project.pmfightacademy.app.domain.ResolveGeneralErrorUseCase
 import krasnikov.project.pmfightacademy.app.pagination.PaginationData
 import krasnikov.project.pmfightacademy.app.pagination.PaginationState
 import krasnikov.project.pmfightacademy.app.ui.base.BaseViewModel
@@ -18,6 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ServicesViewModel @Inject constructor(
     private val serviceRepository: ServiceRepository,
+    private val resolveGeneralErrorUseCase: ResolveGeneralErrorUseCase,
     private val serviceUIMapper: ServiceUIMapper
 ) : BaseViewModel() {
 
@@ -41,7 +44,13 @@ class ServicesViewModel @Inject constructor(
 
     override fun handleError(throwable: Throwable) {
         _contentServices.value =
-            _contentServices.value.copy(currentState = PaginationState.Error(throwable as Exception))
+            _contentServices.value.copy(
+                currentState = PaginationState.Error(
+                    resolveGeneralErrorUseCase.execute(
+                        throwable
+                    )
+                )
+            )
     }
 
     fun loadNextData() {

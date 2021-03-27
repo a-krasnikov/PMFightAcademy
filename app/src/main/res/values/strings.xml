@@ -50,7 +50,9 @@
     <string name="phone_prefix">+380</string>
 
     <!--Login Errors-->
-    <string name="error_password_invalid">Entered password is invalid</string>
-    <string name="error_phone_invalid">Entered phone is invalid</string>
+    <string name="error_password_invalid">Password should contain</string>
+    <string name="error_phone_invalid">Please enter valid phone</string>
+    <string name="login_failed">Login failed</string>
+    <string name="registration_failed">Registration failed</string>
 
 </resources>

@@ -3,6 +3,7 @@ package krasnikov.project.pmfightacademy.activity.booking.ui
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -11,6 +12,7 @@ import krasnikov.project.pmfightacademy.activity.booking.data.Booking
 import krasnikov.project.pmfightacademy.activity.booking.data.BookingService
 import krasnikov.project.pmfightacademy.activity.booking.services.ui.model.ServiceUIModel
 import krasnikov.project.pmfightacademy.app.di.IoDispatcher
+import krasnikov.project.pmfightacademy.app.domain.ResolveGeneralErrorUseCase
 import krasnikov.project.pmfightacademy.app.ui.base.BaseViewModel
 import krasnikov.project.pmfightacademy.utils.Event
 import krasnikov.project.pmfightacademy.utils.State
@@ -19,6 +21,7 @@ import javax.inject.Inject
 @HiltViewModel
 class BookingViewModel @Inject constructor(
     private val bookingService: BookingService,
+    private val resolveGeneralErrorUseCase: ResolveGeneralErrorUseCase,
     @IoDispatcher
     private val ioDispatcher: CoroutineDispatcher
 ) : BaseViewModel() {
@@ -26,18 +29,30 @@ class BookingViewModel @Inject constructor(
     private val _contentBooking = MutableStateFlow(BookingUIState())
     val contentBooking = _contentBooking.asStateFlow()
 
-    override fun handleError(throwable: Throwable) {
-        //TODO handleError
+    override fun handleError(throwable: Throwable, coroutineName: CoroutineName?) {
+        val error = resolveGeneralErrorUseCase.execute(throwable)
+        if(coroutineName.toString() == dateCoroutineName) {
+            _contentBooking.value = _contentBooking.value.copy(
+                calendarState = State.Error(error),
+                timeSlotsState = State.Empty,
+                bookingState = State.Empty
+            )
+        } else if(coroutineName.toString() == timeCoroutineName) {
+            _contentBooking.value = _contentBooking.value.copy(
+                timeSlotsState = State.Error(error),
+                bookingState = State.Empty
+            )
+        }
     }
 
     fun onServiceClick() {
-        viewModelScope.launch {
+        viewModelScope.launch(exceptionHandler) {
             eventChannel.send(Event.Navigation(BookingFragmentDirections.actionBookingToServicesDialog()))
         }
     }
 
     fun onCoachClick() {
-        viewModelScope.launch {
+        viewModelScope.launch(exceptionHandler) {
             with(_contentBooking.value) {
                 if (serviceState is State.Content) {
                     eventChannel.send(
@@ -72,7 +87,7 @@ class BookingViewModel @Inject constructor(
                 bookingState = State.Empty
             )
 
-            viewModelScope.launch(ioDispatcher) {
+            viewModelScope.launch(ioDispatcher + CoroutineName(dateCoroutineName) + exceptionHandler) {
                 val dates = bookingService.getAvailableDates(
                     serviceState.data.id,
                     coach.id
@@ -88,7 +103,7 @@ class BookingViewModel @Inject constructor(
             if (serviceState is State.Content && coachState is State.Content) {
                 _contentBooking.value = _contentBooking.value.copy(timeSlotsState = State.Loading)
 
-                viewModelScope.launch(ioDispatcher) {
+                viewModelScope.launch(ioDispatcher + CoroutineName(timeCoroutineName) + exceptionHandler) {
                     val timeSlots = bookingService.getAvailableTimeSlots(
                         serviceState.data.id,
                         coachState.data.id,
@@ -107,7 +122,7 @@ class BookingViewModel @Inject constructor(
         with(_contentBooking.value) {
             if (serviceState is State.Content && coachState is State.Content) {
                 _contentBooking.value = this.copy(bookingState = State.Loading)
-                viewModelScope.launch(ioDispatcher) {
+                viewModelScope.launch(ioDispatcher + exceptionHandler) {
                     bookingService.book(
                         Booking(
                             date,
@@ -121,6 +136,11 @@ class BookingViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    private companion object {
+        const val dateCoroutineName = "dateCoroutine"
+        const val timeCoroutineName = "timeCoroutine"
     }
 }
 

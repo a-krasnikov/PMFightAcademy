@@ -11,6 +11,7 @@ import krasnikov.project.pmfightacademy.R
 import krasnikov.project.pmfightacademy.app.ui.base.BaseFragment
 import krasnikov.project.pmfightacademy.databinding.FragmentLoginBinding
 import krasnikov.project.pmfightacademy.auth.login.domain.LoginError
+import krasnikov.project.pmfightacademy.utils.ErrorWrapper
 import krasnikov.project.pmfightacademy.utils.State
 import krasnikov.project.pmfightacademy.utils.setSafeOnClickListener
 
@@ -31,6 +32,9 @@ class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginBinding>(R.layou
                 val phone = "${layoutPhoneNumber.prefixText}${etPhoneNumber.text.toString()}"
                 val password: String = etPassword.text.toString().trim()
 
+                layoutPhoneNumber.error = null
+                layoutPassword.error = null
+
                 startLogin(phone, password)
             }
 
@@ -45,12 +49,14 @@ class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginBinding>(R.layou
         viewModel.login(phone, password).onEach {
             when (it) {
                 is State.Loading -> {
-                    //show loading
+                    binding.stateInfo.showLoading()
                 }
                 is State.Content -> {
+                    binding.stateInfo.resetState()
                     viewModel.navigateToMainContent()
                 }
                 is State.Error -> {
+                    binding.stateInfo.resetState()
                     showError(it.error)
                 }
                 is State.Empty -> {}
@@ -58,18 +64,24 @@ class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginBinding>(R.layou
         }.launchIn(lifecycleScope)
     }
 
-    private fun showError(error: LoginError) {
+    private fun showError(error: ErrorWrapper<LoginError>) {
         when (error) {
-            LoginError.UnknownError,
-            LoginError.InvalidUserDataSent -> {
+            is ErrorWrapper.General -> {
                 binding.etPhoneNumber.text?.clear()
                 binding.etPassword.text?.clear()
+                showToast(R.string.login_failed)
             }
-            LoginError.UserPhoneInvalid -> {
-                binding.etPhoneNumber.text?.clear()
-            }
-            LoginError.UserPasswordInvalid -> {
-                binding.etPassword.text?.clear()
+            is ErrorWrapper.ClassSpecific -> {
+                when(error.errorType) {
+                    LoginError.UserPasswordInvalid -> {
+                        binding.layoutPassword.error = getString(LoginError.UserPasswordInvalid.errorString)
+                        binding.etPassword.text?.clear()
+                    }
+                    LoginError.UserPhoneInvalid -> {
+                        binding.layoutPhoneNumber.error = getString(LoginError.UserPhoneInvalid.errorString)
+                        binding.etPhoneNumber.text?.clear()
+                    }
+                }
             }
         }
     }
