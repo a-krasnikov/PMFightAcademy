@@ -87,7 +87,7 @@ class BookingFragment :
             btnToBook.setSafeOnClickListener {
                 val date = calendar.selectedDate?.getFormattedDate()
                 val chipTimeSlots =
-                    binding.timeSlots.getChildAt(binding.timeSlots.checkedChipId) as? Chip
+                    binding.timeSlots.findViewById<Chip>(binding.timeSlots.checkedChipId)
                 if (date != null && chipTimeSlots != null) {
                     viewModel.toBook(date, chipTimeSlots.text.toString())
                 }
