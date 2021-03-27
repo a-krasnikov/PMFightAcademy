@@ -1,11 +1,8 @@
 package krasnikov.project.pmfightacademy.auth.domain.verfication
 
-import io.kotlintest.shouldBe
 import krasnikov.project.pmfightacademy.auth.domain.verfication.exceptions.NameNotValidException
 import krasnikov.project.pmfightacademy.auth.domain.verfication.exceptions.PasswordNotValidException
 import krasnikov.project.pmfightacademy.auth.domain.verfication.exceptions.PhoneNotValidException
-import org.junit.jupiter.api.Test
-
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.TestFactory
@@ -13,7 +10,7 @@ import org.junit.jupiter.api.TestFactory
 internal class AuthValidatorTest {
 
     @TestFactory
-    fun `phone validation works as intended`() : List<DynamicTest> {
+    fun `phone validation works as intended`(): List<DynamicTest> {
         val authValidator = AuthValidator()
 
         return listOf(
@@ -30,7 +27,7 @@ internal class AuthValidatorTest {
     }
 
     @TestFactory
-    fun `password validation works as intended`() : List<DynamicTest> {
+    fun `password validation works as intended`(): List<DynamicTest> {
         val authValidator = AuthValidator()
 
         return listOf(
@@ -49,7 +46,7 @@ internal class AuthValidatorTest {
     }
 
     @TestFactory
-    fun `name validation works as intended`() : List<DynamicTest> {
+    fun `name validation works as intended`(): List<DynamicTest> {
         val authValidator = AuthValidator()
 
         return listOf(
@@ -63,4 +60,5 @@ internal class AuthValidatorTest {
             }
         }
     }
+
 }
