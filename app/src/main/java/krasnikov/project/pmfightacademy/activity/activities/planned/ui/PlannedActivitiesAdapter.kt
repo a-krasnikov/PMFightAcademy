@@ -42,7 +42,7 @@ class PlannedActivitiesAdapter(loadMore: () -> Unit) :
     }
 }
 
-class PlannedActivityDiffCallback() : DiffUtil.ItemCallback<PlannedActivityUIModel>() {
+class PlannedActivityDiffCallback : DiffUtil.ItemCallback<PlannedActivityUIModel>() {
     override fun areItemsTheSame(
         oldItem: PlannedActivityUIModel,
         newItem: PlannedActivityUIModel
