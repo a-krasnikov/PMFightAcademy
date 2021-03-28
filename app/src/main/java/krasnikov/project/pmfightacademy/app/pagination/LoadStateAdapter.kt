@@ -1,29 +1,34 @@
 package krasnikov.project.pmfightacademy.app.pagination
 
-import android.view.LayoutInflater
+import android.os.Handler
+import android.os.Looper
 import android.view.ViewGroup
-import androidx.core.view.isVisible
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
-import krasnikov.project.pmfightacademy.databinding.RecyclerStateViewBinding
+import krasnikov.project.pmfightacademy.view.LoadingErrorView
 
 class LoadStateAdapter(private val retry: () -> Unit) :
     RecyclerView.Adapter<LoadStateAdapter.LoadStateViewHolder>() {
 
-    var state: LoadState = LoadState.Empty
+    private companion object {
+        val mainHandler: Handler = Handler(Looper.getMainLooper())
+    }
+
+    var state: PaginationState = PaginationState.Empty
         set(value) {
             val oldState = field
             field = value
             updateState(oldState, value)
         }
 
-    private fun updateState(oldState: LoadState, newState: LoadState) {
+    private fun updateState(oldState: PaginationState, newState: PaginationState) {
         if (oldState != newState) {
-            if (oldState is LoadState.Complete) {
-                notifyItemInserted(0)
+            if (oldState is PaginationState.Complete) {
+                mainHandler.post { notifyItemInserted(0) }
             } else {
                 when (newState) {
-                    is LoadState.Complete -> notifyItemRemoved(0)
-                    else -> notifyItemChanged(0)
+                    is PaginationState.Complete -> mainHandler.post { notifyItemRemoved(0) }
+                    else -> mainHandler.post { notifyItemChanged(0) }
                 }
             }
         }
@@ -38,44 +43,43 @@ class LoadStateAdapter(private val retry: () -> Unit) :
     }
 
     override fun getItemCount(): Int = when (state) {
-        LoadState.Complete -> 0
+        PaginationState.Complete -> 0
         else -> 1
     }
 
     class LoadStateViewHolder(
-        private val binding: RecyclerStateViewBinding,
-        retry: () -> Unit
-    ) : RecyclerView.ViewHolder(binding.root) {
+        private val loadingErrorView: LoadingErrorView,
+        private val retry: () -> Unit
+    ) : RecyclerView.ViewHolder(loadingErrorView) {
 
-        init {
-            binding.btnRetry.setOnClickListener { retry() }
-        }
-
-        fun bind(state: LoadState) {
-            if (state is LoadState.Error) {
-                binding.errorMsg.text = state.message
+        fun bind(state: PaginationState) {
+            when (state) {
+                is PaginationState.Empty -> {
+                    loadingErrorView.resetState()
+                }
+                is PaginationState.Loading -> {
+                    loadingErrorView.showLoading()
+                }
+                is PaginationState.Complete -> {
+                    loadingErrorView.resetState()
+                }
+                is PaginationState.Error -> {
+                    loadingErrorView.showError(state.error.errorType.errorStringRes, retry)
+                }
             }
-            binding.progressBar.isVisible = state is LoadState.Loading
-            binding.btnRetry.isVisible = state is LoadState.Error
-            binding.errorMsg.isVisible = state is LoadState.Error
         }
 
         companion object {
             fun create(parent: ViewGroup, retry: () -> Unit): LoadStateViewHolder {
-                val binding = RecyclerStateViewBinding.inflate(
-                    LayoutInflater.from(parent.context),
-                    parent,
-                    false
+                val params = LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
                 )
-                return LoadStateViewHolder(binding, retry)
+                val view = LoadingErrorView(parent.context).apply {
+                    layoutParams = params
+                }
+                return LoadStateViewHolder(view, retry)
             }
         }
     }
-}
-
-sealed class LoadState {
-    object Empty : LoadState()
-    object Loading : LoadState()
-    object Complete : LoadState()
-    data class Error(val message: String) : LoadState()
 }

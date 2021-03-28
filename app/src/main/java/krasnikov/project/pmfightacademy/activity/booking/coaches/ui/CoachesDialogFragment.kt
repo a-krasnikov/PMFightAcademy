@@ -7,12 +7,14 @@ import androidx.fragment.app.viewModels
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
 import krasnikov.project.pmfightacademy.R
 import krasnikov.project.pmfightacademy.activity.booking.ui.BookingViewModel
+import krasnikov.project.pmfightacademy.app.pagination.LoadStateAdapter
 import krasnikov.project.pmfightacademy.app.ui.base.BaseBottomSheetDialogFragment
 import krasnikov.project.pmfightacademy.databinding.FragmentDialogCoachesBinding
 import krasnikov.project.pmfightacademy.utils.launchWhenStarted
@@ -27,9 +29,8 @@ class CoachesDialogFragment :
 
     private val args: CoachesDialogFragmentArgs by navArgs()
 
-    private val adapter = CoachesAdapter {
-        viewModel.loadNextData()
-    }
+    private val dataAdapter = CoachesAdapter { viewModel.loadNextData() }
+    private val loadStateAdapter = LoadStateAdapter { viewModel.loadNextData() }
 
     override fun createViewBinding() {
         mBinding = FragmentDialogCoachesBinding.inflate(layoutInflater)
@@ -54,17 +55,20 @@ class CoachesDialogFragment :
                     ?.let { setDrawable(it) }
             }
         binding.rvCoaches.addItemDecoration(dividerItemDecoration)
-        binding.rvCoaches.adapter = adapter.apply {
-            onItemClickListener = {
-                bookingViewModel.onChoseCoach(it)
-                dismiss()
-            }
-        }
+        binding.rvCoaches.adapter = ConcatAdapter(
+            dataAdapter.apply {
+                onItemClickListener = {
+                    bookingViewModel.onChoseCoach(it)
+                    dismiss()
+                }
+            }, loadStateAdapter
+        )
     }
 
     private fun observeCoachesContent() {
         viewModel.contentCoaches.onEach {
-            adapter.submitData(it)
+            loadStateAdapter.state = it.currentState
+            dataAdapter.submitList(it.availableData)
         }.launchWhenStarted(lifecycleScope)
     }
 }

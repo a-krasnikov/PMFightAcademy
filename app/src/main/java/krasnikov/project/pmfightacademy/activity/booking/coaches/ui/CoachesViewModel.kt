@@ -2,7 +2,6 @@ package krasnikov.project.pmfightacademy.activity.booking.coaches.ui
 
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
@@ -14,7 +13,6 @@ import krasnikov.project.pmfightacademy.app.domain.ResolveGeneralErrorUseCase
 import krasnikov.project.pmfightacademy.app.pagination.PaginationData
 import krasnikov.project.pmfightacademy.app.pagination.PaginationState
 import krasnikov.project.pmfightacademy.app.ui.base.BaseViewModel
-import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
@@ -46,8 +44,12 @@ class CoachesViewModel @Inject constructor(
     fun loadData(serviceId: Int) {
         viewModelScope.launch(exceptionHandler) {
             coachRepository.flowData(serviceId).collect {
-                _contentCoaches.value =
-                    PaginationData(coachUIMapper.map(it), PaginationState.Complete)
+                if (it.isEmpty()) {
+                    _contentCoaches.value = PaginationData(currentState = PaginationState.Empty)
+                } else {
+                    _contentCoaches.value =
+                        PaginationData(coachUIMapper.map(it), PaginationState.Complete)
+                }
             }
         }
         loadNextData()

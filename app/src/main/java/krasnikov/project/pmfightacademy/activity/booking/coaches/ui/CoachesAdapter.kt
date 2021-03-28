@@ -3,16 +3,20 @@ package krasnikov.project.pmfightacademy.activity.booking.coaches.ui
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import krasnikov.project.pmfightacademy.R
 import krasnikov.project.pmfightacademy.activity.booking.coaches.ui.model.CoachUIModel
-import krasnikov.project.pmfightacademy.app.pagination.PaginationAdapter
+import krasnikov.project.pmfightacademy.app.pagination.PaginationListAdapter
 import krasnikov.project.pmfightacademy.databinding.RecyclerItemBookingCoachBinding
 
 class CoachesAdapter(loadNextData: () -> Unit) :
-    PaginationAdapter<CoachUIModel, CoachesAdapter.CoachViewHolder>(loadNextData = loadNextData) {
+    PaginationListAdapter<CoachUIModel, CoachesAdapter.CoachViewHolder>(
+        loadNextData = loadNextData,
+        diffCallback = CoachesDiffCallback()
+    ) {
 
-    override fun onCreateViewHolder(parent: ViewGroup): CoachViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoachViewHolder {
         return CoachViewHolder(
             RecyclerItemBookingCoachBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -41,3 +45,14 @@ class CoachesAdapter(loadNextData: () -> Unit) :
         }
     }
 }
+
+class CoachesDiffCallback : DiffUtil.ItemCallback<CoachUIModel>() {
+    override fun areItemsTheSame(oldItem: CoachUIModel, newItem: CoachUIModel): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: CoachUIModel, newItem: CoachUIModel): Boolean {
+        return oldItem == newItem
+    }
+}
+

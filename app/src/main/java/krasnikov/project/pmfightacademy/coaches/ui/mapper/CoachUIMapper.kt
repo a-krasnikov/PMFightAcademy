@@ -16,6 +16,7 @@ class CoachUIMapper @Inject constructor(
 
     suspend fun map(source: Coach): CoachUIModel = withContext(defaultDispatcher) {
         CoachUIModel(
+            id = source.id,
             fullName = "${source.firstName} ${source.lastName}",
             age = resources.getString(R.string.text_coach_age, source.age),
             description = source.description,

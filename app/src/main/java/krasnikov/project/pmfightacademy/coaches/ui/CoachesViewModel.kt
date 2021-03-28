@@ -14,7 +14,6 @@ import krasnikov.project.pmfightacademy.app.ui.base.BaseViewModel
 import krasnikov.project.pmfightacademy.coaches.data.CoachRepository
 import krasnikov.project.pmfightacademy.coaches.ui.mapper.CoachUIMapper
 import krasnikov.project.pmfightacademy.coaches.ui.model.CoachUIModel
-import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
@@ -35,8 +34,12 @@ class CoachesViewModel @Inject constructor(
     init {
         viewModelScope.launch(exceptionHandler) {
             coachRepository.flowData.collect {
-                _contentCoaches.value =
-                    PaginationData(coachUIMapper.map(it), PaginationState.Complete)
+                if (it.isEmpty()) {
+                    _contentCoaches.value = PaginationData(currentState = PaginationState.Empty)
+                } else {
+                    _contentCoaches.value =
+                        PaginationData(coachUIMapper.map(it), PaginationState.Complete)
+                }
             }
         }
     }

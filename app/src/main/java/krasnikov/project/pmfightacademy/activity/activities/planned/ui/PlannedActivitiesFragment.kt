@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.ConcatAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
 import krasnikov.project.pmfightacademy.R
+import krasnikov.project.pmfightacademy.app.pagination.LoadStateAdapter
 import krasnikov.project.pmfightacademy.app.ui.base.BaseFragment
 import krasnikov.project.pmfightacademy.databinding.FragmentActivitiesPlannedBinding
 import krasnikov.project.pmfightacademy.utils.launchWhenStarted
@@ -18,9 +20,8 @@ class PlannedActivitiesFragment :
     override val viewModel by viewModels<PlannedActivitiesViewModel>()
     override val bindingFactory = FragmentActivitiesPlannedBinding::bind
 
-    private val adapter = PlannedActivitiesAdapter {
-        viewModel.loadPlannedActivities()
-    }
+    private val dataAdapter = PlannedActivitiesAdapter { viewModel.loadPlannedActivities() }
+    private val loadStateAdapter = LoadStateAdapter { viewModel.loadPlannedActivities() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -50,12 +51,13 @@ class PlannedActivitiesFragment :
     }
 
     private fun setupRecyclerView() {
-        binding.rvActivities.adapter = adapter
+        binding.rvActivities.adapter = ConcatAdapter(dataAdapter, loadStateAdapter)
     }
 
     private fun subscribeToPlannedActivitiesFlow() {
         viewModel.plannedActivitiesContent.onEach {
-            adapter.submitData(it)
+            loadStateAdapter.state = it.currentState
+            dataAdapter.submitList(it.availableData)
         }.launchWhenStarted(lifecycleScope)
     }
 }

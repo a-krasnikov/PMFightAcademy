@@ -2,17 +2,19 @@ package krasnikov.project.pmfightacademy.activity.activities.planned.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import krasnikov.project.pmfightacademy.activity.activities.planned.ui.model.PlannedActivityUIModel
-import krasnikov.project.pmfightacademy.app.pagination.PaginationAdapter
+import krasnikov.project.pmfightacademy.app.pagination.PaginationListAdapter
 import krasnikov.project.pmfightacademy.databinding.RecyclerItemActivityPlannedBinding
 
 class PlannedActivitiesAdapter(loadMore: () -> Unit) :
-    PaginationAdapter<PlannedActivityUIModel, PlannedActivitiesAdapter.PlannedActivityViewHolder>(
-        loadNextData = loadMore
+    PaginationListAdapter<PlannedActivityUIModel, PlannedActivitiesAdapter.PlannedActivityViewHolder>(
+        loadNextData = loadMore,
+        diffCallback = PlannedActivityDiffCallback()
     ) {
 
-    override fun onCreateViewHolder(parent: ViewGroup): PlannedActivityViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlannedActivityViewHolder {
         val binding = RecyclerItemActivityPlannedBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
@@ -37,5 +39,21 @@ class PlannedActivitiesAdapter(loadMore: () -> Unit) :
                 tvPrice.text = activity.price
             }
         }
+    }
+}
+
+class PlannedActivityDiffCallback() : DiffUtil.ItemCallback<PlannedActivityUIModel>() {
+    override fun areItemsTheSame(
+        oldItem: PlannedActivityUIModel,
+        newItem: PlannedActivityUIModel
+    ): Boolean {
+        return oldItem == newItem
+    }
+
+    override fun areContentsTheSame(
+        oldItem: PlannedActivityUIModel,
+        newItem: PlannedActivityUIModel
+    ): Boolean {
+        return oldItem == newItem
     }
 }
