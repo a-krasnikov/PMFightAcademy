@@ -3,6 +3,7 @@ package krasnikov.project.pmfightacademy.app.pagination
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import krasnikov.project.pmfightacademy.utils.setSafeOnClickListener
 
 abstract class PaginationListAdapter<T, VH : RecyclerView.ViewHolder>(
     private val offsetStartLoadMore: Int = 4,
@@ -14,7 +15,7 @@ abstract class PaginationListAdapter<T, VH : RecyclerView.ViewHolder>(
 
     final override fun onBindViewHolder(holder: VH, position: Int) {
         onBindViewHolder(holder, getItem(position))
-        holder.itemView.setOnClickListener { onItemClickListener(getItem(position)) }
+        holder.itemView.setSafeOnClickListener { onItemClickListener(getItem(position)) }
 
         // start loading when reach certain position
         if (position == itemCount - offsetStartLoadMore) {

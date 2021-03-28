@@ -115,7 +115,7 @@
     <action
         android:id="@+id/action_global_to_login"
         app:destination="@id/login_flow"
-        app:popUpTo="@id/login_fragment"
+        app:popUpTo="@id/app_navigation"
         app:popUpToInclusive="true" />
 
 </navigation>
