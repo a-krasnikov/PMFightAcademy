@@ -50,9 +50,16 @@
     <string name="phone_prefix">+380</string>
 
     <!--Login Errors-->
-    <string name="error_password_invalid">Password should contain</string>
+    <string name="error_password_invalid">Password should contain 8 characters and at least 1 capital letter</string>
     <string name="error_phone_invalid">Please enter valid phone</string>
+    <string name="error_name_invalid">Please enter valid name</string>
     <string name="login_failed">Login failed</string>
     <string name="registration_failed">Registration failed</string>
+    <string name="such_user_already_exists">Such already exists</string>
+
+    <string name="error_data_could_not_be_loaded">Data could not be loaded</string>
+    <string name="server_error">Server error has occurred</string>
+    <string name="unknown_error">An unknown error has occurred</string>
+
 
 </resources>

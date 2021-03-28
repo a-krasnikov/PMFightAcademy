@@ -5,6 +5,8 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.ktx.storage
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -33,5 +35,11 @@ object FirebaseModule {
         }
     }
 
+    @Provides
+    fun providesFirebaseImageStorageReference(): StorageReference {
+        return Firebase.storage.reference.child(FIREBASE_IMAGE_STORAGE_ROOT_PATH)
+    }
+
     private const val FIREBASE_FETCH_INTERVAL = 3600L
+    private const val FIREBASE_IMAGE_STORAGE_ROOT_PATH = "images"
 }

@@ -15,12 +15,12 @@ class AuthValidator  @Inject constructor() {
     }
 
     fun validateName(name: String) {
-        if (name.length < NAME_MINIMUM_LENGTH) throw NameNotValidException()
+        if (!nameRegex.matches(name)) throw NameNotValidException()
     }
 
     private companion object {
         val passwordRegex = Regex("(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}")
         val phoneRegex = Regex("^\\+380[5-9][0-9]\\d{7}\$")
-        const val NAME_MINIMUM_LENGTH = 2
+        val nameRegex = Regex("^(\\p{L}|\\s){2,}\$")
     }
 }
