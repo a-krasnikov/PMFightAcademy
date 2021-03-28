@@ -1,13 +1,17 @@
 package krasnikov.project.pmfightacademy.launch.ui
 
+import android.animation.Animator
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import krasnikov.project.pmfightacademy.R
 import krasnikov.project.pmfightacademy.app.data.pref.SharedPref
+import krasnikov.project.pmfightacademy.databinding.FragmentLaunchBinding
 import javax.inject.Inject
 
 @Suppress("EmptyFunctionBlock", "MagicNumber")
@@ -16,10 +20,22 @@ class LaunchFragment : Fragment(R.layout.fragment_launch) {
 
     @Inject
     lateinit var sharedPref: SharedPref
+    lateinit var binding: FragmentLaunchBinding
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentLaunchBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        timeCalculation()
+
+        setAnimationListener()
     }
 
 
@@ -40,18 +56,17 @@ class LaunchFragment : Fragment(R.layout.fragment_launch) {
     }
 
 
-    private fun timeCalculation() {
-        object : CountDownTimer(LAUNCH_TIME, 1000) {
-            override fun onTick(millisUntilFinished: Long) {}
+    private fun setAnimationListener() {
+        binding.avLoadingDots.addAnimatorListener(object : Animator.AnimatorListener {
+            override fun onAnimationStart(p0: Animator?) {}
 
-            override fun onFinish() {
+            override fun onAnimationEnd(p0: Animator?) {
                 checkSharedPref()
             }
-        }.start()
-    }
 
-    private companion object {
-        const val LAUNCH_TIME = 2000L
+            override fun onAnimationCancel(p0: Animator?) {}
+            override fun onAnimationRepeat(p0: Animator?) {}
+        })
     }
 
 }

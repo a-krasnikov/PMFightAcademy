@@ -5,15 +5,16 @@ import krasnikov.project.pmfightacademy.auth.domain.verfication.exceptions.Passw
 import krasnikov.project.pmfightacademy.auth.domain.verfication.exceptions.PhoneNotValidException
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DynamicTest
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestFactory
 
 internal class AuthValidatorTest {
 
     @TestFactory
-    fun `phone validation works as intended`(): List<DynamicTest> {
+    fun `phone validation detects invalid phones`(): List<DynamicTest> {
         val authValidator = AuthValidator()
 
-        val testList = listOf(
+        return listOf(
             "380991234567",
             "12351251595695",
             "991234567"
@@ -23,24 +24,23 @@ internal class AuthValidatorTest {
                     authValidator.validatePhone(phone)
                 }
             }
-        }.toMutableList()
-        val validPhone = "+380991234567"
-        testList.add(
-            DynamicTest.dynamicTest("Phone number: $validPhone is valid") {
-                assertDoesNotThrow {
-                    authValidator.validatePhone(validPhone)
-                }
-            }
-        )
+        }
+    }
 
-        return testList
+    @Test
+    fun `phone validation detects valid phones`() {
+        val authValidator = AuthValidator()
+        val validPhone = "+380991234567"
+        assertDoesNotThrow {
+            authValidator.validatePhone(validPhone)
+        }
     }
 
     @TestFactory
-    fun `password validation works as intended`(): List<DynamicTest> {
+    fun `password validation detects invalid passwords`(): List<DynamicTest> {
         val authValidator = AuthValidator()
 
-        val testList = listOf(
+        return listOf(
             "12351251595695",
             "12351251595695p",
             "password",
@@ -52,24 +52,23 @@ internal class AuthValidatorTest {
                     authValidator.validatePassword(password)
                 }
             }
-        }.toMutableList()
-        val validPassword = "Aa123456"
-        testList.add(
-            DynamicTest.dynamicTest("Password: $validPassword is valid") {
-                assertDoesNotThrow {
-                    authValidator.validatePassword(validPassword)
-                }
-            }
-        )
+        }
+    }
 
-        return testList
+    @Test
+    fun `password validation detects valid passwords`() {
+        val authValidator = AuthValidator()
+        val validPassword = "Aa123456"
+        assertDoesNotThrow {
+            authValidator.validatePassword(validPassword)
+        }
     }
 
     @TestFactory
-    fun `name validation works as intended`(): List<DynamicTest> {
+    fun `name validation detects invalid names`(): List<DynamicTest> {
         val authValidator = AuthValidator()
 
-        val testList = listOf(
+        return listOf(
             "Name1",
             "A",
         ).map { name ->
@@ -78,17 +77,16 @@ internal class AuthValidatorTest {
                     authValidator.validateName(name)
                 }
             }
-        }.toMutableList()
-        val validName = "Name Surname"
-        testList.add(
-            DynamicTest.dynamicTest("Name: $validName is valid") {
-                assertDoesNotThrow {
-                    authValidator.validateName(validName)
-                }
-            }
-        )
+        }
+    }
 
-        return testList
+    @Test
+    fun `name validation detects valid names`() {
+        val authValidator = AuthValidator()
+        val validName = "Name Surname"
+        assertDoesNotThrow {
+            authValidator.validateName(validName)
+        }
     }
 
 }
