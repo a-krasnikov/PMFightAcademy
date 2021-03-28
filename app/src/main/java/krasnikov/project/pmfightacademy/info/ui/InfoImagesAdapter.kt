@@ -7,7 +7,7 @@ import com.google.firebase.storage.StorageReference
 import krasnikov.project.pmfightacademy.databinding.RecyclerItemInfoImageBinding
 import krasnikov.project.pmfightacademy.utils.setImageFromGlide
 
-class InfoImagesAdapter() :
+class InfoImagesAdapter :
     RecyclerView.Adapter<InfoImagesAdapter.InfoImageViewHolder>() {
 
     private var images: List<StorageReference> = listOf()
