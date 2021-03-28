@@ -12,7 +12,7 @@
         <action
             android:id="@+id/action_launch_to_main_content"
             app:destination="@id/main_content"
-            app:popUpTo="@id/launch_fragment"
+            app:popUpTo="@id/app_navigation"
             app:popUpToInclusive="true" />
     </fragment>
 
