@@ -34,7 +34,8 @@
             android:layout_height="wrap_content"
             android:hint="@string/hint_phone"
             android:inputType="phone"
-            android:maxLength="9" />
+            android:maxLength="9"
+            android:textAppearance="@style/TextAppearance.App.Text" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -55,7 +56,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hint_password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textAppearance="@style/TextAppearance.App.Text" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,10 +76,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/btnLogin"
         app:layout_constraintBottom_toTopOf="@id/btnCreateAccount"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnLogin" />
 
     <TextView
         android:id="@+id/tvNoAccount"
@@ -85,6 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spacing_large"
         android:text="@string/text_no_account"
+        android:textAppearance="@style/TextAppearance.App.Text"
         android:textColor="@color/grey"
         app:layout_constraintBottom_toTopOf="@+id/btnCreateAccount"
         app:layout_constraintEnd_toEndOf="parent"
@@ -92,14 +95,12 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnCreateAccount"
+        style="@style/Widget.App.OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/btn_create_account"
-        app:cornerRadius="@dimen/button_corner_radius"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:strokeColor="@color/yellow_primary"
-        app:strokeWidth="@dimen/button_stroke_width" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

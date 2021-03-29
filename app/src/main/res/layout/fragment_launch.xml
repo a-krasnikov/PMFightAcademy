@@ -20,7 +20,7 @@
         app:lottie_autoPlay="true"
         app:lottie_colorFilter="@color/yellow_primary"
         app:lottie_loop="true"
-        app:lottie_repeatCount="1"
-        app:lottie_rawRes="@raw/loading_dots" />
+        app:lottie_rawRes="@raw/loading_dots"
+        app:lottie_repeatCount="1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

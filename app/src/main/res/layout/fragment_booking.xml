@@ -44,8 +44,8 @@
                         android:id="@+id/ivService"
                         android:layout_width="@dimen/booking_icon_size"
                         android:layout_height="@dimen/booking_icon_size"
-                        android:src="@drawable/ic_service"
-                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circle" />
+                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circle"
+                        app:srcCompat="@drawable/ic_service" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tvService"
@@ -54,8 +54,8 @@
                         android:layout_marginStart="@dimen/spacing_medium"
                         android:drawablePadding="@dimen/spacing_small"
                         android:gravity="center_vertical"
-                        android:textAllCaps="true"
-                        android:textColorHint="@color/white"
+                        android:maxLines="1"
+                        android:textAppearance="@style/TextAppearance.App.Title"
                         app:drawableEndCompat="@drawable/ic_forward"
                         app:drawableTint="@color/white"
                         tools:text="@string/title_choose_service" />
@@ -82,8 +82,8 @@
                         android:id="@+id/ivAvatarCoach"
                         android:layout_width="@dimen/booking_icon_size"
                         android:layout_height="@dimen/booking_icon_size"
-                        android:src="@drawable/ic_coach"
-                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circle" />
+                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circle"
+                        app:srcCompat="@drawable/ic_coach" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tvCoach"
@@ -92,8 +92,8 @@
                         android:layout_marginStart="@dimen/spacing_medium"
                         android:drawablePadding="@dimen/spacing_small"
                         android:gravity="center_vertical"
-                        android:textAllCaps="true"
-                        android:textColorHint="@color/white"
+                        android:maxLines="1"
+                        android:textAppearance="@style/TextAppearance.App.Title"
                         app:drawableEndCompat="@drawable/ic_forward"
                         app:drawableTint="@color/white"
                         tools:text="@string/title_choose_coach" />
@@ -107,7 +107,7 @@
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:gravity="center"
                 android:text="@string/title_choose_date"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textAppearance="@style/TextAppearance.App.Title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cardCoach" />
@@ -123,7 +123,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvLabelDate"
-                app:mcv_dateTextAppearance="@style/CalendarDayTextAppearance"
+                app:mcv_dateTextAppearance="@style/TextAppearance.App.CalendarDayText"
                 app:mcv_headerTextAppearance="@color/white"
                 app:mcv_selectionColor="@color/yellow_primary"
                 app:mcv_showOtherDates="all"
@@ -147,7 +147,7 @@
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:gravity="center"
                 android:text="@string/title_choose_time"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textAppearance="@style/TextAppearance.App.Title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/calendar" />
