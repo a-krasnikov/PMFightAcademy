@@ -12,8 +12,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     private val firebaseMessagingManager: FirebaseMessagingManager
-) :
-    BaseViewModel() {
+) : BaseViewModel() {
 
     fun enableNotifications() {
         viewModelScope.launch(exceptionHandler) {
