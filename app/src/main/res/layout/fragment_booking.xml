@@ -157,6 +157,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_small"
+                android:animateLayoutChanges="true"
                 app:chipSpacing="@dimen/spacing_small"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_min="@dimen/booking_time_slots_min_height"

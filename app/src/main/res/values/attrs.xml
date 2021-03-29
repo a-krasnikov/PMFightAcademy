@@ -7,8 +7,10 @@
     </declare-styleable>
 
     <declare-styleable name="LoadingErrorView">
-        <attr name="retryBtnShow" format="boolean" />
-        <attr name="textErrorColor" format="color" />
-        <attr name="textErrorAppearance" format="reference" />
+        <attr name="iconEmpty" format="reference" />
+        <attr name="iconError" format="reference" />
+        <attr name="iconSize" format="dimension" />
+        <attr name="textAppearance" format="reference" />
+        <attr name="retryBtnStyle" format="reference" />
     </declare-styleable>
 </resources>

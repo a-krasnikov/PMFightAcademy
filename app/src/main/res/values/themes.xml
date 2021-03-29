@@ -49,6 +49,7 @@
 
     <style name="Widget.App.Button" parent="Widget.MaterialComponents.Button">
         <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="android:buttonCornerRadius">@dimen/button_corner_radius</item>
         <item name="android:backgroundTint">@color/button_color</item>
     </style>
 
@@ -109,7 +110,11 @@
 
     <style name="Widget.MyApp.LoadingErrorView" parent="">
         <item name="android:elevation">@dimen/loading_error_view_elevation</item>
-        <item name="textErrorAppearance">@style/TextAppearance.App.TextError</item>
+        <item name="textAppearance">@style/TextAppearance.App.TextError</item>
+        <item name="iconSize">@dimen/loading_error_view_icon_size</item>
+        <item name="iconError">@drawable/ic_error</item>
+        <item name="iconEmpty">@drawable/ic_empty</item>
+        <item name="retryBtnStyle">@style/Widget.App.Button</item>
         <item name="android:padding">@dimen/spacing_medium</item>
         <item name="android:background">@drawable/loading_error_background</item>
     </style>
