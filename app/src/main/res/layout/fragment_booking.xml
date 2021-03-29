@@ -30,6 +30,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_medium"
+                android:clickable="true"
+                android:focusable="true"
                 android:background="@drawable/booking_card_background"
                 android:orientation="horizontal"
                 android:paddingHorizontal="@dimen/spacing_medium"
@@ -68,6 +70,9 @@
                 android:orientation="horizontal"
                 android:paddingHorizontal="@dimen/spacing_medium"
                 android:paddingVertical="@dimen/spacing_small"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="@drawable/card_foreground"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cardService">
