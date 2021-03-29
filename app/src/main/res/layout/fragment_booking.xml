@@ -24,81 +24,73 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.google.android.material.card.MaterialCardView
+            <LinearLayout
                 android:id="@+id/cardService"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_medium"
+                android:background="@drawable/booking_card_background"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/spacing_medium"
+                android:paddingVertical="@dimen/spacing_small"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <LinearLayout
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivService"
+                    android:layout_width="@dimen/booking_icon_size"
+                    android:layout_height="@dimen/booking_icon_size"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circle"
+                    app:srcCompat="@drawable/ic_service" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvService"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="@dimen/spacing_medium"
-                    android:paddingVertical="@dimen/spacing_small">
+                    android:layout_marginStart="@dimen/spacing_medium"
+                    android:drawablePadding="@dimen/spacing_small"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:textAppearance="@style/TextAppearance.App.Title"
+                    app:drawableEndCompat="@drawable/ic_forward"
+                    app:drawableTint="@color/white"
+                    tools:text="@string/title_choose_service" />
+            </LinearLayout>
 
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/ivService"
-                        android:layout_width="@dimen/booking_icon_size"
-                        android:layout_height="@dimen/booking_icon_size"
-                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circle"
-                        app:srcCompat="@drawable/ic_service" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvService"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="@dimen/spacing_medium"
-                        android:drawablePadding="@dimen/spacing_small"
-                        android:gravity="center_vertical"
-                        android:maxLines="1"
-                        android:textAppearance="@style/TextAppearance.App.Title"
-                        app:drawableEndCompat="@drawable/ic_forward"
-                        app:drawableTint="@color/white"
-                        tools:text="@string/title_choose_service" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
+            <LinearLayout
                 android:id="@+id/cardCoach"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_medium"
+                android:background="@drawable/booking_card_background"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/spacing_medium"
+                android:paddingVertical="@dimen/spacing_small"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cardService">
 
-                <LinearLayout
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivAvatarCoach"
+                    android:layout_width="@dimen/booking_icon_size"
+                    android:layout_height="@dimen/booking_icon_size"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circle"
+                    app:srcCompat="@drawable/ic_coach" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvCoach"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="@dimen/spacing_medium"
-                    android:paddingVertical="@dimen/spacing_small">
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/ivAvatarCoach"
-                        android:layout_width="@dimen/booking_icon_size"
-                        android:layout_height="@dimen/booking_icon_size"
-                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circle"
-                        app:srcCompat="@drawable/ic_coach" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvCoach"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="@dimen/spacing_medium"
-                        android:drawablePadding="@dimen/spacing_small"
-                        android:gravity="center_vertical"
-                        android:maxLines="1"
-                        android:textAppearance="@style/TextAppearance.App.Title"
-                        app:drawableEndCompat="@drawable/ic_forward"
-                        app:drawableTint="@color/white"
-                        tools:text="@string/title_choose_coach" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                    android:layout_marginStart="@dimen/spacing_medium"
+                    android:drawablePadding="@dimen/spacing_small"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:textAppearance="@style/TextAppearance.App.Title"
+                    app:drawableEndCompat="@drawable/ic_forward"
+                    app:drawableTint="@color/white"
+                    tools:text="@string/title_choose_coach" />
+            </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvLabelDate"
@@ -119,7 +111,7 @@
                 android:layout_marginStart="@dimen/spacing_xlarge"
                 android:layout_marginTop="@dimen/spacing_small"
                 android:layout_marginEnd="@dimen/spacing_xlarge"
-                android:background="@drawable/booking_calendar_background"
+                android:background="@drawable/booking_card_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvLabelDate"
@@ -157,7 +149,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_small"
-                android:animateLayoutChanges="true"
                 app:chipSpacing="@dimen/spacing_small"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_min="@dimen/booking_time_slots_min_height"
