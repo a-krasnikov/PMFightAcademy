@@ -1,6 +1,7 @@
 package krasnikov.project.pmfightacademy.launch.ui
 
 import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.LayoutInflater
@@ -57,15 +58,10 @@ class LaunchFragment : Fragment(R.layout.fragment_launch) {
 
 
     private fun setAnimationListener() {
-        binding.avLoadingDots.addAnimatorListener(object : Animator.AnimatorListener {
-            override fun onAnimationStart(p0: Animator?) {}
-
+        binding.avLoadingDots.addAnimatorListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(p0: Animator?) {
                 checkSharedPref()
             }
-
-            override fun onAnimationCancel(p0: Animator?) {}
-            override fun onAnimationRepeat(p0: Animator?) {}
         })
     }
 
