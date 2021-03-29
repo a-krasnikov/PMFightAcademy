@@ -41,10 +41,7 @@ class ExpandableTextView @JvmOverloads constructor(
             resources,
             attributes.getResourceId(
                 R.styleable.ExpandableTextView_backgroundShowMore,
-                attributes.getColor(
-                    R.styleable.LoadingErrorView_textErrorColor,
-                    ContextCompat.getColor(context, android.R.color.transparent)
-                )
+                android.R.color.transparent
             ),
             null
         ) ?: throw Resources.NotFoundException()
@@ -52,10 +49,7 @@ class ExpandableTextView @JvmOverloads constructor(
         paintTextShowMore = Paint().apply {
             color = attributes.getColor(
                 R.styleable.ExpandableTextView_textColorShowMore,
-                attributes.getColor(
-                    R.styleable.LoadingErrorView_textErrorColor,
-                    ContextCompat.getColor(context, android.R.color.black)
-                )
+                ContextCompat.getColor(context, android.R.color.black)
             )
             textSize = attributes.getDimension(
                 R.styleable.ExpandableTextView_textSizeShowMore,

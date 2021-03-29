@@ -4,8 +4,12 @@ import android.os.Handler
 import android.os.Looper
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.appcompat.view.ContextThemeWrapper
+import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.RecyclerView
+import krasnikov.project.pmfightacademy.R
 import krasnikov.project.pmfightacademy.view.LoadingErrorView
+
 
 class LoadStateAdapter(private val retry: () -> Unit) :
     RecyclerView.Adapter<LoadStateAdapter.LoadStateViewHolder>() {
@@ -55,7 +59,7 @@ class LoadStateAdapter(private val retry: () -> Unit) :
         fun bind(state: PaginationState) {
             when (state) {
                 is PaginationState.Empty -> {
-                    loadingErrorView.resetState()
+                    loadingErrorView.showEmpty()
                 }
                 is PaginationState.Loading -> {
                     loadingErrorView.showLoading()
@@ -75,7 +79,9 @@ class LoadStateAdapter(private val retry: () -> Unit) :
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT
                 )
-                val view = LoadingErrorView(parent.context).apply {
+                val view = LoadingErrorView(
+                    ContextThemeWrapper(parent.context, R.style.Widget_MyApp_LoadingErrorView)
+                ).apply {
                     layoutParams = params
                 }
                 return LoadStateViewHolder(view, retry)

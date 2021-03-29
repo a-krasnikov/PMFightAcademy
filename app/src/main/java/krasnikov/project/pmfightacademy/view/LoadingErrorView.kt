@@ -3,14 +3,20 @@ package krasnikov.project.pmfightacademy.view
 import android.content.Context
 import android.util.AttributeSet
 import android.view.Gravity
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.ProgressBar
-import android.widget.TextView
+import androidx.annotation.Dimension
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.core.content.ContextCompat
+import androidx.annotation.StyleRes
+import androidx.appcompat.view.ContextThemeWrapper
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.view.isVisible
 import krasnikov.project.pmfightacademy.R
+import krasnikov.project.pmfightacademy.utils.setSafeOnClickListener
 
 class LoadingErrorView @JvmOverloads constructor(
     context: Context,
@@ -18,14 +24,22 @@ class LoadingErrorView @JvmOverloads constructor(
     defStyleAttr: Int = 0,
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
-    private val tvError: TextView by lazy { findViewById(R.id.tvError) }
-    private val progress: ProgressBar by lazy { findViewById(R.id.progress) }
-    private val btnRetry: Button by lazy { findViewById(R.id.btnRetry) }
+    @StyleRes
+    private val textAppearance: Int
 
-    private val retryBtnShow: Boolean
+    @DrawableRes
+    private val iconError: Int
+
+    @DrawableRes
+    private val iconEmpty: Int
+
+    @Dimension
+    private val iconSize: Int
+
+    @StyleRes
+    private val retryBtnStyle: Int
 
     init {
-        inflate(context, R.layout.loading_error_view, this)
         orientation = VERTICAL
         gravity = Gravity.CENTER
         isVisible = false
@@ -34,62 +48,105 @@ class LoadingErrorView @JvmOverloads constructor(
         val attributes =
             context.obtainStyledAttributes(attrs, R.styleable.LoadingErrorView, defStyleAttr, 0)
 
-        retryBtnShow = attributes.getBoolean(R.styleable.LoadingErrorView_retryBtnShow, true)
-        tvError.setTextColor(
-            attributes.getColor(
-                R.styleable.LoadingErrorView_textErrorColor,
-                ContextCompat.getColor(context, android.R.color.black)
-            )
+        textAppearance = attributes.getResourceId(
+            R.styleable.LoadingErrorView_textAppearance,
+            R.style.TextAppearance_AppCompat
         )
-        tvError.setTextAppearance(
-            attributes.getResourceId(
-                R.styleable.LoadingErrorView_textErrorAppearance,
-                R.style.TextAppearance_AppCompat
-            )
+
+        iconError = attributes.getResourceId(
+            R.styleable.LoadingErrorView_iconError,
+            android.R.drawable.stat_notify_error
+        )
+
+        iconEmpty = attributes.getResourceId(
+            R.styleable.LoadingErrorView_iconEmpty,
+            android.R.color.transparent
+        )
+
+        iconSize =
+            attributes.getDimension(R.styleable.LoadingErrorView_iconSize, 0f).toInt()
+
+        retryBtnStyle = attributes.getResourceId(
+            R.styleable.LoadingErrorView_retryBtnStyle,
+            android.R.style.Widget_Material_Button
         )
 
         attributes.recycle()
     }
 
+    fun showEmpty() {
+        layoutParams = LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.MATCH_PARENT
+        )
+        removeAllViews()
+        addIcon(iconEmpty)
+        addText(resources.getString(R.string.title_empty))
+    }
+
     fun showError(message: String, retryAction: () -> Unit) {
-        tvError.text = message
-        btnRetry.isVisible = retryBtnShow
-        btnRetry.setOnClickListener { retryAction() }
-        showError()
+        buildErrorView(message, retryAction)
     }
 
     fun showError(@StringRes resId: Int, retryAction: () -> Unit) {
-        tvError.text = context.getText(resId)
-        btnRetry.isVisible = retryBtnShow
-        btnRetry.setOnClickListener { retryAction() }
-        showError()
+        buildErrorView(context.getString(resId), retryAction)
     }
 
     fun showError(message: String) {
-        tvError.text = message
-        showError()
+        buildErrorView(message)
     }
 
     fun showError(@StringRes resId: Int) {
-        tvError.text = context.getText(resId)
-        showError()
+        buildErrorView(context.getString(resId))
     }
 
     fun showLoading() {
-        tvError.isVisible = false
-        btnRetry.isVisible = false
-        progress.isVisible = true
+        removeAllViews()
+        addView(ProgressBar(context))
         isVisible = true
     }
 
     fun resetState() {
         isVisible = false
-        btnRetry.setOnClickListener(null)
+        removeAllViews()
     }
 
-    private fun showError() {
-        progress.isVisible = false
-        tvError.isVisible = true
+    private fun buildErrorView(message: String, retryAction: (() -> Unit)? = null) {
+        removeAllViews()
+        addIcon(iconError)
+        addText(message)
+
+        if (retryAction != null) {
+            val retryButton = Button(ContextThemeWrapper(context, retryBtnStyle)).apply {
+                setText(R.string.btn_retry)
+                setSafeOnClickListener(retryAction)
+                layoutParams = LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
+            }
+            addView(retryButton)
+        }
         isVisible = true
+    }
+
+    private fun addIcon(@DrawableRes id: Int) {
+        val icon = AppCompatImageView(context).apply {
+            setImageResource(id)
+            if (iconSize != 0) {
+                minimumHeight = iconSize
+                minimumWidth = iconSize
+            }
+        }
+        addView(icon)
+    }
+
+    private fun addText(message: String) {
+        val textView = AppCompatTextView(context).apply {
+            text = message
+            gravity = Gravity.CENTER
+            setTextAppearance(textAppearance)
+        }
+        addView(textView)
     }
 }
