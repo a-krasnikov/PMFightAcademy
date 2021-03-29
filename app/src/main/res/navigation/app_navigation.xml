@@ -12,6 +12,7 @@
         <action
             android:id="@+id/action_launch_to_main_content"
             app:destination="@id/main_content"
+            app:enterAnim="@anim/scale_in"
             app:popUpTo="@id/app_navigation"
             app:popUpToInclusive="true" />
     </fragment>
@@ -25,9 +26,6 @@
             android:name="krasnikov.project.pmfightacademy.auth.registration.ui.RegistrationFragment"
             tools:layout="@layout/fragment_registration">
             <action
-                android:id="@+id/action_register_to_login"
-                app:destination="@id/login_fragment" />
-            <action
                 android:id="@+id/action_register_to_main_content"
                 app:destination="@id/main_content" />
         </fragment>
@@ -38,9 +36,14 @@
             tools:layout="@layout/fragment_login">
             <action
                 android:id="@+id/action_login_to_register"
+                app:enterAnim="@anim/slide_right"
+                app:exitAnim="@anim/background_fragment"
+                app:popExitAnim="@anim/slide_left"
+                app:popEnterAnim="@anim/background_fragment"
                 app:destination="@id/register_fragment" />
             <action
                 android:id="@+id/action_login_to_main_content"
+                app:enterAnim="@anim/scale_in"
                 app:destination="@id/main_content" />
         </fragment>
     </navigation>
@@ -65,6 +68,10 @@
             tools:layout="@layout/fragment_activities_planned">
             <action
                 android:id="@+id/action_activities_to_booking"
+                app:enterAnim="@anim/slide_right"
+                app:exitAnim="@anim/background_fragment"
+                app:popExitAnim="@anim/slide_left"
+                app:popEnterAnim="@anim/background_fragment"
                 app:destination="@id/booking_flow" />
         </fragment>
 
@@ -115,6 +122,8 @@
     <action
         android:id="@+id/action_global_to_login"
         app:destination="@id/login_flow"
+        app:enterAnim="@anim/slide_up"
+        app:exitAnim="@anim/slide_up"
         app:popUpTo="@id/app_navigation"
         app:popUpToInclusive="true" />
 
