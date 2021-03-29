@@ -30,7 +30,7 @@ class ProfileFragment: BaseFragment<ProfileViewModel, FragmentProfileBinding>(R.
         with(binding) {
             cardLogout.setSafeOnClickListener {
                 sharedPref.token = SharedPref.TOKEN_DEFAULT_VALUE
-                sharedPref.notificationState = SharedPref.NOTIFICATIONS_DISABLED
+                viewModel.disableNotifications()
                 viewModel.logOut()
             }
             switchNotifications.setOnCheckedChangeListener { _, isChecked ->
