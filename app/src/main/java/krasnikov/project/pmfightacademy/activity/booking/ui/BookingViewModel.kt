@@ -31,17 +31,20 @@ class BookingViewModel @Inject constructor(
 
     override fun handleError(throwable: Throwable, coroutineName: CoroutineName?) {
         val error = resolveGeneralErrorUseCase.execute(throwable)
-        if(coroutineName.toString() == dateCoroutineName) {
-            _contentBooking.value = _contentBooking.value.copy(
-                calendarState = State.Error(error),
-                timeSlotsState = State.Empty,
-                bookingState = State.Empty
-            )
-        } else if(coroutineName.toString() == timeCoroutineName) {
-            _contentBooking.value = _contentBooking.value.copy(
-                timeSlotsState = State.Error(error),
-                bookingState = State.Empty
-            )
+
+        when (coroutineName?.name) {
+            dateCoroutineName -> {
+                _contentBooking.value =
+                    _contentBooking.value.copy(calendarState = State.Error(error))
+            }
+            timeCoroutineName -> {
+                _contentBooking.value =
+                    _contentBooking.value.copy(timeSlotsState = State.Error(error))
+            }
+            else -> {
+                _contentBooking.value =
+                    _contentBooking.value.copy(bookingState = State.Error(error))
+            }
         }
     }
 
