@@ -7,16 +7,17 @@
     android:orientation="vertical">
 
     <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:title="@string/activities_history_title" />
+        app:title="@string/title_activities_history" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvActivitiesHistory"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingStart="@dimen/card_padding"
-        android:paddingEnd="@dimen/card_padding"
+        android:paddingStart="@dimen/spacing_medium"
+        android:paddingEnd="@dimen/spacing_medium"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/recycler_item_activity_completed" />
 

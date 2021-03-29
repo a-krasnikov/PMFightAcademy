@@ -52,6 +52,7 @@ dependencies {
     implementation "com.google.android.material:material:$material_version"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
     implementation "androidx.fragment:fragment-ktx:$fragment_version"
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.3.1"
 
     //navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
@@ -59,6 +60,7 @@ dependencies {
 
     //hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
+    implementation 'androidx.hilt:hilt-navigation-fragment:1.0.0-beta01'
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
 
     //retrofit
@@ -88,4 +90,7 @@ dependencies {
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    //Other
+    implementation 'com.github.prolificinteractive:material-calendarview:2.0.0'
 }

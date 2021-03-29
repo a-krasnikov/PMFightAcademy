@@ -5,32 +5,31 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/mtTitle"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/info_screen_title" />
+        app:title="@string/title_info_screen" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mtTitle">
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
         <TextView
             android:id="@+id/tvInfoDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/mtTitle" />
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
     </ScrollView>
 
-
-    <ProgressBar
-        android:id="@+id/pbInfoLoading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="1dp"
+    <krasnikov.project.pmfightacademy.view.LoadingErrorView
+        android:id="@+id/stateInfo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

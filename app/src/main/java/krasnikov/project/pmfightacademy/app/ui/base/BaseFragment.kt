@@ -1,10 +1,9 @@
 package krasnikov.project.pmfightacademy.app.ui.base
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -15,21 +14,21 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import krasnikov.project.pmfightacademy.utils.Event
 
-abstract class BaseFragment<V : BaseViewModel, T : ViewBinding> : Fragment() {
+abstract class BaseFragment<V : BaseViewModel, T : ViewBinding>(
+    @LayoutRes contentLayoutId: Int
+) : Fragment(contentLayoutId) {
+
+    protected abstract val viewModel: V
+
+    protected abstract val bindingFactory: (View) -> T
+    private var mBinding: T? = null
+    protected val binding get() = mBinding!!
 
     private var eventJob: Job? = null
 
-    protected abstract val viewModel: V
-    protected var mBinding: T? = null
-    protected val binding get() = mBinding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        createViewBinding()
-        return binding.root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        mBinding = bindingFactory(requireView())
     }
 
     override fun onStart() {
@@ -54,11 +53,13 @@ abstract class BaseFragment<V : BaseViewModel, T : ViewBinding> : Fragment() {
         eventJob?.cancel()
     }
 
-    private fun showToast(@StringRes stringRes: Int) {
+    protected fun showToast(@StringRes stringRes: Int) {
         Toast.makeText(requireContext(), stringRes, Toast.LENGTH_SHORT).show()
     }
 
-    abstract fun createViewBinding()
+    protected fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

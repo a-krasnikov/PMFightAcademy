@@ -2,22 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/info_fragment"
-        android:icon="@drawable/ic_info_icon"
+        android:icon="@drawable/ic_bottom_info"
         android:title="@string/info_bottom_label" />
     <item
         android:id="@+id/coaches_fragment"
-        android:icon="@drawable/ic_coaches_icon"
+        android:icon="@drawable/ic_bottom_coaches"
         android:title="@string/coaches_bottom_label" />
     <item
-        android:id="@+id/current_activities_fragment"
-        android:icon="@drawable/ic_activities_icon"
+        android:id="@+id/planned_activities_fragment"
+        android:icon="@drawable/ic_bottom_activities"
         android:title="@string/activities_bottom_label" />
     <item
-        android:id="@+id/history_fragment"
-        android:icon="@drawable/ic_history_icon"
+        android:id="@+id/history_activities_fragment"
+        android:icon="@drawable/ic_bottom_history"
         android:title="@string/history_bottom_label" />
     <item
         android:id="@+id/settings_fragment"
-        android:icon="@drawable/ic_settings_icon"
+        android:icon="@drawable/ic_bottom_settings"
         android:title="@string/settings_bottom_label" />
 </menu>

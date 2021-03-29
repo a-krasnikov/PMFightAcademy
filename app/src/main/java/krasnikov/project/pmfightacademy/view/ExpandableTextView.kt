@@ -1,4 +1,3 @@
-@file:Suppress("WildcardImport")
 package krasnikov.project.pmfightacademy.view
 
 import android.content.Context
@@ -9,6 +8,7 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.MotionEvent
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import krasnikov.project.pmfightacademy.R
 
@@ -41,7 +41,10 @@ class ExpandableTextView @JvmOverloads constructor(
             resources,
             attributes.getResourceId(
                 R.styleable.ExpandableTextView_backgroundShowMore,
-                android.R.color.transparent
+                attributes.getColor(
+                    R.styleable.LoadingErrorView_textErrorColor,
+                    ContextCompat.getColor(context, android.R.color.transparent)
+                )
             ),
             null
         ) ?: throw Resources.NotFoundException()
@@ -49,7 +52,10 @@ class ExpandableTextView @JvmOverloads constructor(
         paintTextShowMore = Paint().apply {
             color = attributes.getColor(
                 R.styleable.ExpandableTextView_textColorShowMore,
-                android.R.attr.textColor
+                attributes.getColor(
+                    R.styleable.LoadingErrorView_textErrorColor,
+                    ContextCompat.getColor(context, android.R.color.black)
+                )
             )
             textSize = attributes.getDimension(
                 R.styleable.ExpandableTextView_textSizeShowMore,

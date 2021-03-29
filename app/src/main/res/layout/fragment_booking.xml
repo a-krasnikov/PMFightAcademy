@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:navigationIcon="@drawable/ic_back"
+        app:title="@string/title_booking" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:paddingStart="@dimen/spacing_medium"
+        android:paddingEnd="@dimen/spacing_medium">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardService"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="@dimen/spacing_medium"
+                    android:paddingVertical="@dimen/spacing_small">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/ivService"
+                        android:layout_width="@dimen/booking_icon_size"
+                        android:layout_height="@dimen/booking_icon_size"
+                        android:src="@drawable/ic_service"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circle" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvService"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/spacing_medium"
+                        android:drawablePadding="@dimen/spacing_small"
+                        android:gravity="center_vertical"
+                        android:textAllCaps="true"
+                        android:textColorHint="@color/white"
+                        app:drawableEndCompat="@drawable/ic_forward"
+                        app:drawableTint="@color/white"
+                        tools:text="@string/title_choose_service" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardCoach"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardService">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="@dimen/spacing_medium"
+                    android:paddingVertical="@dimen/spacing_small">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/ivAvatarCoach"
+                        android:layout_width="@dimen/booking_icon_size"
+                        android:layout_height="@dimen/booking_icon_size"
+                        android:src="@drawable/ic_coach"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circle" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvCoach"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/spacing_medium"
+                        android:drawablePadding="@dimen/spacing_small"
+                        android:gravity="center_vertical"
+                        android:textAllCaps="true"
+                        android:textColorHint="@color/white"
+                        app:drawableEndCompat="@drawable/ic_forward"
+                        app:drawableTint="@color/white"
+                        tools:text="@string/title_choose_coach" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvLabelDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:gravity="center"
+                android:text="@string/title_choose_date"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardCoach" />
+
+            <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+                android:id="@+id/calendar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_xlarge"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginEnd="@dimen/spacing_xlarge"
+                android:background="@drawable/booking_calendar_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvLabelDate"
+                app:mcv_dateTextAppearance="@style/CalendarDayTextAppearance"
+                app:mcv_headerTextAppearance="@color/white"
+                app:mcv_selectionColor="@color/yellow_primary"
+                app:mcv_showOtherDates="all"
+                app:mcv_titleAnimationOrientation="horizontal"
+                app:mcv_weekDayTextAppearance="@color/white" />
+
+            <krasnikov.project.pmfightacademy.view.LoadingErrorView
+                android:id="@+id/stateCalendar"
+                style="@style/Widget.MyApp.LoadingErrorView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@id/calendar"
+                app:layout_constraintEnd_toEndOf="@id/calendar"
+                app:layout_constraintStart_toStartOf="@id/calendar"
+                app:layout_constraintTop_toTopOf="@id/calendar" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvLabelTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:gravity="center"
+                android:text="@string/title_choose_time"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/calendar" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/timeSlots"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                app:chipSpacing="@dimen/spacing_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvLabelTime"
+                app:singleSelection="true" />
+
+            <krasnikov.project.pmfightacademy.view.LoadingErrorView
+                android:id="@+id/stateTimeSlots"
+                style="@style/Widget.MyApp.LoadingErrorView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@id/timeSlots"
+                app:layout_constraintEnd_toEndOf="@id/timeSlots"
+                app:layout_constraintStart_toStartOf="@id/timeSlots"
+                app:layout_constraintTop_toTopOf="@id/timeSlots" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnToBook"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:text="@string/btn_done"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/timeSlots"
+                app:layout_constraintVertical_bias="1" />
+
+            <krasnikov.project.pmfightacademy.view.LoadingErrorView
+                android:id="@+id/stateBooking"
+                style="@style/Widget.MyApp.LoadingErrorView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</LinearLayout>

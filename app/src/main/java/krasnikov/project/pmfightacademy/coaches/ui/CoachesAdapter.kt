@@ -2,7 +2,7 @@ package krasnikov.project.pmfightacademy.coaches.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.res.ResourcesCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import krasnikov.project.pmfightacademy.R
 import krasnikov.project.pmfightacademy.app.pagination.PaginationAdapter
@@ -29,16 +29,10 @@ class CoachesAdapter(loadNextData: () -> Unit) :
     class CoachViewHolder(private val binding: RecyclerItemDetailCoachBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        private val resources = itemView.resources
-
         fun bind(coach: CoachUIModel) {
             with(binding) {
                 ivAvatar.setImageDrawable(
-                    ResourcesCompat.getDrawable(
-                        resources,
-                        R.drawable.coach_avatar,
-                        null
-                    )
+                    ContextCompat.getDrawable(itemView.context, R.drawable.coach_avatar)
                 )
                 tvName.text = coach.fullName
                 tvAge.text = coach.age

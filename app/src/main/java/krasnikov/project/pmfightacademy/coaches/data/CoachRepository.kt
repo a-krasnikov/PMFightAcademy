@@ -19,9 +19,9 @@ class CoachRepository @Inject constructor(
 
     val flowData = coachesPagination.flowData
 
-    suspend fun loadNextData() {
+    suspend fun loadNextData(forceRefresh: Boolean = false) {
         withContext(ioDispatcher) {
-            coachesPagination.loadNextPage()
+            coachesPagination.loadNextPage(forceRefresh)
         }
     }
 

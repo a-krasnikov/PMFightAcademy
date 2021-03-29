@@ -36,17 +36,17 @@ class CoachesViewModel @Inject constructor(
                     PaginationData(coachUIMapper.map(it), PaginationState.Complete)
             }
         }
-        loadNextData()
     }
 
     override fun handleError(throwable: Throwable) {
-        _contentCoaches.value = _contentCoaches.value.stateToError(throwable as Exception)
+        _contentCoaches.value =
+            _contentCoaches.value.copy(currentState = PaginationState.Error(throwable as Exception))
     }
 
-    fun loadNextData() {
-        _contentCoaches.value = _contentCoaches.value.stateToLoading()
+    fun loadCoaches(forceRefresh: Boolean = false) {
+        _contentCoaches.value = _contentCoaches.value.copy(currentState = PaginationState.Loading)
         viewModelScope.launch(exceptionHandler) {
-            coachRepository.loadNextData()
+            coachRepository.loadNextData(forceRefresh)
         }
     }
 }

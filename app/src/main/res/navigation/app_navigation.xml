@@ -16,6 +16,28 @@
             app:popUpToInclusive="true" />
     </fragment>
 
+    <navigation
+        android:id="@+id/login_flow"
+        app:startDestination="@id/login_fragment">
+
+        <fragment android:id="@+id/register_fragment">
+            <action
+                android:id="@+id/action_register_to_login"
+                app:destination="@id/login_fragment" />
+            <action
+                android:id="@+id/action_register_to_main_content"
+                app:destination="@id/main_content" />
+        </fragment>
+
+        <fragment android:id="@+id/login_fragment">
+            <action
+                android:id="@+id/action_login_to_register"
+                app:destination="@id/register_fragment" />
+            <action
+                android:id="@+id/action_login_to_main_content"
+                app:destination="@id/main_content" />
+        </fragment>
+    </navigation>
 
     <navigation
         android:id="@+id/main_content"
@@ -32,42 +54,53 @@
             tools:layout="@layout/fragment_coaches" />
 
         <fragment
-            android:id="@+id/current_activities_fragment"
-            android:name="krasnikov.project.pmfightacademy.activities.planned.ui.PlannedActivitiesFragment"
-            tools:layout="@layout/fragment_planned_activities">
+            android:id="@+id/planned_activities_fragment"
+            android:name="krasnikov.project.pmfightacademy.activity.activities.planned.ui.PlannedActivitiesFragment"
+            tools:layout="@layout/fragment_activities_planned">
             <action
                 android:id="@+id/action_activities_to_booking"
-                app:destination="@id/booking_fragment" />
+                app:destination="@id/booking_flow" />
         </fragment>
 
         <fragment
-            android:id="@+id/history_fragment"
-            android:name="krasnikov.project.pmfightacademy.activities.history.ui.ActivitiesHistoryFragment"
+            android:id="@+id/history_activities_fragment"
+            android:name="krasnikov.project.pmfightacademy.activity.activities.history.ui.ActivitiesHistoryFragment"
             tools:layout="@layout/fragment_activities_history" />
+
         <fragment android:id="@+id/settings_fragment" />
 
-        <fragment android:id="@+id/booking_fragment" />
-    </navigation>
+        <navigation
+            android:id="@+id/booking_flow"
+            app:startDestination="@id/booking_fragment">
 
-    <navigation
-        android:id="@+id/login_flow"
-        app:startDestination="@id/login_fragment">
-        <fragment android:id="@+id/register_fragment">
-            <action
-                android:id="@+id/action_register_to_login"
-                app:destination="@id/login_fragment" />
-            <action
-                android:id="@+id/action_register_to_main_content"
-                app:destination="@id/main_content" />
-        </fragment>
-        <fragment android:id="@+id/login_fragment">
-            <action
-                android:id="@+id/action_login_to_register"
-                app:destination="@id/register_fragment" />
-            <action
-                android:id="@+id/action_login_to_main_content"
-                app:destination="@id/main_content" />
-        </fragment>
+            <fragment
+                android:id="@+id/booking_fragment"
+                android:name="krasnikov.project.pmfightacademy.activity.booking.ui.BookingFragment"
+                tools:layout="@layout/fragment_booking">
+                <action
+                    android:id="@+id/action_booking_to_services_dialog"
+                    app:destination="@id/services_dialog" />
+                <action
+                    android:id="@+id/action_booking_to_coaches_dialog"
+                    app:destination="@id/coaches_dialog" />
+            </fragment>
+
+            <dialog
+                android:id="@+id/services_dialog"
+                android:name="krasnikov.project.pmfightacademy.activity.booking.services.ui.ServicesDialogFragment"
+                tools:layout="@layout/fragment_dialog_services" />
+
+            <dialog
+                android:id="@+id/coaches_dialog"
+                android:name="krasnikov.project.pmfightacademy.activity.booking.coaches.ui.CoachesDialogFragment"
+                tools:layout="@layout/fragment_dialog_coaches">
+                <argument
+                    android:name="serviceId"
+                    android:defaultValue="0"
+                    app:argType="integer" />
+            </dialog>
+
+        </navigation>
     </navigation>
 
     <action

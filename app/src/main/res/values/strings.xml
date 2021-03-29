@@ -8,7 +8,6 @@
     <string name="text_coach_age">%d years old</string>
 
     <!-- Activity -->
-    <string name="activity_coach_name">%s %s</string>
     <string name="activity_price">%d UAH</string>
 
     <!-- Bottom Navigation -->
@@ -17,10 +16,26 @@
     <string name="activities_bottom_label">Activities</string>
     <string name="history_bottom_label">History</string>
     <string name="settings_bottom_label">Settings</string>
-    <string name="info_screen_title">About Fight Academy</string>
-    <string name="planned_activities_title">Planned Activities</string>
-    <string name="book_new_activity_title">Book new activity</string>
-    <string name="planned_activity_coach_string">Coach</string>
-    <string name="planned_activity_price_string">Price</string>
-    <string name="activities_history_title">History</string>
+
+    <!-- Booking -->
+    <string name="title_booking">Booking</string>
+    <string name="title_choose_service">Choose training</string>
+    <string name="title_choose_coach">Choose coach</string>
+    <string name="title_choose_date">Choose date</string>
+    <string name="title_choose_time">Choose time</string>
+    <string name="btn_done">Done</string>
+
+    <!-- Services -->
+    <string name="service_price">Price: %d UAH</string>
+    <string name="service_duration">Duration: 1 hour</string>
+
+    <!-- Info -->
+    <string name="title_info_screen">About Fight Academy</string>
+
+    <!-- Activities -->
+    <string name="title_planned_activities">Planned Activities</string>
+    <string name="title_book_new_activity">Book new activity</string>
+    <string name="title_coach">Coach</string>
+    <string name="title_price">Price</string>
+    <string name="title_activities_history">History</string>
 </resources>

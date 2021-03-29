@@ -14,7 +14,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class FirebaseModule {
+object FirebaseModule {
 
     @Singleton
     @Provides
@@ -25,6 +25,7 @@ class FirebaseModule {
         return remoteConfig
     }
 
+    @Singleton
     @Provides
     fun provideFirebaseRemoteConfigSettings(): FirebaseRemoteConfigSettings {
         return remoteConfigSettings {
@@ -32,7 +33,5 @@ class FirebaseModule {
         }
     }
 
-    private companion object {
-        const val FIREBASE_FETCH_INTERVAL = 3600L
-    }
+    private const val FIREBASE_FETCH_INTERVAL = 3600L
 }

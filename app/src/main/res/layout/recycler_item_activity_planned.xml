@@ -4,71 +4,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/card_padding">
+    android:layout_marginBottom="@dimen/spacing_medium">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/card_padding">
+        android:padding="@dimen/spacing_medium">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvServiceName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="20sp"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toStartOf="@id/barrierDateTime"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Crossfit" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvCoach"
+            android:id="@+id/tvCoachTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_small"
-            android:text="@string/planned_activity_coach_string"
+            android:text="@string/title_coach"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvServiceName" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvPriceString"
+            android:id="@+id/tvPriceTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_small"
-            android:text="@string/planned_activity_price_string"
+            android:text="@string/title_price"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvCoach" />
-        
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/valuesBarrier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="end"
-            app:constraint_referenced_ids="tvCoach, tvPriceString"
-            />
-        
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvActivityPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_large"
-            app:layout_constraintStart_toEndOf="@id/valuesBarrier"
-            app:layout_constraintBottom_toBottomOf="@id/tvPriceString"
-            tools:text = "100 UAH"
-            />
+            app:layout_constraintTop_toBottomOf="@id/barrierCoach" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvCoachName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_large"
-            app:layout_constraintBottom_toBottomOf="@id/tvCoach"
-            app:layout_constraintStart_toEndOf="@id/valuesBarrier"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBaseline_toBaselineOf="@id/tvCoachTitle"
+            app:layout_constraintBottom_toBottomOf="@id/tvCoachTitle"
+            app:layout_constraintEnd_toStartOf="@id/barrierDateTime"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toEndOf="@id/barrierCoachPriceTitles"
             tools:text="Aleksandr Tarasov" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_large"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBaseline_toBaselineOf="@id/tvPriceTitle"
+            app:layout_constraintBottom_toBottomOf="@id/tvPriceTitle"
+            app:layout_constraintEnd_toStartOf="@id/barrierDateTime"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toEndOf="@id/barrierCoachPriceTitles"
+            tools:text="100 UAH" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintBaseline_toBaselineOf="@id/tvServiceName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="22.01.2021" />
@@ -77,10 +82,32 @@
             android:id="@+id/tvTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@id/tvCoach"
+            android:layout_marginTop="@dimen/spacing_small"
+            app:layout_constraintBaseline_toBaselineOf="@id/tvCoachName"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDate"
             tools:text="12:00" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrierCoachPriceTitles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="end"
+            app:constraint_referenced_ids="tvCoachTitle, tvPriceTitle" />
 
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrierCoach"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="tvCoachTitle, tvCoachName" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrierDateTime"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:barrierDirection="start"
+            app:constraint_referenced_ids="tvDate, tvTime" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>
