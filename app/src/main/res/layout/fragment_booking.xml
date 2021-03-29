@@ -159,6 +159,7 @@
                 android:layout_marginTop="@dimen/spacing_small"
                 app:chipSpacing="@dimen/spacing_small"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_min="@dimen/booking_time_slots_min_height"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvLabelTime"
                 app:singleSelection="true" />

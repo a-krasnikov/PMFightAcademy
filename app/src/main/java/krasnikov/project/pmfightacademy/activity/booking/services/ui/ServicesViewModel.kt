@@ -9,15 +9,16 @@ import kotlinx.coroutines.launch
 import krasnikov.project.pmfightacademy.activity.booking.services.data.ServiceRepository
 import krasnikov.project.pmfightacademy.activity.booking.services.ui.mapper.ServiceUIMapper
 import krasnikov.project.pmfightacademy.activity.booking.services.ui.model.ServiceUIModel
+import krasnikov.project.pmfightacademy.app.domain.ResolveGeneralErrorUseCase
 import krasnikov.project.pmfightacademy.app.pagination.PaginationData
 import krasnikov.project.pmfightacademy.app.pagination.PaginationState
 import krasnikov.project.pmfightacademy.app.ui.base.BaseViewModel
-import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
 class ServicesViewModel @Inject constructor(
     private val serviceRepository: ServiceRepository,
+    private val resolveGeneralErrorUseCase: ResolveGeneralErrorUseCase,
     private val serviceUIMapper: ServiceUIMapper
 ) : BaseViewModel() {
 
@@ -32,8 +33,12 @@ class ServicesViewModel @Inject constructor(
     init {
         viewModelScope.launch(exceptionHandler) {
             serviceRepository.flowData.collect {
-                _contentServices.value =
-                    PaginationData(serviceUIMapper.map(it), PaginationState.Complete)
+                if (it.isEmpty()) {
+                    _contentServices.value = PaginationData(currentState = PaginationState.Empty)
+                } else {
+                    _contentServices.value =
+                        PaginationData(serviceUIMapper.map(it), PaginationState.Complete)
+                }
             }
         }
         loadNextData()
@@ -41,7 +46,13 @@ class ServicesViewModel @Inject constructor(
 
     override fun handleError(throwable: Throwable) {
         _contentServices.value =
-            _contentServices.value.copy(currentState = PaginationState.Error(throwable as Exception))
+            _contentServices.value.copy(
+                currentState = PaginationState.Error(
+                    resolveGeneralErrorUseCase.execute(
+                        throwable
+                    )
+                )
+            )
     }
 
     fun loadNextData() {

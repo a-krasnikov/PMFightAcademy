@@ -11,12 +11,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:title="@string/title_info_screen" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvImages"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintHeight_percent="0.35"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="horizontal"
+        android:layout_height="0dp"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar">
+        app:layout_constraintTop_toBottomOf="@id/rvImages">
 
         <TextView
             android:id="@+id/tvInfoDescription"

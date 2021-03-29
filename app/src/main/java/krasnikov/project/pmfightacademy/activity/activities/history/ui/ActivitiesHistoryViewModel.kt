@@ -9,15 +9,16 @@ import kotlinx.coroutines.launch
 import krasnikov.project.pmfightacademy.activity.activities.history.data.ActivitiesHistoryRepository
 import krasnikov.project.pmfightacademy.activity.activities.history.ui.mapper.CompletedActivityUIMapper
 import krasnikov.project.pmfightacademy.activity.activities.history.ui.model.CompletedActivityUIModel
+import krasnikov.project.pmfightacademy.app.domain.ResolveGeneralErrorUseCase
 import krasnikov.project.pmfightacademy.app.pagination.PaginationData
 import krasnikov.project.pmfightacademy.app.pagination.PaginationState
 import krasnikov.project.pmfightacademy.app.ui.base.BaseViewModel
-import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
 class ActivitiesHistoryViewModel @Inject constructor(
     private val activitiesHistoryRepository: ActivitiesHistoryRepository,
+    private val resolveGeneralErrorUseCase: ResolveGeneralErrorUseCase,
     private val completedActivityUIMapper: CompletedActivityUIMapper
 ) : BaseViewModel() {
 
@@ -34,10 +35,15 @@ class ActivitiesHistoryViewModel @Inject constructor(
     init {
         viewModelScope.launch(exceptionHandler) {
             activitiesHistoryRepository.activitiesHistoryFlow.collect { activities ->
-                _activitiesHistoryContent.value = PaginationData(
-                    completedActivityUIMapper.map(activities),
-                    PaginationState.Complete
-                )
+                if (activities.isEmpty()) {
+                    _activitiesHistoryContent.value =
+                        PaginationData(currentState = PaginationState.Empty)
+                } else {
+                    _activitiesHistoryContent.value = PaginationData(
+                        completedActivityUIMapper.map(activities),
+                        PaginationState.Complete
+                    )
+                }
             }
         }
     }
@@ -52,6 +58,10 @@ class ActivitiesHistoryViewModel @Inject constructor(
 
     override fun handleError(throwable: Throwable) {
         _activitiesHistoryContent.value =
-            _activitiesHistoryContent.value.copy(currentState = PaginationState.Error(throwable as Exception))
+            _activitiesHistoryContent.value.copy(
+                currentState = PaginationState.Error(
+                    resolveGeneralErrorUseCase.execute(throwable)
+                )
+            )
     }
 }

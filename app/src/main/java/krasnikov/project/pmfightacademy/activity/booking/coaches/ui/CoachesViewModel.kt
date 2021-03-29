@@ -9,15 +9,16 @@ import kotlinx.coroutines.launch
 import krasnikov.project.pmfightacademy.activity.booking.coaches.data.CoachRepository
 import krasnikov.project.pmfightacademy.activity.booking.coaches.ui.mapper.CoachUIMapper
 import krasnikov.project.pmfightacademy.activity.booking.coaches.ui.model.CoachUIModel
+import krasnikov.project.pmfightacademy.app.domain.ResolveGeneralErrorUseCase
 import krasnikov.project.pmfightacademy.app.pagination.PaginationData
 import krasnikov.project.pmfightacademy.app.pagination.PaginationState
 import krasnikov.project.pmfightacademy.app.ui.base.BaseViewModel
-import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
 class CoachesViewModel @Inject constructor(
     private val coachRepository: CoachRepository,
+    private val resolveGeneralErrorUseCase: ResolveGeneralErrorUseCase,
     private val coachUIMapper: CoachUIMapper
 ) : BaseViewModel() {
 
@@ -31,14 +32,24 @@ class CoachesViewModel @Inject constructor(
 
     override fun handleError(throwable: Throwable) {
         _contentCoaches.value =
-            _contentCoaches.value.copy(currentState = PaginationState.Error(throwable as Exception))
+            _contentCoaches.value.copy(
+                currentState = PaginationState.Error(
+                    resolveGeneralErrorUseCase.execute(
+                        throwable
+                    )
+                )
+            )
     }
 
     fun loadData(serviceId: Int) {
         viewModelScope.launch(exceptionHandler) {
             coachRepository.flowData(serviceId).collect {
-                _contentCoaches.value =
-                    PaginationData(coachUIMapper.map(it), PaginationState.Complete)
+                if (it.isEmpty()) {
+                    _contentCoaches.value = PaginationData(currentState = PaginationState.Empty)
+                } else {
+                    _contentCoaches.value =
+                        PaginationData(coachUIMapper.map(it), PaginationState.Complete)
+                }
             }
         }
         loadNextData()

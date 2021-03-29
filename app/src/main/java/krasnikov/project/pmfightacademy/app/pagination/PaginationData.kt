@@ -1,6 +1,6 @@
 package krasnikov.project.pmfightacademy.app.pagination
 
-import java.lang.Exception
+import krasnikov.project.pmfightacademy.utils.ErrorWrapper
 
 data class PaginationData<T>(
     val availableData: List<T> = emptyList(),
@@ -8,9 +8,8 @@ data class PaginationData<T>(
 )
 
 sealed class PaginationState {
+    object Empty : PaginationState()
     object Complete : PaginationState()
-
     object Loading : PaginationState()
-
-    data class Error(val error: Exception) : PaginationState()
+    data class Error(val error: ErrorWrapper.General) : PaginationState()
 }
