@@ -60,6 +60,7 @@
     <string name="error_data_could_not_be_loaded">Data could not be loaded</string>
     <string name="server_error">Server error has occurred</string>
     <string name="unknown_error">An unknown error has occurred</string>
+    <string name="settings_notifications">Notifications</string>
 
     <string name="title_empty">Nothing here!</string>
 
