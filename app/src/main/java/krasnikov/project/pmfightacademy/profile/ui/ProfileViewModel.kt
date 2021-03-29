@@ -4,7 +4,6 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import krasnikov.project.pmfightacademy.LoginFlowDirections
-import krasnikov.project.pmfightacademy.app.data.pref.SharedPref
 import krasnikov.project.pmfightacademy.app.ui.base.BaseViewModel
 import krasnikov.project.pmfightacademy.notifications.FirebaseMessagingManager
 import krasnikov.project.pmfightacademy.utils.Event
