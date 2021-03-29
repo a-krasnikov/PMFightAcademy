@@ -1,6 +1,8 @@
 package krasnikov.project.pmfightacademy.app.di
 
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.messaging.ktx.messaging
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import com.google.firebase.remoteconfig.ktx.remoteConfig
@@ -33,6 +35,11 @@ object FirebaseModule {
         return remoteConfigSettings {
             minimumFetchIntervalInSeconds = FIREBASE_FETCH_INTERVAL
         }
+    }
+
+    @Provides
+    fun provideFirebaseMessaging() : FirebaseMessaging {
+        return Firebase.messaging
     }
 
     @Provides

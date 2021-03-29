@@ -20,4 +20,5 @@
     <dimen name="loading_error_view_elevation">8dp</dimen>
 
     <dimen name="booking_time_slots_min_height">96dp</dimen>
+    <dimen name="settings_card_text_size">18sp</dimen>
 </resources>

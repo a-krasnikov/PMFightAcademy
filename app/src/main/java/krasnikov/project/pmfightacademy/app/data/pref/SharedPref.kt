@@ -8,6 +8,10 @@ class SharedPref(context: Context) {
     companion object {
         private const val KEY_TOKEN = "KEY_TOKEN"
         const val TOKEN_DEFAULT_VALUE = "NoPref"
+
+        private const val KEY_NOTIFICATIONS = "KEY_NOTIFICATIONS"
+        const val NOTIFICATIONS_DISABLED = false
+        const val NOTIFICATIONS_ENABLED = true
     }
 
     private val sharedPreferences: SharedPreferences by lazy {
@@ -17,4 +21,5 @@ class SharedPref(context: Context) {
     }
 
     var token: String by SharedPrefDelegate(sharedPreferences, KEY_TOKEN, TOKEN_DEFAULT_VALUE)
+    var notificationState: Boolean by SharedPrefDelegate(sharedPreferences, KEY_NOTIFICATIONS, NOTIFICATIONS_DISABLED)
 }
